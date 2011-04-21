@@ -1,0 +1,1 @@
+Templates of control components. Filename is derived from the name of component e.g. navigation.phtml.

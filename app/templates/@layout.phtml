@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="cs" xml:lang="cs">
+<head>
+{control metas}
+{block #metas}
+{/block}
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+{control css 'screen.css', 'jquery-ui.css'}
+<link rel="stylesheet" media="screen,projection,tv,print" href="{$baseUri}css/screen-safari.css" type="text/css" n:if="$browser->isSafari()"/>
+<link rel="stylesheet" media="screen,projection,tv,print" href="{$baseUri}css/screen-opera10.css" type="text/css" n:if="$browser->isOpera(10)"/>
+<link rel="stylesheet" media="screen,projection,tv,print" href="{$baseUri}css/screen-ie8.css" type="text/css" n:if="$browser->isIe(8)"/>
+<link rel="stylesheet" media="screen,projection,tv,print" href="{$baseUri}css/screen-ie7.css" type="text/css" n:if="$browser->isIe(7)"/>
+<link rel="stylesheet" media="screen,projection,tv,print" href="{$baseUri}css/screen-ie6.css" type="text/css" n:if="$browser->isIe(6)"/>
+<link rel="stylesheet" media="print" href="{$baseUri}css/print.css" type="text/css" />
+
+{control js 'jquery.js', 'jquery.nette.js', 'jquery.ajaxform.js', 'jquery-ui.js', 'jquery.prettyPhoto.js', 'analytics.js', 'front-scripts.js'}
+{block #scripts}{/block}
+
+</head>
+<body>
+    <div id="page">
+        <div id="container">
+        @{include #content}
+        </div>
+
+        <div id="header">
+            <a id="logo" href="{dlink ''}" title="">Název</a>
+
+            <div id="navcontainer">
+                {control navigation}
+            </div>
+        </div>
+
+        <div id="footer">
+            <p>&copy; 2011 Intya s.r.o.</p>
+        </div>
+    </div>
+</body>
+</html>

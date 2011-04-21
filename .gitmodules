@@ -1,0 +1,3 @@
+[submodule "libs/eywa"]
+	path = libs/eywa
+	url = ssh://minyon.intya.cz/var/shares/repos/eywa.git
