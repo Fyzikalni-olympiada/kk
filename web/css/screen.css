@@ -5,7 +5,7 @@ body#tinymce {}
 
 
 /* BASIC */
-p {font-size: 1.5em;}
+p, ol, ul, table {font-size: 1.5em;}
 h1 {font-size: 2.8em; font-weight: bold; padding: 0 0 10px;}
 h2 {font-size: 2.4em; padding: 10px 0; font-weight: bold;}
 h3 {font-size: 1.8em; padding: 10px 0; font-weight: normal;}
@@ -34,9 +34,16 @@ label {display: block; float: left; width: 60px;}
 
 
 /*  CONTENT */
-#container p, #container ol, #container ul {padding-bottom: 10px;}
-#container ol, #container ul {font-size: 1.5em; margin-left: 30px; line-height: 1.5em;}
-#container ul ul {padding-bottom: 0px; margin-left: 15px;}
+#container p, #container ol, #container ul,
+body#tinymce p, body#tinymce ol, body#tinymce ul {padding-bottom: 10px;}
+#container ol, #container ul,
+body#tinymce ol, body#tinymce ul {font-size: 1.5em; margin-left: 30px; line-height: 1.5em;}
+#container ul ul,
+body#tinymce ul ul {padding-bottom: 0px; margin-left: 15px;}
+#container li,
+body#tinymce li {list-style-type: circle;}
+#container li li,
+body#tinymce li li {list-style-type: square;}
 
 
 /* MENU */
