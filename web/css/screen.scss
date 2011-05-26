@@ -1,3 +1,9 @@
+
+$width: 960px;
+$header-height: 150px;
+$nav-height: 40px;
+
+
 * {margin: 0; padding: 0; list-style:none;}
 html {font-size: 62.5%;	font-family: Arial, Helvetica, sans-serif; height: 100%;}
 body {height: 100%;}
@@ -9,9 +15,10 @@ p, ol, ul, table {font-size: 1.5em;}
 h1 {font-size: 2.8em; font-weight: bold; padding: 0 0 10px;}
 h2 {font-size: 2.4em; padding: 10px 0; font-weight: bold;}
 h3 {font-size: 1.8em; padding: 10px 0; font-weight: normal;}
-a {}
-a:hover {text-decoration: none;}
-a>img {}
+a {
+    &:hover {text-decoration: none;}
+    img {}
+}
 hr {border: none; border-top: 1px solid #333; margin: 0 0 15px;}
 th {}
 td {}
@@ -25,31 +32,33 @@ label {display: block; float: left; width: 60px;}
 
 
 /* LAYOUT */
-#page {position: relative; width: 960px; margin: 0 auto; min-height: 200px;}
-#container {padding-top: 190px;}
+#page {position: relative; width: $width; margin: 0 auto; min-height: $header-height + $nav-height;}
+#container {padding-top: $header-height + $nav-height;}
 #content {padding: 20px;}
-#header {position: absolute; top: 0px; left: 0px; width: 960px; height:150px;}
-#header #logo {position: absolute; top: 0px; left: 0px; display: block;}
-#footer {width: 960px;}
+#header {position: absolute; top: 0px; left: 0px; width: $width; height: $header-height;
+    #logo {position: absolute; top: 0px; left: 0px; display: block;}
+}
+#footer {width: $width;}
 
 
 /*  CONTENT */
-#container p, #container ol, #container ul,
-body#tinymce p, body#tinymce ol, body#tinymce ul {padding-bottom: 10px;}
-#container ol, #container ul,
-body#tinymce ol, body#tinymce ul {font-size: 1.5em; margin-left: 30px; line-height: 1.5em;}
-#container ul ul,
-body#tinymce ul ul {padding-bottom: 0px; margin-left: 15px;}
-#container li,
-body#tinymce li {list-style-type: circle;}
-#container li li,
-body#tinymce li li {list-style-type: square;}
+#container, body#tinymce {
+    p, ol, ul {padding-bottom: 10px;}
+    ol, ul {font-size: 1.5em; margin-left: 30px; line-height: 1.5em;
+        &>li {list-style-type: circle;}
+        ol, ul {padding-bottom: 0px; margin-left: 15px;
+            &>li {list-style-type: square;}
+        }
+    }
+}
 
 
 /* MENU */
-#navcontainer {padding-top: 150px; font-size: 1.5em;}
-#navcontainer>ul {float: left; width: 960px;}
-#navcontainer>ul>li {display: inline;}
-#navcontainer>ul>li>a {float: left; text-decoration: none;}
-#navcontainer>ul>li>a:hover {}
-#navcontainer>ul>li.current>a, #navcontainer>ul>li.ancestor>a {}
+#navcontainer {padding-top: $header-height; height: $nav-height; font-size: 1.5em;
+    &>ul {float: left; width: $width;
+        &>li {display: inline;
+            &>a {float: left; text-decoration: none;}
+            &.current>a, &.ancestor>a, &>a:hover {text-decoration: underline;}
+        }
+    }
+}
