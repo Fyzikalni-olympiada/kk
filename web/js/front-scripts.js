@@ -5,10 +5,13 @@ _gaq.push(['_trackPageview']);
 $(function(){
 
     /** FACEBOOK */
-    var e = document.createElement('script');
-    e.src = document.location.protocol + '//connect.facebook.net/cs_CZ/all.js#xfbml=1';
-    e.async = true;
-    document.getElementById('fb-root').appendChild(e);
+    var fbRoot = document.getElementById('fb-root');
+    if (fbRoot) {
+        var e = document.createElement('script');
+        e.src = document.location.protocol + '//connect.facebook.net/cs_CZ/all.js#xfbml=1';
+        e.async = true;
+        fbRoot.appendChild(e);
+    }
 
 
     var ajaxLoadedHandler;
