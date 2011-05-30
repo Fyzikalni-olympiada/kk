@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="cs-CZ">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>{$title}</title>
+        <meta name="robots" content="noindex"/>
+
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        {control css 'screen.scss'}
+    </head>
+    <body>
+    <div id="page">
+        <div id="container">
+            <div id="content">
+                <h1>{$title}</h1>
+                <p>{$text}</p>
+                <p>{$e->getMessage()}</p>
+            </div>
+        </div>
+
+        <div id="header">
+            <a id="logo" href="/" title="">Název</a>
+
+            <div id="navcontainer">
+                <ul><li><a href="/">Hlavní stránka</a></li></ul>
+            </div>
+        </div>
+
+        <div id="footer">
+            <p>&copy; 2011 Intya s.r.o.</p>
+        </div>
+    </div>
+</html>

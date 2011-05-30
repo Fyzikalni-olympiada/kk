@@ -16,9 +16,6 @@ require LIBS_DIR . '/eywa/loader.php';
 
 // Configure application
 $application = Environment::getApplication();
-//$application->errorPresenter = 'Front:Error';
-//$application->catchExceptions = TRUE;
-$application->catchExceptions = FALSE;
 
 $application->onStartup[] = function() {
     //dibi::connect(Environment::getConfig('database'));
