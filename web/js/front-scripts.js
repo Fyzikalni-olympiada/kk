@@ -4,6 +4,12 @@ _gaq.push(['_trackPageview']);
 
 $(function(){
 
+    /** Google +1 */
+    var e = document.createElement('script');
+    e.src = document.location.protocol + '//apis.google.com/js/plusone.js#lang=cs';
+    e.async = true;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(e, s);
+
     /** FACEBOOK */
     var fbRoot = document.getElementById('fb-root');
     if (fbRoot) {
