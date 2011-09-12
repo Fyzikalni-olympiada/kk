@@ -7,7 +7,6 @@ $nav-height: 40px;
 * {margin: 0; padding: 0; list-style:none;}
 html {font-size: 62.5%;	font-family: Arial, Helvetica, sans-serif; height: 100%;}
 body {height: 100%;}
-body#tinymce {}
 
 
 /* BASIC */
@@ -42,7 +41,7 @@ label {display: block; float: left; width: 60px;}
 
 
 /*  CONTENT */
-#container, body#tinymce {
+#container {
     p, ol, ul {padding-bottom: 10px;}
     ol, ul {font-size: 1.5em; margin-left: 30px; line-height: 1.5em;
         &>li {list-style-type: circle;}

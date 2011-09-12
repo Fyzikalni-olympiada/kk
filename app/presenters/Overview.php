@@ -11,7 +11,7 @@ use Eywa\CMS\Navigation;
 class Overview extends Base
 {
 
-    public function renderDefault($path = '')
+    public function renderDefault($path)
     {
         $this->template->list = $this['overview']->getDocuments();
     }

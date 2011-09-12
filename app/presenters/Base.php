@@ -19,8 +19,8 @@ abstract class Base extends Presenter
     protected function createComponentNavigation()
     {
         $navigation = new Navigation;
-        $navigation->setRoot('');
-        $navigation->add('/');
+        $navigation->setRoot('//www');
+        $navigation->add('//www');
         $navigation->setOrder('position');
         return $navigation;
     }
