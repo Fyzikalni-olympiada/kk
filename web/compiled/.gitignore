@@ -2,3 +2,8 @@
 !.gitignore
 !images
 !fonts
+!aloha
+!css
+!deps
+!i18n
+!plugins
