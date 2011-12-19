@@ -9,9 +9,10 @@ abstract class Base extends Presenter
 {
 
 
-    public function renderDefault($path)
+    public function beforeRender()
     {
-        $this['navigation']->setCurrent($path);
+        parent::beforeRender();
+        $this['navigation']->setCurrent($this->getParam('path'));
     }
 
 
