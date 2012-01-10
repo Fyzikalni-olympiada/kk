@@ -39,5 +39,18 @@
         </div>
     </div>
     <div id="fb-root"></div>
+    {snippet flashes}
+        {var $firstFlash => reset($flashes)}
+        <div n:if="$firstFlash" id="flashes" class="text" title="{if $firstFlash->type=='warning'}{_'Upozornění'}{elseif $firstFlash->type=='error'}{_'Chyba'}{else}{_'Zpráva'}{/if}">
+            {foreach $flashes as $flash}<p class="flash {$flash->type}">{!$flash->message}</p>{/foreach}
+        </div>
+        <script type="text/javascript" n:if="count($flashes)>0">
+            $(function(){
+                $.nette.openFlash();
+            });
+        </script>
+    {/snippet}
+
+    {dialog dialog, #content}
 </body>
 </html>
