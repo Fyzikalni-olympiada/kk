@@ -45,7 +45,7 @@ label {display: block; float: left; width: 60px;}
     p, ol, ul {padding-bottom: 10px;}
     ol, ul {font-size: 1.5em; margin-left: 30px; line-height: 1.5em;
         &>li {list-style-type: circle;}
-        ol, ul {padding-bottom: 0px; margin-left: 15px;
+        ol, ul {font-size: 1em; padding-bottom: 0px; margin-left: 15px;
             &>li {list-style-type: square;}
         }
     }

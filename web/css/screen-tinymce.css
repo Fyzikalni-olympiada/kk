@@ -1,7 +1,7 @@
-body {}
+body {font-size: 12px; line-height: 1.5em;}
 
 p, ol, ul {padding-bottom: 10px;}
-ol, ul {font-size: 1.5em; margin-left: 30px; line-height: 1.5em;}
+ol, ul {font-size: 1em; margin-left: 30px;}
 ol>li, ul>li {list-style-type: circle;}
 ol ol, ol ul, ul ol, ul ul {padding-bottom: 0px; margin-left: 15px;}
 li li {list-style-type: square;}
