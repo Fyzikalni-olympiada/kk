@@ -730,7 +730,7 @@ class Spreadsheet_Excel_Reader {
                         }
                     }
                 }
-                if ($colCount == 256 && $lastNonEmpty < $colCount || $lastNonEmpty > $colCount) {
+                if ($colCount >= 250 && $lastNonEmpty < $colCount || $lastNonEmpty > $colCount) {
                     $colCount = $lastNonEmpty;
                 } else {
                     $rowH .= $buffer;
