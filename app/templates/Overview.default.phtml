@@ -1,15 +1,13 @@
 @{block #content}
-<div id="content">
-    <h1>{$heading}</h1>
-    <div id="editable">
-        {!$document->html}
-    </div>
-
-    <ul>
-    {foreach $list as $item}
-        <li><a href="{dlink $item->path}" title="{$item->title}">{$item->name}</a></li>
-    {/foreach}
-    </ul>
-
-    {control overview}
+<h1>{$heading}</h1>
+<div id="editable">
+    {!$document->html}
 </div>
+
+<ul>
+{foreach $list as $item}
+    <li><a href="{dlink $item->path}" title="{$item->title}">{$item->name}</a></li>
+{/foreach}
+</ul>
+
+{control overview}

@@ -1,8 +1,33 @@
 @{block #content}
-<h1 class="hidden">{$heading}</h1>
+<h1>{$heading}</h1>
 
-<div class="hp" id="content">
-    <div id="editable">
-        {!$document->html}
-    </div>
+<div id="editable">
+    {!$document->html}
 </div>
+
+<div class="news">
+{foreach $news as $item}
+    <h2>{$item->heading}</h2>
+    <p class="small">
+        Napsal {$item->changes[0]->identity}
+    </p>
+    <p class="createdate">
+        {$item->createdAt->format('j. n. Y H:i')}
+    </p>
+    {!$item->html}
+    <span class="article_separator">&nbsp;</span>
+{/foreach}
+
+{control overview}
+<!--span class="pagination">
+<span class="paginationDummy">&laquo;</span>
+<span>Start</span>
+<span>Prev</span>
+<strong><span>1</span></strong>
+<strong><a href="/joomla/index.php?start=4" title="2">2</a></strong>
+<a href="/joomla/index.php?start=4" title="Next">Next</a>
+<a href="/joomla/index.php?start=4" title="End">End</a>
+<span class="paginationDummy">&raquo;</span></span-->
+    
+</div>
+

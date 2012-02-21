@@ -1,27 +1,26 @@
-
-$width: 960px;
-$header-height: 150px;
-$nav-height: 40px;
-
-
 * {margin: 0; padding: 0; list-style:none;}
-html {font-size: 62.5%;	font-family: Arial, Helvetica, sans-serif; height: 100%;}
+html {font-size: 62.5%;	font-family: 'Lucida Grande', Verdana, Helvetica, sans-serif; height: 100%;}
 body {height: 100%;}
+body, input, select, option {color: #222; background: #fff;}
 
 
 /* BASIC */
 p, ol, ul, table {font-size: 1.5em;}
-h1 {font-size: 2.8em; font-weight: bold; padding: 0 0 10px;}
-h2 {font-size: 2.4em; padding: 10px 0; font-weight: bold;}
-h3 {font-size: 1.8em; padding: 10px 0; font-weight: normal;}
 a {
-    &:hover {text-decoration: none;}
+    text-decoration: none; color: #ae855c;
+    &:hover {text-decoration: none;color:#444;}
+    &:active, &:focus {outline: 0;}
     img {}
 }
 hr {border: none; border-top: 1px solid #333; margin: 0 0 15px;}
 th {}
 td {}
-label {display: block; float: left; width: 60px;}
+ol, ul {font-size: 1.5em;
+    &>li {list-style-type: circle;}
+    ol, ul {font-size: 1em;
+        &>li {list-style-type: square;}
+    }
+}
 
 
 /* CLASSES */
@@ -30,34 +29,587 @@ label {display: block; float: left; width: 60px;}
 .vanish {display: none; speak: none;}
 
 
-/* LAYOUT */
-#page {position: relative; width: $width; margin: 0 auto; min-height: $header-height + $nav-height;}
-#container {padding-top: $header-height + $nav-height;}
-#content {padding: 20px;}
-#header {position: absolute; top: 0px; left: 0px; width: $width; height: $header-height;
-    #logo {position: absolute; top: 0px; left: 0px; display: block;}
+/* Headings */
+
+
+h1 {
+		font: normal 40px/44px Georgia, "Times New Roman", Times, serif;
+		color:#444;
+		padding:0;
+		margin:4px 0 12px;
 }
-#footer {width: $width;}
+h2 {
+		font: normal 26px/30px Georgia, "Times New Roman", Times, serif;
+		color:#444;
+		padding:0;
+		margin:4px 0 12px;
+}
+h3 {
+		font: normal 22px/24px Georgia, "Times New Roman", Times, serif;
+		color:#444;
+		padding:0;
+		margin:12px 0;
+}
+h4 {
+		font: normal 16px/18px Georgia, "Times New Roman", Times, serif;
+		color:#444;
+		padding:0;
+		margin:8px 0;
+}
+h5 {
+		font: normal 14px/16px Georgia, "Times New Roman", Times, serif;
+		color:#444;
+		padding:0;
+		margin:8px 0;
+}
+h6 {
+		font: normal 12px/14px Georgia, "Times New Roman", Times, serif;
+		color:#444;
+		padding:0;
+		margin:8px 0;
+}
+/* Lists */
+ul, ol {
+		margin: 10px 20px;
+		padding: 0 20px;
+}
+ul { list-style: disc; }
+ol { list-style: decimal; }
+dt {
+		font-weight: bold;
+		color: #7BA857;
+}
+dd {
+		padding-left: 35px;
+		margin:1px 0;
+}
+dl { padding: 10px 0; }
+/* Forms */
+input { vertical-align:middle; }
+blockquote {
+		margin:0;
+		display:block;
+		padding:20px 20px 20px 50px;
+		background:#f8f8f8 url(../images/quote.gif) no-repeat 12px 8px;
+		font:italic 17px/20px Georgia, "Times New Roman", Times, serif;
+		color:#555;
+		border:1px solid #ebebeb;
+}
+pre {
+		color:#555;
+		border:1px solid #ebebeb;
+		background:#f8f8f8;
+		padding:20px;
+}
+/* Article Image */
+.news img {
+		background: #FAFAFA;
+		border: 1px solid #DCDCDC;
+		padding: 8px;
+		margin:8px;
+}
+td.buttonheading img {
+		background:none;
+		margin:0;
+		padding:0;
+		border:0;
+}
+/* Tables */
+.news table {
+		border-collapse: collapse;
+		margin: 10px;
+}
+.news table tr { background: #fff; }
+.news table tr.altrow { background: #F9F9F9; }
+.news table th, .news table td {
+		text-align: left;
+		border-width: 1px;
+		border-style: solid;
+}
+.news table th {
+		color: #7BA857;
+		background: #EFFAE6;
+		padding: .8em 1em;
+		border-color: #DFF4D5 #D3EFC3 #A7DF8A #D3EFC3;
+}
+.news table td {
+		border-color: #EFEFEF;
+		padding: .7em 1em;
+}
+/* ========================================================================== */
+/* ========================================================================== */
+/* ============================ CONTENT LAYOUT ============================== */
+/* ========================================================================== */
+/* ========================================================================== */
 
 
-/*  CONTENT */
-#container {
-    p, ol, ul {padding-bottom: 10px;}
-    ol, ul {font-size: 1.5em; margin-left: 30px; line-height: 1.5em;
-        &>li {list-style-type: circle;}
-        ol, ul {font-size: 1em; padding-bottom: 0px; margin-left: 15px;
-            &>li {list-style-type: square;}
-        }
-    }
+
+#top-container {
+		margin:0 auto;
+		background: #fff url(../images/bg.gif) repeat-x top;
+		padding:0;
+}
+#top {
+		margin:0 auto;
+		padding:0;
+		width:960px;
+		background:url(../images/header-image.png) no-repeat right 0;
+		overflow:hidden;
+}
+.topArea {
+		height:60px;
+		overflow:hidden;
+		padding-left:25px;
+}
+#logo { padding:35px 0 0 0; }
+#logo h1 {
+		margin:0;
+		padding:0 0 0 25px;
+}
+#logo a {
+		font-size:70px;
+		line-height:76px;
+		font-weight:normal;
+		color:#93b876;
+		display:block;
+		font-family:Georgia, "Times New Roman", Times, serif;
+		padding:0;
+}
+#logo a:hover { }
+#logo a span { }
+#logo a:hover span { }
+#logo h2 {
+		font-size:22px;
+		line-height:20px;
+		font-family: Georgia, "Times New Roman", Times, serif;
+		font-style:italic;
+		color:#93b876;
+		font-weight:normal;
+		padding:0 0 0 80px;
+		margin:10px 0 50px 0;
+}
+#menu-top {
+		float:left;
+		margin:0;
+		padding:0;
+}
+#search {
+		float:right;
+		width:300px;
+		margin:0;
+		padding:0;
+}
+#search form .search {
+		padding:0;
+		margin:10px 0 0 16px;
+}
+#content {
+		margin:0 auto;
+		width:960px;
+		background: url(../images/dots.gif) repeat-x top;
+}
+#left-col {
+		margin-top:10px;
+		width:630px;
+		float:left;
+		text-align:left;
+		padding:20px;
+}
+#left-col .small { color:#93b876; }
+#left-col a.readon:link, #left-col a.readon:visited {
+		color:#ae855c;
+		border-bottom:1px dotted #ae855c;
+		line-height:15px;
+		text-transform:lowercase;
+		background-image:none;
+		padding:2px 0;
+}
+#left-col a.readon:hover {
+		border-bottom:1px dotted #444;
+		color:#444;
+}
+#left-col ul { padding:0 15px; }
+#right-col div.moduletable h3 {
+		font-weight:normal;
+		line-height:30px;
+		font-size:22px;
+		color:#444;
+		text-transform:capitalize;
+		border-bottom:#ebebeb 2px solid;
+		padding-bottom:10px;
+}
+#right-col div.moduletable ul { list-style:none; }
+#right-col ul {
+		margin:0;
+		padding:0;
+		list-style:square;
+}
+#right-col ul li {
+		margin:0;
+		padding:0;
+}
+#right-col ol {
+		margin:0;
+		padding:0 0;
+}
+#right-col ol li {
+		margin:0;
+		padding:0;
+}
+#right-col {
+		margin-top:10px;
+		width:200px;
+		float:right;
+		text-align:left;
+		padding:20px;
+		/*font-family:Georgia, "Times New Roman", Times, serif;*/
+		font-weight:normal;
+                border-left: 1px solid #F3F1F1;
+}
+#right-col div.moduletable h3 {
+		font-family:Georgia, "Times New Roman", Times, serif;
+		font-weight:normal;
+		font-size:22px;
+		color:#444;
+		text-transform:capitalize;
+		border-bottom:#ebebeb 1px solid;
+		padding-bottom:10px;
+}
+.bannerfooter_text {
+		background:#f8f8f8;
+		text-align:right;
+}
+.bannerfooter_text a { color:#a82a15; }
+#footer {
+		clear:both;
+		margin:0 auto;
+		width:960px;
+		padding:16px 0;
+                border-top: 1px solid #DFDFDF;
+}
+#footer a { color:#444; }
+#footer a:hover { border-bottom:dotted 1px #444; }
+#footer div#design {
+		float:right;
+		width:400px;
+		text-align:right;
+		padding:0;
+		font-family:	'Trebuchet MS', 'Helvetica Neue', Arial, sans-serif;
+		font-size:12px;
+}
+#footer div#credits {
+		float:left;
+		width:450px;
+		padding:0 10px;
+		font-family:	'Trebuchet MS', 'Helvetica Neue', Arial, sans-serif;
+		font-size:12px;
+}
+#footer div#cms-credits { }
+#footer div#copyrights span { }
+#search .search {
+		background:url(../images/header-search.gif) no-repeat top right;
+		border-top:none;
+		width:280px;
+		height:33px;
+}
+#search .search input.inputbox {
+		background:url(../images/search.gif) no-repeat right center;
+		text-align:left;
+		width:248px;
+		border:0;
+		padding:8px 0;
+		color:#afafaf;
+		font-size:12px;
+		text-transform:capitalize;
+}
+/* ========================================================================== */
+/* ========================================================================== */
+/* ============= COMMON ELEMENTS (titles, forms, buttons etc.) ============== */
+/* ========================================================================== */
+/* ========================================================================== */
+
+/* Global clear */
+.clr {
+		clear:both;
+		height:0;
+		line-height:0;
+}
+/* Layout */
+fieldset { }
+legend { }
+pre { font-family:monospace; } /* used for displaying code blocks in content */
+/* Images */
+img { border:none; }
+/* ---target images inside content tables only--- */
+.news img {background:#fff;padding:2px;border:1px solid #ddd;}
+td.buttonheading a img {border:none;padding:0;background:none;}
+
+
+/* Form elements */
+#form-login fieldset.input { border:none; }
+#form-login fieldset.input p { padding-bottom:3px; }
+#form-login ul {
+		padding:0;
+		margin:10px 0 0 0;
+}
+#form-login ul li a {
+		display:block;
+		padding:0 1px;
+		color:#444;
+}
+#form-login ul li a:hover {
+		display:block;
+		padding:0 1px;
+		color:#93b876;
+}
+.inputbox {
+		border:1px solid #ccc;
+		padding:1px;
+		font-size:12px;
+}
+.inputbox:focus {
+		border:1px solid #ccc;
+		padding:1px;
+		background:#ffffdd;
+		font-size:12px;
+}
+td .inputbox { margin:2px; }
+.button {
+		margin:4px 0;
+		padding:1px 4px;
+		background:#eee;
+		color:#333;
+		font-weight:bold;
+		border:1px solid #ddd;
+		cursor:pointer;
 }
 
-
-/* MENU */
-#navcontainer {padding-top: $header-height; height: $nav-height; font-size: 1.5em;
-    &>ul {float: left; width: $width;
-        &>li {display: inline;
-            &>a {float: left; text-decoration: none;}
-            &.current>a, &.ancestor>a, &>a:hover {text-decoration: underline;}
-        }
-    }
+/* Back button */
+div.back_button {
+		border-top:1px solid #ccc;
+		margin:12px 0px;
+		padding:8px;
+		text-align:center;
 }
+div.back_button a {
+		font-family:"Trebuchet MS", Trebuchet, Arial, Verdana, sans-serif;
+		font-weight:normal;
+		background:#222;
+		color:#fff;
+		font-size:14px;
+		line-height:18px;
+		padding:2px 16px;
+}
+div.back_button a:hover {
+		font-family:"Trebuchet MS", Trebuchet, Arial, Verdana, sans-serif;
+		font-weight:normal;
+		background:#c00;
+		color:#fff;
+		font-size:14px;
+		line-height:18px;
+		padding:2px 16px;
+}
+/* Pathway */
+div#pathway { margin-bottom:12px; }
+span.pathway {
+		margin:0;
+		padding:0 4px;
+}
+span.pathway img { } /* the arrow */
+a.pathway {
+		padding:0 2px;
+		margin:0;
+}
+a.pathway:hover {
+		padding:0 2px;
+		margin:0;
+}
+/* Page navigation buttons - e.g. "<< Start < Previous 1 Next > End >>" */
+span.pagination {
+		display:block;
+		padding:8px;
+}
+span.pagination span {
+		font-weight:bold;
+		color:#777;
+		font-size:12px;
+		line-height:15px;
+		padding:2px 4px;
+		border:1px solid #ddd;
+		background:#fff;
+		margin:0 2px;
+} /* page nav item (disabled) */
+span.pagination a {
+		font-weight:bold;
+		color:#222;
+		font-size:12px;
+		line-height:15px;
+		padding:2px 4px;
+		border:1px solid #ddd;
+		background:#eee;
+		margin:0 2px;
+} /* page nav link */
+span.pagination a:hover {
+		font-weight:bold;
+		color:#222;
+		font-size:12px;
+		line-height:15px;
+		padding:2px 4px;
+		border:1px solid #afafaf;
+		background:#bfbfbf;
+		margin:0 2px;
+}
+span.pagination span.paginationDummy { border:none; }
+/* ========================================================================== */
+/* ========================================================================== */
+/* =============================== COMPONENTS =============================== */
+/* ========================================================================== */
+/* ========================================================================== */
+/* com_banner */
+
+#emailForm label {
+		display:block;
+		font-weight:bold;
+		margin-top:4px;
+}
+#emailForm br {/*display:none;*/ }
+#emailForm input { }
+#emailForm textarea { display:block; }
+#emailForm input.button { padding:2px 20px; }
+/* END com_contact ------------------ */
+
+
+
+/* ---------------------- com_content & com_frontpage ----------------------
+
+/* article title */
+.news .small {
+		color:#333;
+		font-size:12px;
+		font-weight:bold;
+		font-family:"Trebuchet MS", Trebuchet, Arial, Verdana, sans-serif;
+} /* author */
+.news .createdate {
+		color:#888;
+		background:url(../images/date.gif) no-repeat left;
+		padding:4px 0 4px 18px;
+} /* creation date */
+.article_separator {
+		display:block;
+		height:40px;
+}
+/* ---------------------- END com_content & com_frontpage ---------------------- */
+
+.frontpage table.pollstableborder {
+		width:auto;
+		padding:0;
+		border:none;
+}
+
+.news ul { padding: 10px 0 10px 22px; }
+.news ul li {
+		padding:2px 0;
+}
+table.searchintro {
+		width:100%;
+		margin:8px 0;
+		background:#f5f5f5;
+}
+table.searchintro tr td {
+		font-weight:bold;
+		padding:4px;
+}
+select.inputbox { }
+span.highlight {
+		color:#c00;
+		border-bottom:1px dotted #c00;
+}
+fieldset { border:0; }
+fieldset div a:hover { }
+fieldset div span.small { font-weight:bold; }
+fieldset div.small {
+		color:#999;
+		font-style:italic;
+}
+
+/* ========================================================================== */
+/* ========================================================================== */
+/* ================================= MODULES ================================ */
+/* ========================================================================== */
+/* ========================================================================== */
+
+#right-col .menu {
+		padding:0;
+		margin:0;
+}
+#right-col .menu a:hover { }
+/* Cleaner version of the above would be:*/
+#right-col .menu { list-style:none; }
+#right-col .menu li {
+                list-style:none; 
+		border-bottom:1px solid #dfdfdf;
+		line-height:26px;
+}
+#right-col .menu li a { color:#777; }
+#right-col .menu li a:hover { color:#333; }
+
+/* ------------------ mod_mainmenu.php ------------------ */
+#menu-top ul {
+		list-style:none;
+		padding:0px;
+		margin:0;
+		text-transform: uppercase;
+		font-family:'Trebuchet MS', 'Helvetica Neue', Arial, Sans-Serif;
+} /* flat list mode */
+#menu-top li {
+		display:inline;
+		padding:0px 4px;
+		margin:0;
+}
+#menu-top li a {
+		color:#5f5f5f;
+		line-height:60px;
+		background:none;
+		font-size:14px;
+		font-weight:bold;
+		padding:10px 16px 0 0;
+}
+#menu-top li a:hover {
+		background:none;
+		line-height:60px;
+		padding:10px 16px 0 0;
+		color:#111;
+}
+#menu-top li.current a, #menu-top li.ancestor a {
+		background:none;
+		color: #93b876;
+		line-height:60px;
+		padding:10px 16px 0 0;
+}
+/* ------------------ END mod_mainmenu.php ------------------ */
+
+
+/* mod_search.php
+div.search[module class suffix]
+input.inputbox[module class suffix]
+input.button[module class suffix] 
+*/
+div.search {
+		text-align:center;
+		margin:4px auto;
+}
+/* ========================================================================== */
+/* ========================================================================== */
+/* ======================= GENERIC MODULE FORMATTING ======================== */
+/* ========================================================================== */
+/* ========================================================================== */
+
+div.moduletable { margin:0 0 20px 0; }
+div.moduletable h3 {
+		color:#c00;
+		font-size:16px;
+		font-weight:normal;
+		text-transform:uppercase;
+		margin:0 0 4px 0;
+}
+

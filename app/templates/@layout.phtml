@@ -16,28 +16,82 @@
 <link rel="stylesheet" media="print" href="{$baseUri}css/print.css" type="text/css" />
 
 {control js 'jquery.js', 'jquery.nette.js', 'jquery.ajaxform.js', 'jquery-ui.js', 'jquery.prettyPhoto.js', 'analytics.js', 'front-scripts.js'}
-{control aloha}
+{*control aloha*}
 {block #scripts}{/block}
 
 </head>
-<body>
-    <div id="page">
-        <div id="container">
+<body id="com_content" class="background c3 viewfrontpage itemid1">
+<div id="top-container">
+  <div id="top">
+    <div class="topArea">
+        <div id="menu-top">
+            {control navigation}
+        </div>
+        <div id="search">
+            <form action="index.php" method="post">
+                <div class="search">
+                    <input name="searchword" id="mod_search_searchword" maxlength="20" alt="Search" class="inputbox" type="text" size="20" placeholder="hledat..." />    
+                </div>
+            </form>
+        </div>
+        <div class="clr"></div>
+    </div>    
+    <div id="logo"><h1><a href="{dlink '//www'}" title="Fyzikální olympiáda Praha">Fyzikální olympiáda Praha</a></h1>
+      <h2>Krajská komise Fyzikální olympiády v Praze</h2>
+    </div>
+    <div class="clr"></div>
+  </div>
+  <div id="content">
+    
+    
+    <div id="left-col">
         @{include #content}
+    </div>
+    <div id="right-col" class="s2">
+        <div class="moduletable">
+            <h3>Menu</h3>
         </div>
-
-        <div id="header">
-            <a id="logo" href="{dlink '//www'}" title="">Název</a>
-
-            <div id="navcontainer">
-                {control navigation}
-            </div>
+        <div class="moduletable">
+            <h3>Odkazy</h3>
+            <ul class="menu">
+                <li><a href="http://fyzikalniolympiada.cz/">Fyzikální olympiáda</a></li>
+                <li><a href="http://www.uhk.cz/fo">Centrum péče o fyzikální talenty</a></li>
+                <li><a href="http://cental.uhk.cz/">CenTal – Centrum talentů M&amp;F&amp;I</a></li>
+            </ul>
         </div>
-
-        <div id="footer">
-            <p>&copy; 2011 Intya s.r.o.</p>
+        <div class="moduletable ">
+            <h3>Přihlášení</h3>
+            <form action="/joomla/index.php" method="post" name="login" id="form-login" >
+		<fieldset class="input">
+                    <p id="form-login-username">
+                        <label for="modlgn_username">Email</label><br />
+                        <input id="modlgn_username" type="text" name="username" class="inputbox" size="18" />
+                    </p>
+                    <p id="form-login-password">
+                        <label for="modlgn_passwd">Heslo</label><br />
+                        <input id="modlgn_passwd" type="password" name="passwd" class="inputbox" size="18" />
+                    </p>
+                    <p id="form-login-remember">
+                        <label for="modlgn_remember">Zapamatovat</label>
+                        <input id="modlgn_remember" type="checkbox" name="remember" class="inputbox" value="yes" />
+                    </p>
+                    <input type="submit" name="Submit" class="button" value="Přihlásit" />
+                </fieldset>
+                <p>
+                    <a href="#">Zapomenuté heslo</a>
+                </p>
+            </form>
         </div>
     </div>
+    <div class="clr"></div>
+  </div>
+</div>
+<div id="footer">
+  <div id="credits">Copyright &copy; 2012</div>
+  <div id="design">Designed by <a target="_blank" href="http://www.styleshout.com/">Styleshout</a></div>
+  <div class="clr"></div>
+</div>
+
     <div id="fb-root"></div>
     {snippet flashes}
         {var $firstFlash => reset($flashes)}

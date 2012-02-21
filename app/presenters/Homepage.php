@@ -12,4 +12,10 @@ use Eywa\CMS\Navigation;
 class Homepage extends Base
 {
     
+    public function renderDefault()
+    {
+        $this['overview']->setPath('//www/novinky');
+        $this->template->news = $this['overview']->getDocuments();
+        
+    }
 }

@@ -1,6 +1,0 @@
-/* MENU */
-#navcontainer ul {float: left; width: 960px;}
-#navcontainer ul li {display: inline;}
-#navcontainer ul li a {float: left; text-decoration: none;}
-#navcontainer ul li a:hover {}
-#navcontainer ul li.current a, #navcontainer ul li.ancestor a {}

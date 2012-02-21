@@ -1,8 +1,6 @@
 @{block #content}
-<div id="content">
-    <h1>{$heading}</h1>
-    <div id="editable">
-        {!$document->html}
-        {!$data->render()}
-    </div>
+<h1>{$heading}</h1>
+<div id="editable">
+    {!$document->html}
 </div>
+{!$data->render()}
