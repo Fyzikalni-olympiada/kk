@@ -1,0 +1,15 @@
+@{block #content}
+<h1>{$heading}</h1>
+<div id="editable">
+    {!$document->html}
+</div>
+
+{foreach $list as $item}
+<h2>{$item->name}</h2>
+<ul>
+{foreach $presenter->repository->getChildren($item->path) as $subitem}
+    <li><a href="{dlink $subitem->path}" title="{$subitem->title}">{$subitem->name}</a></li>
+{/foreach}
+</ul>
+{/foreach}
+{control overview}
