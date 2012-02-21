@@ -7,7 +7,7 @@ body, input, select, option {color: #222; background: #fff;}
 /* BASIC */
 p, ol, ul, table {font-size: 1.5em; margin-top: 1em;}
 a {
-    text-decoration: none; color: #ae855c;
+    text-decoration: none; color: #8e654c;
     &:hover {text-decoration: none;color:#444;}
     &:active, &:focus {outline: 0;}
     img {}
@@ -217,18 +217,6 @@ td.buttonheading img {
 		padding:20px;
 }
 #left-col .small { color:#93b876; }
-#left-col a.readon:link, #left-col a.readon:visited {
-		color:#ae855c;
-		border-bottom:1px dotted #ae855c;
-		line-height:15px;
-		text-transform:lowercase;
-		background-image:none;
-		padding:2px 0;
-}
-#left-col a.readon:hover {
-		border-bottom:1px dotted #444;
-		color:#444;
-}
 #left-col ul { padding:0 15px; }
 #right-col div.moduletable h3 {
 		font-weight:normal;
@@ -551,8 +539,10 @@ fieldset div.small {
 		border-bottom:1px solid #dfdfdf;
 		line-height:26px;
 }
-#right-col .menu li a { color:#777; }
-#right-col .menu li a:hover { color:#333; }
+#right-col .menu li a { color:#5f5f5f; }
+#right-col .menu.control li a { font-weight: bold; }
+#right-col .menu li a:hover { color:#111; }
+#right-col .menu li.current a { color:#93b876; }
 
 /* ------------------ mod_mainmenu.php ------------------ */
 #menu-top ul {
