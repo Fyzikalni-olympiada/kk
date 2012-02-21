@@ -30,7 +30,8 @@ abstract class Base extends Presenter
     protected function createComponentMenu()
     {
         $navigation = new Navigation;
-        $navigation->add(substr($this->getParam('path'),0,strpos($this->getParam('path'), '/', 6) ?: strlen($this->getParam('path')))); //skip  //www/
+        $path = $this->getParam('path');
+        $navigation->add(substr($path, 0, strpos($path, '/', 6) ?: strlen($path))); //skip  //www/
         $navigation->setOrder('position');
         return $navigation;
     }
