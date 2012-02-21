@@ -11,9 +11,9 @@ use Eywa\CMS\Navigation;
  */
 class News extends Overview
 {
-    public function renderDefault()
+    public function renderDefault($path)
     {
         $this['overview']->setPath('//www/aktualni-rocnik/novinky');
-        parent::renderDefault();
+        parent::renderDefault($path);
     }
 }
