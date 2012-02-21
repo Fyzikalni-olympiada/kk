@@ -5,7 +5,7 @@ body, input, select, option {color: #222; background: #fff;}
 
 
 /* BASIC */
-p, ol, ul, table {font-size: 1.5em;}
+p, ol, ul, table {font-size: 1.5em; margin-top: 1em;}
 a {
     text-decoration: none; color: #ae855c;
     &:hover {text-decoration: none;color:#444;}
@@ -86,6 +86,7 @@ dd {
 dl { padding: 10px 0; }
 /* Forms */
 input { vertical-align:middle; }
+label {font-size: 1.5em;}
 blockquote {
 		margin:0;
 		display:block;
