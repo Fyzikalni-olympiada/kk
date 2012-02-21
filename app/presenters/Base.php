@@ -13,6 +13,7 @@ abstract class Base extends Presenter
     {
         parent::beforeRender();
         $this['navigation']->setCurrent($this->getParam('path'));
+        $this->setLayout('layout2Col');
     }
 
 
