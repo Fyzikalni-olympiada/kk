@@ -653,7 +653,8 @@ class Spreadsheet_Excel_Reader {
 	public function render($sheet=0) 
         {
             $out = "<table class=\"vysledkovka\" cellpadding=3>";
-            $thead = TRUE;
+            $headerLines = TRUE;
+            $thead = FALSE;
             $tbody = FALSE;
             $colCount = $this->colcount($sheet);
             for ($row=1; $row<=$this->rowcount($sheet); $row++) {
@@ -689,7 +690,7 @@ class Spreadsheet_Excel_Reader {
                         
                         $cell = ($style ? " style=\"$style\"" : "") . ($colspan > 1?" colspan=$colspan":"") . ($rowspan > 1?" rowspan=$rowspan":"") . ">";
                         if ($this->bold($row, $col, $sheet)) {
-                            if ($thead) {
+                            if ($headerLines) {
                                 $cell = '<th' . $cell;
                                 $cellEnd = '</th>';
                             } else {
@@ -698,13 +699,13 @@ class Spreadsheet_Excel_Reader {
                             }
                         } else {
                             if ($val) {
-                                $thead = FALSE;
+                                $headerLines = FALSE;
                             }
                             $cell = '<td' . $cell;
                             $cellEnd = '</td>';
                         }
                         if ($this->italic($row, $col, $sheet)) {
-                            $cel .= '<i>';
+                            $cell .= '<i>';
                             $celEnd = '</i>' . $cellEnd;
                         }
                         $cell = "\n\t\t" . $cell;
@@ -736,11 +737,16 @@ class Spreadsheet_Excel_Reader {
                     $rowH .= $buffer;
                 }
                 $rowH .= "</tr>\n";
-                if ($thead) {
-                    $rowH = "\n<thead>" . $rowH . "\n</thead>";
-                } elseif (!$tbody) {
+                if ($headerLines && !$thead) {
+                    $thead = TRUE;
+                    $rowH = "\n<thead>" . $rowH;
+                } elseif (!$headerLines && !$tbody) {
                     $tbody = TRUE;
                     $rowH = "\n<tbody>" . $rowH;
+                    if ($thead) {
+                        $thead = FALSE;
+                        $rowH = "\n</thead>" . $rowH;
+                    }
                 }
                 $out .= $rowH;
             }
