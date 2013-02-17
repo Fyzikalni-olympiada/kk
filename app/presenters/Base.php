@@ -14,6 +14,7 @@ abstract class Base extends Presenter
         parent::beforeRender();
         $this['navigation']->setCurrent($this->getParam('path'));
         $this->setLayout('layout2Col');
+		$this->template->subdomain = $this->getSubdomain();
     }
 
 
@@ -21,7 +22,7 @@ abstract class Base extends Presenter
     protected function createComponentNavigation()
     {
         $navigation = new Navigation;
-        $navigation->add('//www');
+        $navigation->add($this->getSubdomain());
         $navigation->setOrder('position');
         return $navigation;
     }
@@ -32,9 +33,15 @@ abstract class Base extends Presenter
     {
         $navigation = new Navigation;
         $path = $this->getParam('path');
-        $navigation->add(substr($path, 0, strpos($path, '/', 6) ?: strlen($path))); //skip  //www/
+        $navigation->add(substr($path, 0, strpos($path, '/', strlen($this->getSubdomain()) + 1) ?: strlen($path))); //skip  //www/
         $navigation->setOrder('position');
         return $navigation;
     }
+
+
+	protected function getSubdomain() {
+		$path = $this->getParam('path');
+		return substr($path, 0, strpos($path, '/', 2) ?: strlen($path));
+	}
 
 }
