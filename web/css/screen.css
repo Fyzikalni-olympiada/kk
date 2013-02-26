@@ -8,17 +8,18 @@ body, input, select, option {color: #222; background: #fff;}
 p, ol, ul, table {font-size: 1.5em; margin-top: 1em;}
 a {
     text-decoration: none; color: #8e654c;
-    &:hover {text-decoration: none;color:#444;}
-    &:active, &:focus {outline: 0;}
-    img {}
 }
+a:hover {text-decoration: none;color:#444;}
+a:active, a:focus {outline: 0;}
 hr {border: none; border-top: 1px solid #333; margin: 0 0 15px;}
-ol, ul {font-size: 1.5em;
-    &>li {list-style-type: circle;}
-    ol, ul {font-size: 1em;
-        &>li {list-style-type: square;}
-    }
-}
+ol, ul {
+	font-size: 1.5em; }
+ol > li, ul > li {
+	list-style-type: circle; }
+ol ol, ol ul, ul ol, ul ul {
+	font-size: 1em; }
+ol ol > li, ol ul > li, ul ol > li, ul ul > li {
+	list-style-type: square; }
 
 
 /* CLASSES */
