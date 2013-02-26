@@ -709,7 +709,7 @@ class Spreadsheet_Excel_Reader {
                             $celEnd = '</i>' . $cellEnd;
                         }
                         $cell = "\n\t\t" . $cell;
-                        if ($val=='') {
+                        if ($val==='') {
                             $val = "&nbsp;";
                             $empty = TRUE;
                         } else {
