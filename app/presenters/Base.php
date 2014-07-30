@@ -32,6 +32,7 @@ abstract class Base extends Presenter
     protected function createComponentMenu()
     {
         $navigation = new Navigation;
+		$navigation->setDocumentClass('Eywa\CMS\Model\Presentable');
         $path = $this->getParam('path');
         $navigation->add(substr($path, 0, strpos($path, '/', strlen($this->getSubdomain()) + 1) ?: strlen($path))); //skip  //www/
         $navigation->setOrder('position');
