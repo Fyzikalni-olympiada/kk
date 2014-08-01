@@ -1,0 +1,60 @@
+plit {block #content}
+<h1>{$heading}</h1>
+<div id="editable">
+    {!$document->html}
+</div>
+
+<div>{!$error}</div>
+
+<form name="addPost" method="POST" action="">
+<table style="border-collapse: separate; border : 0px none; background-color : transparent;">
+  <tr>
+    <td style="text-align: right">Nadpis:</td>
+    <td><input class="text" tabindex="1" type="text" size="40" value="{!$titleline}" name="titleline" /></td>
+  </tr>
+  <tr>
+    <td style="text-align: right">Text:</td>
+    <td><textarea name="text" tabindex="2" cols="40" rows="10" id="text"></textarea></td>
+  </tr>
+  <tr>
+    <td style="text-align: right">1 a 1 je:</td>
+	<td><input class="text" tabindex="8" type="text" size="25" name="kontrola" value="" /></td>
+  </tr>
+  <tr>
+    <td style="text-align: right">Jméno:</td>
+	<td><input class="text" tabindex="9" type="text" size="25" name="name" value="" /></td>
+  </tr>
+  <tr>
+    <td style="text-align: right">E-mail:</td>
+	<td><input class="text" tabindex="10" type="text" size="25" name="email" value="" /></td>
+  </tr>
+  <tr>
+    <td></td>
+	<td><input tabindex="13" type="submit" name="ok" value="Odeslat" class="button" />
+    </td>
+  </tr>
+  </table>
+  </form>
+  </td>
+</tr>
+</table>
+</form>
+
+
+{foreach $posts as $item}
+<div style="padding-left: {$item->lmargin}px; padding-right: 0px; padding-top: 0px; padding-bottom: 1em;">
+<h3><strong>{$item->title}</strong> <small>(<a href="mailto:{$item->email}">{$item->name}</a>, {$item->datetime})</small></h3>
+<p  style="text-align: justify">{!$item->text}</p>
+<p style="text-align: right"><a href="?reply={$item->id}&vnoreni={$item->vnoreni}">reagovat</a></p>
+</div>
+{/foreach}
+
+{foreach $list as $item}
+<h2>{$item->name}</h2>
+<ul>
+{foreach $presenter->repository->getChildren($item->path) as $subitem}
+    <li><a href="{dlink $subitem->path}" title="{$subitem->title}">{$subitem->name}</a></li>
+{/foreach}
+</ul>
+{/foreach}
+{control overview}

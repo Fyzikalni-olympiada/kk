@@ -18,7 +18,16 @@ require LIBS_DIR . '/eywa/loader.php';
 $application = Environment::getApplication();
 
 $application->onStartup[] = function() {
-    //dibi::connect(Environment::getConfig('database'));
+//    dibi::connect(Environment::getConfig('database'));
+    dibi::connect(array(
+      'driver'   => 'mysql',
+      'host'     => 'localhost',
+      'username' => 'www-fo',
+      'password' => 'ajwRMsIBue',
+      'database' => 'fo',
+      'charset'  => 'utf8',
+    ));
+
 };
 
 $application->run();
