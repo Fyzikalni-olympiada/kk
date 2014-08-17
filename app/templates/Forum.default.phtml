@@ -43,18 +43,17 @@ plit {block #content}
 
 {foreach $posts as $item}
 <div style="padding-left: {$item->lmargin}px; padding-right: 0px; padding-top: 0px; padding-bottom: 1em;">
-<h3><strong>{$item->title}</strong> <small>(<a href="mailto:{$item->email}">{$item->name}</a>, {$item->datetime})</small></h3>
-<p  style="text-align: justify">{!$item->text}</p>
-<p style="text-align: right"><a href="?reply={$item->id}&vnoreni={$item->vnoreni}">reagovat</a></p>
+<h3><strong>{$item->title}</strong> <small>(<a href="mailto:{$item->email}">{!$item->name}</a>, {$item->datetime})</small></h3>
+<p style="text-align: justify">{!$item->text}</p>
+<p style="text-align: right"><a href="?reply={$item->id}">reagovat</a></p>
 </div>
 {/foreach}
 
-{foreach $list as $item}
-<h2>{$item->name}</h2>
-<ul>
-{foreach $presenter->repository->getChildren($item->path) as $subitem}
-    <li><a href="{dlink $subitem->path}" title="{$subitem->title}">{$subitem->name}</a></li>
-{/foreach}
-</ul>
-{/foreach}
+<div style="padding-center">
+<a href="./?page={$first_page}">První</a>
+<a href="./?page={$prev_page}">Předchozí</a>
+<a href="./?page={$next_page}">Následující</a>
+<a href="./?page={$last_page}">Poslední</a>
+</div>
+
 {control overview}
