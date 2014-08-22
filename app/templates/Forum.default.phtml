@@ -4,9 +4,11 @@ plit {block #content}
     {!$document->html}
 </div>
 
-<div>{!$error}</div>
+<div style="background-color:#ffaaaa"><p>{!$errorMsg}</p></div>
+<div style="background-color:#aaffaa"><p>{!$okMsg}</p></div>
 
-<form name="addPost" method="POST" action="">
+<form name="addPost" method="POST" action="./">
+<input type="hidden" name="reply" value={$reply}>
 <table style="border-collapse: separate; border : 0px none; background-color : transparent;">
   <tr>
     <td style="text-align: right">Nadpis:</td>
@@ -49,11 +51,12 @@ plit {block #content}
 </div>
 {/foreach}
 
-<div style="padding-center">
-<a href="./?page={$first_page}">První</a>
+<div style="padding-center"><p>
+<a href="./?page={$frst_page}">První</a>
 <a href="./?page={$prev_page}">Předchozí</a>
 <a href="./?page={$next_page}">Následující</a>
 <a href="./?page={$last_page}">Poslední</a>
+</p>
 </div>
 
 {control overview}
