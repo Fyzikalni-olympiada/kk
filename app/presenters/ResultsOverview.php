@@ -13,6 +13,10 @@ class ResultsOverview extends Overview
 {
     public function renderDefault($path)
     {
-        parent::renderDefault($path);
+        $this->template->list = $this['overview']->getDocuments();
+//        foreach( $this->template->list as $list ){
+//            $this->template->subitem=Array();
+//        }
+//        parent::renderDefault($path);
     }
 }
