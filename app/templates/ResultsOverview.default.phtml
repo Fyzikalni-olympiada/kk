@@ -9,9 +9,9 @@
 <ul>
 <!--TODO udělat sort jiný než abecední!!!-->
 
-{foreach $presenter->repository->getChildren($item->path) as $subitem}
+{foreach $presenter->repository->getChildren($item->path,null,array("position","ASC")) as $subitem}
     <li><a href="{dlink $subitem->path}" title="{$subitem->title}">{$subitem->name}</a></li>
-    {foreach $presenter->repository->getChildren($subitem->path) as $subitem}
+    {foreach $presenter->repository->getChildren($subitem->path,null,array("position","ASC")) as $subitem}
         <a href="{dlink $subitem->path}" title="{$subitem->title}">{$subitem->name}</a>
         <span style="width: 15px;">&nbsp;</span>
     {/foreach}
