@@ -1,0 +1,25 @@
+@{extends @layout.phtml}
+@{block #content}
+{ifset $error}<br />{$error}<a href="./">Zpět</a>{else}
+<h1>{!$heading}</h1>
+<br />
+{control krajSelect}
+
+<br />
+{if $_GET["kr_select"]>0}
+<!-- budeme vůbec něco zobrazovat-->
+
+<table>
+{foreach $data as $row}
+  <tr>
+  {foreach $row as $item}
+    <td>{$item}</td>
+  {/foreach}
+  </tr>
+{/foreach}
+</table>
+{/if}
+
+{/if}<!--error-->
+
+
