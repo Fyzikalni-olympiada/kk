@@ -10,26 +10,78 @@ use dibi;
  */
 class ResultsDatabase extends Base
 {
+    public $KATEGORY=array("1"=>"A","2"=>"B","3"=>"C","4"=>"D","5"=>"E","6"=>"F","7"=>"G");
     public function renderDefault($path)
     {
 // nacist data z URL
         list($heading,$rocnik,$kolo,$kategorie)=
             $this->getURLData($this->getParam('path'));
-        //$heading.=" r ".$rocnik." ko ".$kolo." ka ".$kategorie;
 // page title
         $this->template->heading=$heading;
 // comment
-        if($this->template->document->html == null){
-            if($kolo==1) $this->template->document->html=
-                "<p>Pro postup do dalšího kola ". 
-                "bylo třeba dosáhnout hodnocení alespoň 5&nbsp;bodů ".
-                "v&nbsp;alespoň pěti úlohách a&nbsp;odevzdat ".
-                "seriózně experimentální úlohu.</p>";
-            if($kolo==3) $this->template->document->html=
-                "<p>K&nbsp;úspěchu v&nbsp;krajském kole je třeba mít ".
-                "alespoň 14&nbsp;bodů a&nbsp;dvě úlohy hodnocené ".
-                "alespoň 5&nbsp;body.";
+        $stdtitle="";// text pod nadpisem
+        if($kolo==1) $stdtitle=
+            "<p>Pro postup do dalšího kola ". 
+            "bylo třeba dosáhnout hodnocení alespoň 5&nbsp;bodů ".
+            "v&nbsp;alespoň pěti úlohách a&nbsp;odevzdat ".
+            "seriózně experimentální úlohu.</p>";
+        if($kolo==3) $stdtitle=
+            "<p>K&nbsp;úspěchu v&nbsp;krajském kole je třeba mít ".
+            "alespoň 14&nbsp;bodů a&nbsp;dvě úlohy hodnocené ".
+            "alespoň 5&nbsp;body.";
+        $qr=dibi::query("
+            SELECT publish_type_id,title_line FROM publish_res 
+            WHERE kraj_id=%i AND rocnik=%i 
+            AND round=%i AND category=%s;",
+            /*kraj_id*/1,$rocnik,$kolo,$this->KATEGORY[$kategorie])->fetch();
+        $publish=$qr["publish_type_id"];
+        $title_line=$qr["title_line"];
+ 
+        if($title_line!=null) $stdtitle=$title_line;
+        if($publish==null){ // nema se publikovat
+            $html=$this->template->document->html;
+            if($html==null || $html=="")
+                $stdtitle="<p>Výsledková listina se připravuje.</p>";
+            else
+                $stdtitle="";
         }
+        else{
+            if($publish === 1){ // databáze
+            }
+            if($publish === 2){ // html
+            }
+            if($publish === 3){ // excel
+                $this->setLayout('layout');
+                $xlsData = $this->repository->getStorage()->getConnection()->send('GET', $this->document->resources[0]);
+                if(is_string($xlsData)) // soubor existuje!!
+                    $this->template->data = new \Spreadsheet_Excel_Reader($xlsData, TRUE, 'utf8');
+                else
+                    $this->template->emptyXls=true;
+            }
+        }
+// html
+//  * zpráva null -> std+html
+//  * jinak -> zpráva+html (input)
+// databaze
+//  * zprava null -> std
+//  * zprava -> zprava 
+//  + databazova tabulka
+// Excel
+//  * zprava null -> std
+//  * zprava -> zprava
+//  + excel input
+
+// null
+//  * html==null -> Výsledková listina se připravuje.
+//  * html!=null -> html
+//
+// std: 
+//  * vyřešit účastníka a řešitele... -> v html (není potřeba do té doby než se bude migrovat 
+//                                       do databáze zpětně
+//  * vyřešit modifikované body 
+
+        $this->template->document->html = $stdtitle.$this->template->document->html;
+        $this->template->publish=$publish;
 // TODO několik sekcí s tabulkami pro OK E mozna ne
         $this->template->add("section","");
         //$this->template->section= new stdClass();
@@ -85,9 +137,9 @@ class ResultsDatabase extends Base
             if($rocnik<54) unset($row->mod);
             if($kolo!=1)   unset($row->adv);
             if($kolo!=1)for($i=5;$i<=7;$i++) unset($row["U".$i]);
-            $table.="<tr>";
+            $table.="<tr style=\"padding:1em 2px;\">";
             foreach($row as $col){
-                $table.="<td>".$col."</td>";
+                $table.="<td style=\"padding:.5em 2px;\">".$col."</td>";
             }
             $table.="</tr>\n";
         }
@@ -96,21 +148,24 @@ class ResultsDatabase extends Base
 
     function getTitleLine($rocnik,$kolo,$kategorie){
         $titleline="";
-        foreach(array("Pořadí","Jméno","Třída","Učitel","Škola") as $item)
-            $titleline.="<td>".$item."</td>";
+        foreach(array("","Jméno","Třída","Učitel","Škola") as $item)
+            $titleline.="<th style=\"padding:1em 2px;\">".$item."</th>";
         for($i=1;$i<=($kolo==1?7:4);$i++)
-            $titleline.="<td>Ú".$i."</td>";
-        $titleline.="<td>Celkem</td>";
+            $titleline.="<th style=\"width:2em;padding:2px;\">Ú".$i."</th>";
+        $titleline.="<th style=\"padding:2px\">Celkem</th>";
         if($rocnik>=54 && $kolo>1)
-            $titleline.="<td>Mod. body</td>";
-        $titleline.="<td></td>";// úsp/neúsp
+            $titleline.="<th style=\"padding:2px\">Mod. body</th>";
+        $titleline.="<th></th>";// úsp/neúsp
         if($kolo==1 || ($kolo==2 && $kategorie==5))
-            $titleline.="<td>Postup</td>";
+            $titleline.="<th style=\"padding:2px\">Postup</th>";
         return $titleline;
     }
 
     function getURLData($path){
         $heading="";
+        $kolo=0;
+        $kategorie=0;
+        $rocnik=0;
 
 	$arr=array(
             "domaci"  => "Domácí kolo",
