@@ -1,0 +1,245 @@
+@{block #page}
+
+<script type="text/javascript">
+  function noBack()
+  {
+    window.history.forward()
+  }
+  noBack();
+  window.onload = noBack;
+  window.onpageshow = function(evt) { if (evt.persisted) noBack() }
+  window.onunload = function() { void(0) }
+</script>
+
+<h1>Stránka je právě ve výstavbě.</h1> <p>Prosíme vyčkejte s přihlašováním nebo použijte email <a href="mailto:praha@fyzikalniolympiada.cz">praha@fyzikalniolympiada.cz</a>. Děkujeme</p>
+<p />
+<hr />
+
+<h1>{$heading}</h1>
+<div id="editable">
+    {!$document->html}
+</div>
+
+<style>
+p.error{
+    margin: 10px;
+}
+</style>
+<div style="background-color:#ffaaaa"><p class="error">{!$errorMsg}</p></div>
+<div style="background-color:#aaffaa"><p class="error">{!$okMsg}</p></div>
+
+<h2>Krok {$step}: {$stepname}</h2>
+
+{if $step==1}
+<form name="addStudets" method="POST" action="./">
+<input type="hidden" name="step" value="{$step}">
+{if $rekap}
+<input type="hidden" name="refNum" value="{$refNum}">
+{/if}
+{for $i=0; $i<$refNum; $i++}
+  <input type="hidden"  value="{$stdName["$i"]}" name="stdName[{$i}]">
+  <input type="hidden"  value="{$stdSur["$i"]}" name="stdSur[{$i}]">
+  <input type="hidden"  value="{$stdKat["$i"]}" name="stdKat[{$i}]">
+  <input type="hidden"  value="{$stdMail["$i"]}" name="stdMail[{$i}]">
+  <input type="hidden"  value="{$stdBorn["$i"]}" name="stdBorn[{$i}]">
+  <input type="hidden"  value="{$stdClss["$i"]}" name="stdClss[{$i}]">
+  <input type="hidden"  value="{$stdTeac["$i"]}" name="stdTeac[{$i}]">
+{/for}
+<table style="border-collapse: separate; border : 0px none; background-color : transparent;">
+  <tr><td style="text-align: right">* Škola:</td><td><select name="refSchool">
+    <option value="NULL">---- vyberte školu ----</option>
+{foreach $schools as $school}
+    <option value={$school->school_id} {if $school->selected}selected="selected"{/if}>{$school->school_choice}</option>
+{/foreach}
+    </select>
+    <input tabindex="13" type="submit" name="missschool" value="Škola není na seznamu" class="button" />
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right">* Jméno referenta FO:</td>
+    <td><input class="text" tabindex="1" type="text" size="40" value="{$refName}" name="refName" /></td>
+  </tr>
+  <tr>
+    <td style="text-align: right">* Vaš email:</td>
+    <td><input class="text" tabindex="1" type="text" size="40" value="{$refMail}" name="refMail" /></td>
+  </tr>
+  <tr>
+    <td style="text-align: right">Váš telefon:</td>
+    <td><input class="text" tabindex="1" type="text" size="40" value="{$refPhone}" name="refPhone" /></td>
+  </tr>
+{if !$rekap}
+  <tr>
+    <td style="text-align: right">* Počet soutěžících:</td>
+    <td><input class="text" tabindex="1" type="text" size="40" value="{$refNum}" name="refNum" /></td>
+  </tr>
+{/if}
+  <tr>
+{if $rekap}
+        <td colspan=2><input tabindex="13" type="submit" name="garantOk" value="Pokračovat k rekapitulaci" class="button" />
+        <input type="hidden"  value="true" name="rekapE">
+{else}
+        <td colspan=2><input tabindex="13" type="submit" name="garantOk" value="Pokračovat" class="button" />
+{/if}
+    </td>
+  </tr>
+  </table>
+  </form>
+  </td>
+</tr>
+</table>
+</form>
+
+{elseif $step==1.5}
+<form name="addSchool" method="POST" action="./">
+<input type="hidden" name="step" value="{$step}">
+<input type="hidden" name="refSchool" value="{$refSchool}">
+<input type="hidden" name="refName" value="{$refName}">
+<input type="hidden" name="refMail" value="{$refMail}">
+<input type="hidden" name="refPhone" value="{$refPhone}">
+<input type="hidden" name="refNum" value="{$refNum}">
+<input type="hidden"  value={$rekap} name="rekapE">
+{for $i=0; $i<$refNum; $i++}
+  <input type="hidden"  value="{$stdName["$i"]}" name="stdName[{$i}]">
+  <input type="hidden"  value="{$stdSur["$i"]}" name="stdSur[{$i}]">
+  <input type="hidden"  value="{$stdKat["$i"]}" name="stdKat[{$i}]">
+  <input type="hidden"  value="{$stdMail["$i"]}" name="stdMail[{$i}]">
+  <input type="hidden"  value="{$stdBorn["$i"]}" name="stdBorn[{$i}]">
+  <input type="hidden"  value="{$stdClss["$i"]}" name="stdClss[{$i}]">
+  <input type="hidden"  value="{$stdTeac["$i"]}" name="stdTeac[{$i}]">
+{/for}
+<table style="border-collapse: separate; border : 0px none; background-color : transparent;">
+  <tr>
+    <td style="text-align: right">Zkratka názvu školy:</td>
+    <td><input class="text" type="text" size="40" value="{$schName}" name="schName" /></td>
+  </tr>
+  <tr>
+    <td style="text-align: right">Adresa školy:</td>
+    <td><input class="text" type="text" size="40" value="{$schAdr}" name="schAdr" /></td>
+  </tr>
+
+  <tr>
+        <td><input type="submit" name="schSave" value="Uložit školu" class="button" /></td>
+        <td><input type="submit" name="schCanc" value="Zpět" class="button" /></td>
+  </tr>
+  </table>
+  </form>
+  </td>
+</tr>
+</table>
+</form>
+{elseif $step==2}
+<form name="addStudents" method="POST" action="./">
+<input type="hidden" name="step" value="{$step}">
+<input type="hidden" name="refSchool" value="{$refSchool}">
+<input type="hidden" name="refName" value="{$refName}">
+<input type="hidden" name="refMail" value="{$refMail}">
+<input type="hidden" name="refPhone" value="{$refPhone}">
+<input type="hidden" name="refNum" value="{$refNum}">
+<table style="border-collapse: separate; border : 0px none; background-color : transparent;">
+  <tr>
+    <td></td>
+    <td>Jméno</td>
+    <td>Příjmení</td>
+    <td>Kat.</td>
+    <td>Email studenta</td>
+    <td>Datum narození (RRRR-MM-DD)</td>
+    <td>Třída</td>
+    <td>Vyučující fyziky</td>
+  </tr>
+{for $i=0; $i<$refNum; $i++}
+  <tr>
+    <td>{$i+1}.</td>
+    <td><input class="text" type="text" size="10" value="{$stdName["$i"]}" name="stdName[{$i}]" /></td>
+    <td><input class="text" type="text" size="10" value="{$stdSur["$i"]}" name="stdSur[{$i}]" /></td>
+    <td><select name="stdKat[{$i}]" size=1>
+      <option value="">&nbsp;&nbsp;&nbsp;</option>
+      <option value="A" {if $stdKat[$i]=='A'}selected='selected'{/if}>A&nbsp;</option>
+      <option value="B" {if $stdKat[$i]=='B'}selected='selected'{/if}>B&nbsp;</option>
+      <option value="C" {if $stdKat[$i]=='C'}selected='selected'{/if}>C&nbsp;</option>
+      <option value="D" {if $stdKat[$i]=='D'}selected='selected'{/if}>D&nbsp;</option>
+      </select></td>
+    <td><input class="text" type="text" size="15" value="{$stdMail["$i"]}" name="stdMail[{$i}]" /></td>
+    <td><input class="text" type="text" size="12"  value="{$stdBorn["$i"]}" name="stdBorn[{$i}]" /></td>
+    <td><input class="text" type="text" size="5"  value="{$stdClss["$i"]}" name="stdClss[{$i}]" /></td>
+    <td><input class="text" type="text" size="10" value="{$stdTeac["$i"]}" name="stdTeac[{$i}]" /></td>
+    <td><input tabindex=100 class="button" type="submit" name="stdRm[{$i}]" value="Smazat"/></td>
+  </tr>
+{/for}
+  <tr>
+    <td colspan = 8"><input type="submit" name="rekap" value="Pokračovat k rekapitulaci" class="button" /></td>
+    <td ><input type="submit" name="stdAdd" value="Přidat řádek" class="button" /></td>
+  </tr>
+  </table>
+  </form>
+  </td>
+</tr>
+</table>
+</form>
+{elseif $step==3}
+<form name="rekapitulace" method="POST" action="./">
+<input type="hidden" name="step" value="{$step}">
+<input type="hidden" name="refSchool" value="{$refSchool}">
+<input type="hidden" name="refName" value="{$refName}">
+<input type="hidden" name="refMail" value="{$refMail}">
+<input type="hidden" name="refPhone" value="{$refPhone}">
+<input type="hidden" name="refNum" value="{$refNum}">
+{for $i=0; $i<$refNum; $i++}
+  <input type="hidden"  value="{$stdName["$i"]}" name="stdName[{$i}]">
+  <input type="hidden"  value="{$stdSur["$i"]}" name="stdSur[{$i}]">
+  <input type="hidden"  value="{$stdKat["$i"]}" name="stdKat[{$i}]">
+  <input type="hidden"  value="{$stdMail["$i"]}" name="stdMail[{$i}]">
+  <input type="hidden"  value="{$stdBorn["$i"]}" name="stdBorn[{$i}]">
+  <input type="hidden"  value="{$stdClss["$i"]}" name="stdClss[{$i}]">
+  <input type="hidden"  value="{$stdTeac["$i"]}" name="stdTeac[{$i}]">
+{/for}
+<h3>Referent FO: <input tabindex="13" type="submit" name="edit_garant" value="Editovat údaje" class="button" /></h3>
+<table style="border-collapse: separate; border : 0px none; background-color : transparent;">
+  <tr>
+    <td style="text-align: right">Škola:</td>
+    <td>{$refSchoolName}</td>
+  </tr>
+  <tr>
+    <td style="text-align: right">Vaše jméno:</td>
+    <td>{$refName}</td>
+  </tr>
+  <tr>
+    <td style="text-align: right">Vaš email:</td>
+    <td>{$refMail}</td>
+  </tr>
+  <tr>
+    <td style="text-align: right">Váš telefon:</td>
+    <td>{$refPhone}</td>
+  </tr>
+</table>
+<h3>Řešitelé: <input tabindex="13" type="submit" name="edit_resitele" value="Editovat údaje" class="button" /></h3>
+<table style="border-collapse: separate; border : 0px none; background-color : transparent;">
+  <tr>
+    <td></td>
+    <td>Jméno</td>
+    <td>Příjmení</td>
+    <td>Kat.</td>
+    <td>Email studenta</td>
+    <td>Datum narození</td>
+    <td>Třída</td>
+    <td>Vyučující fyziky</td>
+  </tr>
+{for $i=0; $i<$refNum; $i++}
+  <tr>
+    <td>{$i+1}.</td>
+    <td>{$stdName["$i"]}</td>
+    <td>{$stdSur["$i"]}</td>
+    <td>{$stdKat["$i"]}</td>
+    <td>{$stdMail["$i"]}</td>
+    <td>{$stdBorn["$i"]}</td>
+    <td>{$stdClss["$i"]}</td>
+    <td>{$stdTeac["$i"]}</td>
+  </tr>
+{/for}
+</table>
+<input tabindex="13" type="submit" name="submit" value="Potvrdit přihlášku" class="button" />
+</form>
+{else}
+<div style="background-color:#ffaaaa"><p class="error">Chyba serveru.</p></div>
+{/if}
+
+{control overview}
