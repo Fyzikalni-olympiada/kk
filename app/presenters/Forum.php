@@ -70,38 +70,41 @@ class Forum extends Overview
                 );
                 dibi::query('INSERT INTO forum_kraj', $arr);
                 $okMsg.="Prispevek pridan.<br />";
- 
  /* email */
-//                $telo = 'Na ' . SERVER_NAME . ' je novy diskusni prispevek od ' . $_POST['name'] . ' (' . $_POST['email'] . "):\n\n" . $_POST['title'] . "\n\n" . $zaloha_text . "\n\nhttp://" . SERVER_NAME . rtrim(ROOT_WWW, '/') . odkaz2('content/forum.php', array('forum_id' => $forum_last_id, 'sort' => 'vlakno', 'news_id' => $GLOBALS['news_id']), 0);
+                $telo = 'Na ' . "praha.fyzikalniolympiada.cz"/*SERVER_NAME*/ . ' je novy diskusni prispevek od ' . $_POST['name'] . ' (' . $_POST['email'] . "):\n\n" . $_POST['titleline'] . "\n\n" . $zaloha_text . "\n\nhttp://praha.fyzikalniolympiada.cz/forum/";
+// . SERVER_NAME . rtrim(ROOT_WWW, '/');
+//odkaz2('content/forum.php', array('forum_id' => $forum_last_id, 'sort' => 'vlakno', 'news_id' => $GLOBALS['news_id']), 0);
 
-/*                $GLOBALS['mysql']->query('
+                $header='From: webmaster@fyzikalniolympiada.cz' . "\r\n" .
+                    'Reply-To: webmaster@fyzikalniolympiada.cz' . "\r\n" .
+                    'X-Mailer: PHP/' . phpversion();
+                $result=dibi::query('
                     SELECT email
-                    FROM ' . TABLE_USERS . '
+                    FROM users
                     WHERE send_forum="1"
-                ');
-                while ($row = $GLOBALS['mysql']->fetch_array()) {
-                    @mail($row['email'], 'Novy diskusni prispevek na ' . SERVER_NAME, $telo, MAIL_HEADERS);
+                    ')->fetchAll();
+                foreach($result as $email){
+                    @mail($email['email'], 'Novy diskusni prispevek na ' . "praha.fyzikalniolympiada.cz"/*SERVER_NAME*/, $telo, $header);
                 }
-*/
+                //@mail("lukas.ledvina@gmail.com", 'Novy diskusni prispevek na ' . "praha.fyzikalniolympiada.cz"/*SERVER_NAME*/, $telo, $header);
 
+                $SERVER_NAME="praha.fyzikalniolympiada.cz";
                 /** Reakce na jiny prispevek, tak pošleme email */
-/*                if (!empty($reakcena_id)) {
-                    $GLOBALS['mysql']->query("
-                        SELECT name, email, title, datum_cas
-                        FROM " . VIEW_FORUM . "
-                        WHERE id=" . db::escape_string($reakcena_id)
-                    );
-                    $row = $GLOBALS['mysql']->fetch_array();
-                    if (!is_null($row['email'])) {
-                        $datum = explode('-',$row["date"]);
-                        $telo = "Dobry den " . $row["name"] . ".\n\nV diskusnim foru na " . SERVER_NAME . " byla pridana nova reakce na Vas pripevek \"" . $row["title"] . "\" z " . $row['datum_cas'] . "\n\nhttp://" . SERVER_NAME . ROOT_WWW . odkaz2('content/forum.php', array('forum_id' => $forum_last_id, 'sort' => 'vlakno', 'news_id' => $GLOBALS['news_id']), 0);
-                        @mail($row['email'], "Reakce na vas prispevek ve foru " . SERVER_NAME, $telo, MAIL_HEADERS);
+                if (!empty($reply)) {
+                    $result=dibi::query("
+                        SELECT name, email, title, datetime
+                        FROM forum_kraj
+                        WHERE id=%i AND kraj_id=%i",$reply,$this->getKrajId())->fetchAll();
+                    foreach($result as $item){
+                        if (!is_null($item['email'])) {
+                            $datum =  date("j. F Y H:i",strtotime($item['datetime']));
+                            $telo = "Dobry den " . $item['name'] . ".\n\nV diskusnim foru na " . $SERVER_NAME . " byla pridana nova reakce na Vas pripevek \"" . $item['title'] . "\" z " . $datum . "\n\nhttp://" . $SERVER_NAME . "forum/";
+                        @mail($item['email'], "Reakce na vas prispevek ve foru " . $SERVER_NAME, $telo, $header);
                     }
-                }*/
-
+                }
             }
-        }
 
+}}
         $posts=Array();
         $posts=$this::addPost($posts,0);
         foreach($posts as $item){
@@ -198,7 +201,8 @@ class Forum extends Overview
 //            $r .= "Uveďte prosím Vaše jméno!<br />";
 //        }
         /** Email nám nevadí, když není vyplněný. */
-        if (!empty($mail) &&!EReg("^[[:graph:]]+@[[:graph:]]+(\.[[:graph:]]{2,})$", $mail)) {
+
+        if(!filter_var($mail, FILTER_VALIDATE_EMAIL)){
             $r .= "Váš e-mail má neplatný formát!<br />";
         }
         if (strlen($text) < 3) {
