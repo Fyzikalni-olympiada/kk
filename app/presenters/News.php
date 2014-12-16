@@ -13,7 +13,7 @@ class News extends Overview
 {
     public function renderDefault($path)
     {
-        $this['overview']->setPath($this->getSubdomain() . '/aktualni-rocnik/novinky');
+        $this['overview']->setPath($this->getSubdomain() . '/aktualni-rocnik/novinky-dir');
         parent::renderDefault($path);
     }
 }

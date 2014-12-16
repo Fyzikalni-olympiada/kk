@@ -8,13 +8,10 @@
 <div class="news">
 {foreach $list as $item}
     <h2>{$item->heading}</h2>
-    <p class="small">
-        Napsal {$item->changes[0]->identity}
-    </p>
-    <p class="createdate">
-        {$item->createdAt->format('j. n. Y H:i')}
-    </p>
     {!$item->html}
+    <p class="createdate">
+         {$item->createdAt->format('j. n. Y H:i')} napsal <span class="small">{$item->changes[0]->identity}</span>
+    </p>
     <span class="article_separator">&nbsp;</span>
 {/foreach}
 
