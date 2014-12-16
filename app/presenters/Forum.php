@@ -29,7 +29,7 @@ class Forum extends Overview
 
         if(isset($_GET['reply'])){
             $reply=$_GET['reply'];
-            $okMsg="Reakce";
+            $okMsg="Reakce na příspěvek.<br />";
             $this->template->titleline="Re: ".
               dibi::query('SELECT * FROM forum_kraj WHERE id=%i',$reply)->fetch()['title'];
         }
@@ -69,7 +69,7 @@ class Forum extends Overview
                   'kraj_id'     => $this::getKrajId()
                 );
                 dibi::query('INSERT INTO forum_kraj', $arr);
-                $okMsg.="Prispevek pridan.<br />";
+                $okMsg.="Příspěvek přidán.<br />";
  /* email */
                 $telo = 'Na ' . "praha.fyzikalniolympiada.cz"/*SERVER_NAME*/ . ' je novy diskusni prispevek od ' . $_POST['name'] . ' (' . $_POST['email'] . "):\n\n" . $_POST['titleline'] . "\n\n" . $zaloha_text . "\n\nhttp://praha.fyzikalniolympiada.cz/forum/";
 // . SERVER_NAME . rtrim(ROOT_WWW, '/');
@@ -99,12 +99,14 @@ class Forum extends Overview
                         if (!is_null($item['email'])) {
                             $datum =  date("j. F Y H:i",strtotime($item['datetime']));
                             $telo = "Dobry den " . $item['name'] . ".\n\nV diskusnim foru na " . $SERVER_NAME . " byla pridana nova reakce na Vas pripevek \"" . $item['title'] . "\" z " . $datum . "\n\nhttp://" . $SERVER_NAME . "forum/";
-                        @mail($item['email'], "Reakce na vas prispevek ve foru " . $SERVER_NAME, $telo, $header);
+                            @mail($item['email'], "Reakce na vas prispevek ve foru " . $SERVER_NAME, $telo, $header);
+                        }
                     }
                 }
+                $this->flashMessage('Příspěvek byl přidán.','Úspěch');
+                $this->redirect('this');
             }
-
-}}
+        }
         $posts=Array();
         $posts=$this::addPost($posts,0);
         foreach($posts as $item){
