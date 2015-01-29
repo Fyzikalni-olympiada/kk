@@ -80,7 +80,9 @@ class ResultsDatabase extends Base
 //                                       do databáze zpětně
 //  * vyřešit modifikované body 
 
-        $this->template->document->html = $stdtitle.$this->template->document->html;
+        $this->template->html = $stdtitle;
+//$this->template->document->html;
+//        $this->template->document->html = $stdtitle.$this->template->document->html;
         $this->template->publish=$publish;
 // TODO několik sekcí s tabulkami pro OK E mozna ne
         $this->template->add("section","");
@@ -118,25 +120,51 @@ class ResultsDatabase extends Base
         for($i=1;$i<=7;$i++)
             $query.="LEFT JOIN (SELECT participant_id,sub".$i.".points 
                            FROM submit AS sub".$i." 
-                           WHERE round=".$kolo." AND problem_id=".$i.") AS U".$i." 
+                           WHERE prob_round=".$kolo." AND problem_id=".$i.") AS U".$i." 
                      USING(participant_id)";
         $query.="WHERE kraj_id=1 
               AND rocnik=".$rocnik." 
               AND category='".chr(64+$kategorie)."'
               AND advance.round=".$kolo."
             GROUP BY participant_id
-            ORDER BY SUM(sub.points);";
+            ORDER BY SUM(sub.points) DESC;";
         //die($query);
 
         $data=dibi::query($query)->fetchAll();
 // mod points calculate
-// TODO resort data + fill status
+        foreach($data as $row){
+            $row->mod==0;
+        }
+        for($i=1; $i<=($kolo==1?7:4); $i++){
+            $sum=0;$cnt=0;
+            foreach($data as $row){
+                $sum+=$row["U".$i];
+                $cnt++;;
+            }
+            foreach($data as $row){
+                $row->mod+=$row["U".$i]*(10-$sum/$cnt);
+            }
+        }
+// TODO resort data
+// TODO fill status
+       if($kolo>1)foreach($data as $row){
+       }
+// poradi
+       $poradi=1;
+       foreach($data as $row){
+           $row->poradi=$poradi++.".";
+       }
+// prepare data
         $table="";
         foreach($data as $row){
             unset($row->born_date);
             if($rocnik<54) unset($row->mod);
             if($kolo!=1)   unset($row->adv);
             if($kolo!=1)for($i=5;$i<=7;$i++) unset($row["U".$i]);
+            $row->mod=number_format( $row->mod, 2,',','');
+            for($i=1;$i<=($kolo==1?7:4);$i++)
+                $row["U".$i]=str_replace('.',',',$row["U".$i]);
+            $row->sum=str_replace('.',',',$row->sum);
             $table.="<tr style=\"padding:1em 2px;\">";
             foreach($row as $col){
                 $table.="<td style=\"padding:.5em 2px;\">".$col."</td>";
@@ -148,12 +176,12 @@ class ResultsDatabase extends Base
 
     function getTitleLine($rocnik,$kolo,$kategorie){
         $titleline="";
-        foreach(array("","Jméno","Třída","Učitel","Škola") as $item)
+        foreach(array("","Jméno","Třída","Vyučující fyziky","Škola") as $item)
             $titleline.="<th style=\"padding:1em 2px;\">".$item."</th>";
         for($i=1;$i<=($kolo==1?7:4);$i++)
             $titleline.="<th style=\"width:2em;padding:2px;\">Ú".$i."</th>";
         $titleline.="<th style=\"padding:2px\">Celkem</th>";
-        if($rocnik>=54 && $kolo>1)
+        if($rocnik>=54)
             $titleline.="<th style=\"padding:2px\">Mod. body</th>";
         $titleline.="<th></th>";// úsp/neúsp
         if($kolo==1 || ($kolo==2 && $kategorie==5))
