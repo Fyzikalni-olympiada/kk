@@ -111,7 +111,7 @@ class ResultsDatabase extends Base
             JOIN referents     USING(referent_id) 
             JOIN school        USING(school_id)
             JOIN advance       USING(participant_id)
-            JOIN submit AS sub USING(participant_id)
+            JOIN (SELECT * FROM submit WHERE prob_round=".$kolo.") AS sub USING(participant_id)
             LEFT JOIN (SELECT DISTINCT participant_id, 
                    '<strong>ano</strong>' adv 
                FROM advance 
@@ -148,6 +148,10 @@ class ResultsDatabase extends Base
 // TODO resort data
 // TODO fill status
        if($kolo>1)foreach($data as $row){
+           $okUl=0;
+           for($i=1;$i<=4;$i++)if($row["U".$i]>=5)$okUl++;
+           if($okUl>=2 && $row->sum>=14)
+               $row->status="uspěšný řešitel";
        }
 // poradi
        $poradi=1;
