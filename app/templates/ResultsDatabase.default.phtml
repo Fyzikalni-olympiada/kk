@@ -1,14 +1,14 @@
 @{block #page}
 <h1>{!$heading}</h1>
 <div id="editable">
-    {!$document->html}
+    {!$html}
 </div>
 {if $publish==1}<!-- datadáze-->
   {foreach $section as $item}
     {if $iterator->first && $iterator->last}{else}
         <h2>{$item->name}</h2>
     {/if}
-    <table width="100%" style="font-size:105%">
+    <table width="100%" style="font-size:125%">
       <thead>
         <tr>{!$item->titleline}</tr>
       </thead>
@@ -25,4 +25,8 @@
     {!$data->render()}
   {/if}
 {/if}
+
+<div id="editable">
+    {!$document->html}
+</div>
 
