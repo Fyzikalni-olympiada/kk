@@ -1,0 +1,118 @@
+@{extends @layout.phtml}
+@{block #content}
+{ifset $error}<br />{$error}<a href="./">Zpět</a>{else}
+<h1>{!$heading}</h1>
+
+{*
+<br />
+{control krajSelect}
+
+<br />
+{if $_GET["kr_select"]>0}
+<!-- budeme vůbec něco zobrazovat-->
+*}
+
+<h2>Postup do Krajského kola kategorie A</h2>
+
+
+<style>
+p.error{
+    margin: 10px;
+}
+</style>
+<div style="background-color:#ffaaaa"><p class="error">{!$errorMsg}</p></div>
+<div style="background-color:#aaffaa"><p class="error">{!$okMsg}</p></div>
+
+<br />
+
+{if $data!=NULL}
+<form name="bodyForm" method="POST" action="">
+<table>
+<thead>
+<th>
+  <td><strong>Jméno</strong></td>
+  <td><strong>Ú1</strong></td>
+  <td><strong>Ú2</strong></td>
+  <td><strong>Ú3</strong></td>
+  <td><strong>Ú4</strong></td>
+  <td><strong>Ú5</strong></td>
+  <td><strong>Ú6</strong></td>
+  <td><strong>Ú7</strong></td>
+  <td><strong>Sum</strong></td>
+</th>
+</thead>
+<tbody>
+{?$index=0}
+{foreach $data as $row}
+  <tr>
+    <input type="hidden"  value="{$row->participant_id}" name="PID{$index}">
+    <td>
+      <input type="radio" name="ADV{$index}" value="1"/>{if  $row->advR}<strong>{/if}Ano</strong>
+      <input type="radio" name="ADV{$index}" value="0"/>{if !$row->advR}<strong>{/if}Ne</strong>
+    </td>
+    <td>{$row->fullname}</td>
+    <td>{if $row->U1>=5}<strong>{/if}{$row->U1}</strong></td>
+    <td>{if $row->U2>=5}<strong>{/if}{$row->U2}</strong></td>
+    <td>{if $row->U3>=5}<strong>{/if}{$row->U3}</strong></td>
+    <td>{if $row->U4>=5}<strong>{/if}{$row->U4}</strong></td>
+    <td>{if $row->U5>=5}<strong>{/if}{$row->U5}</strong></td>
+    <td>{if $row->U6>=5}<strong>{/if}{$row->U6}</strong></td>
+    <td>{if $row->U7>=5}<strong>{/if}{$row->U7}</strong></td>
+    <td>{$row->sum}</td>
+  </tr><tr><td></tr>
+{?$index++}
+{/foreach}
+  <tr>
+    <td colspan=10>
+      <input type="submit" value="Uložit" class="button" name="saveBT"/>
+    </td>
+  </tr>
+</table>
+<input type="hidden" value="{$index}" name="STOT">
+
+</form>
+{/if}
+
+{if $values!=NULL}
+<h2>Postoupili:</h2>
+<table>
+<thead>
+  <tr>
+    <td><strong>Jméno</strong></td>
+  </tr>
+</thead>
+<tbody>
+{foreach $values as $row}
+  <tr>
+    <td>{$row->fullname}</td>
+  </tr>
+{/foreach}
+</tbody>
+</table>
+{/if}
+
+
+
+
+
+
+
+
+{*
+<table>
+{foreach $data as $row}
+  <tr>
+  {foreach $row as $item}
+    <td>{$item}</td>
+  {/foreach}
+  </tr>
+{/foreach}
+</tbody>
+</table>
+*}
+{/if}
+
+{*
+{/if}<!--error-->
+*}
+
