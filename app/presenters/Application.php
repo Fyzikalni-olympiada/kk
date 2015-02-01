@@ -22,7 +22,7 @@ class Application extends Base
     {
 bdump($_POST);
         $step_names=array(
-            1    => "Základní údaje o garantovi",
+            1    => "Základní údaje o referentovi",
            "1.5" => "Údaje o škole", 
             2    => "Údaje o řešitelích",
             3    => "Rekapitulace",
@@ -206,6 +206,19 @@ bdump($_POST);
                         "born_date"      => $stdBorn[$i],
                         "solution_count" => 0);
                     dibi::insert('participants',$data)->execute();
+                    $stdid=dibi::insertId();
+                    for($j=1;$j<=7;$j++){
+                        $data=array(
+                            "participant_id" => $stdid,
+                            "prob_round"     => 1,
+                            "problem_id"     => $j);
+                        dibi::insert('submit',$data)->execute();
+                    }
+                    $data=array(
+                        "participant_id" => $stdid,
+                        "round"          => "1"
+                    );
+                    dibi::insert('advance',$data)->execute();
                 }
 // TODO škola
 // send emails
@@ -253,7 +266,7 @@ bdump($_POST);
                            "\n\nTento email byl vygenerován automaticky.";
                     @mail($std->email, "Potvrzení o přihlášení studenta do FO", $telo, $header);
                     @mail("backup@fyzikalniolympiada.cz", "Potvrzení o přihlášení studenta do FO", $telo, $header);
-                    @mail("lukas.ledvina@fyzikalniolympiada.cz", "Potvrzení o přihlášení studenta do FO", $telo, $header);
+                    @mail("lukas.ledvina@fyzikalniolympiada.cz", "Potvrzení o přihlášení studenta do FO", $telo, $header);//next param
                 }
 // TODO lepší zpráva
                 $step=1;
