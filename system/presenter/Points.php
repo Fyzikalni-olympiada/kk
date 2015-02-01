@@ -15,20 +15,67 @@ class Points extends Secured{
             ->fetchAll();
         foreach($arr as $kr)
             $this->kraje[$kr["kraj_id"]]=$kr["kraj_name"];
-        $this->kraje[0]="";
+        $this->kraje[null]="";
     }
 
     function renderDefault(){
+        $okMsg="";
+        $errMsg="";
+        $values=array();
+
         if(!isset($_GET["kr_select"]))$_GET["kr_select"]=0;
         $kr_select=$_GET["kr_select"];
-        if($kr_select==null)$kr_select=0;
+        if($kr_select==null)$kr_select=null;
         if(!$this::isAllowed($kr_select)){
             $this->template->error="Neoprávněný přístup.";
             return;
         }
 
+        if(!isset($_POST["pr_select"]))$_POST["pr_select"]=0;
+        $pr_select=$_POST["pr_select"];
+
+        $kr_select=1;//Praha auto
+        $round=3;
+
+        if(isset($_POST["resetBT"])){
+            $pr_select=0;
+            $okMsg.="Nic nebylo uděláno.";
+        }
+        if(isset($_POST["saveBT"])){
+            for($i=0; $i<$_POST["STOT"];$i++){
+                if($_POST["SDATAOLD".$i]!=$_POST["SDATA".$i]){
+                    //$okMsg.=$i." ";
+                    $_POST["SDATA".$i]=str_replace(",",".",$_POST["SDATA".$i]);
+                    if($_POST["SDATA".$i]<0 || $_POST["SDATA".$i]>10) continue;
+                    if($_POST["SDATA".$i]=="")
+                        dibi::query("UPDATE submit SET points=NULL WHERE submit_id=%s;",$_POST["SID".$i]);
+                    else
+                        dibi::query("UPDATE submit SET points=%s WHERE submit_id=%s;",$_POST["SDATA".$i],$_POST["SID".$i]);
+                    $values[]=dibi::query("SELECT CONCAT(name,' ',surname) AS fullname,problem_id,points FROM submit 
+                                           JOIN participants USING(participant_id)
+                                           WHERE submit_id=%s;",$_POST["SID".$i])->fetchAll()[0];
+                }
+            }
+            $okMsg.="Body uloženy.";
+        }
+
+// bodovani
+// TODO rocnik
+        $data=dibi::query("SELECT submit_id AS s_id,CONCAT(name,' ',surname) AS fullname, points
+                              FROM submit 
+                              JOIN (SELECT participant_id FROM advance WHERE round=%s) AS adv USING(participant_id)
+                              JOIN participants USING(participant_id)
+                              WHERE category='A' AND problem_id=%s AND prob_round=%s
+                              ORDER BY surname",$round,$pr_select,$round)->fetchAll();
+
+// send to template
         $this->template->heading="Administrační pultík: ".$this->kraje[$kr_select];
-        $this->template->data=dibi::query("SELECT * FROM submit")->fetchAll();
+        $this->template->data=$data;
+        $this->template->pr_select=$pr_select;
+        $this->template->values=$values;
+
+        $this->template->okMsg=$okMsg;
+        $this->template->errorMsg=$errMsg;
     }
 
     function createComponentKrajSelect($name){
@@ -36,7 +83,7 @@ class Points extends Secured{
         $form->setMethod('GET');
         $form->setAction("/system/points/");
         $form->addSelect("kr_select","Kraje:",$this->kraje)
-            ->skipFirst('Vyberte kraj');
+             ->skipFirst('Vyberte kraj');
         $form->addSubmit('send', 'Vybrat');
         return $form;
     }
