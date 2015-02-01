@@ -14,6 +14,8 @@ abstract class Base extends Presenter
         parent::beforeRender();
         $this['navigation']->setCurrent($this->getParam('path'));
         $this->setLayout('layout2Col');
+		$subdomain = $this->getSubdomain();
+		$this->template->site = $this->getRepository()->get($subdomain);
 		$this->template->subdomain = $this->getSubdomain();
     }
 

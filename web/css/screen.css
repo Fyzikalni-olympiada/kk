@@ -8,7 +8,7 @@ body, input, select, option {color: #222; background: #fff;}
 /* BASIC */
 p, ol, ul, table {font-size: 1.5em; margin-top: 1em;}
 a {
-    text-decoration: none; color: #801515;
+    text-decoration: none;
 }
 a:hover {text-decoration: none;color:#444;}
 a:active, a:focus {outline: 0;}
@@ -77,7 +77,6 @@ ul { list-style: disc; }
 ol { list-style: decimal; }
 dt {
 		font-weight: bold;
-		color: #801515;
 }
 dd {
 		padding-left: 35px;
@@ -129,10 +128,7 @@ table th, table td {
 		border-style: solid;
 }
 table th {
-		color: #801515;
-		background: #FFAAAA;
 		padding: .8em 1em;
-		border-color: #D46A6A #AA3939 #D46A6A #AA3939;
 }
 table td {
 		border-color: #EAEAEA;
@@ -163,13 +159,11 @@ table td {
 	width: 100%;
 	height: 60px;
 	display: block;
-	border-top: 4px solid #AA3939;
-	background: #FFAAAA;
+	border-top: 4px solid;
 	z-index: -1;
 }
 .topArea {
-		border-top: 4px solid #AA3939;
-		background: #FFAAAA;
+		border-top: 4px solid;
 		height:60px;
 		overflow:hidden;
 		padding-left:25px;
@@ -183,7 +177,6 @@ table td {
 		font-size:70px;
 		line-height:76px;
 		font-weight:normal;
-		color:#801515;
 		display:block;
 		font-family:Georgia, "Times New Roman", Times, serif;
 		padding:0;
@@ -196,7 +189,6 @@ table td {
 		line-height:20px;
 		font-family: Georgia, "Times New Roman", Times, serif;
 		font-style:italic;
-		color:#801515;
 		font-weight:normal;
 		padding:0 0 0 80px;
 		margin:10px 0 50px 0;
@@ -264,7 +256,7 @@ table td {
 		padding:20px;
 		/*font-family:Georgia, "Times New Roman", Times, serif;*/
 		font-weight:normal;
-                border-left: 1px solid #F3F1F1;
+                border-left: 1px solid #F1F1F1;
 }
 #right-col div.moduletable h3 {
 		font-family:Georgia, "Times New Roman", Times, serif;
@@ -279,7 +271,6 @@ table td {
 		background:#f8f8f8;
 		text-align:right;
 }
-.bannerfooter_text a { color:#D46A6A; }
 #footer {
 		clear:both;
 		margin:0 auto;
@@ -360,7 +351,6 @@ td.buttonheading a img {border:none;padding:0;background:none;}
 #form-login ul li a:hover {
 		display:block;
 		padding:0 1px;
-		color:#801515;
 }
 .inputbox {
 		border:1px solid #ccc;
@@ -370,7 +360,6 @@ td.buttonheading a img {border:none;padding:0;background:none;}
 .inputbox:focus {
 		border:1px solid #ccc;
 		padding:1px;
-		background:#FFAAAA;
 		font-size:12px;
 }
 td .inputbox { margin:2px; }
@@ -384,31 +373,6 @@ td .inputbox { margin:2px; }
 		cursor:pointer;
 }
 
-/* Back button */
-div.back_button {
-		border-top:1px solid #ccc;
-		margin:12px 0px;
-		padding:8px;
-		text-align:center;
-}
-div.back_button a {
-		font-family:"Trebuchet MS", Trebuchet, Arial, Verdana, sans-serif;
-		font-weight:normal;
-		background:#222;
-		color:#fff;
-		font-size:14px;
-		line-height:18px;
-		padding:2px 16px;
-}
-div.back_button a:hover {
-		font-family:"Trebuchet MS", Trebuchet, Arial, Verdana, sans-serif;
-		font-weight:normal;
-		background:#AA3939;
-		color:#fff;
-		font-size:14px;
-		line-height:18px;
-		padding:2px 16px;
-}
 /* Pathway */
 div#pathway { margin-bottom:12px; }
 span.pathway {
@@ -519,8 +483,7 @@ table.searchintro tr td {
 }
 select.inputbox { }
 span.highlight {
-		color:#AA3939;
-		border-bottom:1px dotted #AA3939;
+		border-bottom:1px dotted;
 }
 fieldset { border:0; }
 fieldset div a:hover { }
@@ -551,7 +514,6 @@ fieldset div.small {
 #right-col .menu li a { color:#5f5f5f; }
 #right-col .menu.control li a { font-weight: bold; }
 #right-col .menu li a:hover { color:#111; }
-#right-col .menu li.current a { color:#801515; }
 
 /* ------------------ mod_mainmenu.php ------------------ */
 #menu-top ul {
@@ -578,11 +540,9 @@ fieldset div.small {
 		background:none;
 		line-height:60px;
 		padding:10px 16px 0 0;
-		color:#801515;
 }
 #menu-top li.current a, #menu-top li.ancestor a {
 		background:none;
-		color: #801515;
 		line-height:60px;
 		padding:10px 16px 0 0;
 }
@@ -613,7 +573,6 @@ div.search {
 
 div.moduletable { margin:0 0 20px 0; }
 div.moduletable h3 {
-		color:#AA3939;
 		font-size:16px;
 		font-weight:normal;
 		text-transform:uppercase;

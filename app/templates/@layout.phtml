@@ -19,6 +19,33 @@
 {*control aloha*}
 {block #scripts}{/block}
 
+<style type="text/css" n:syntax="double">
+{{if $subdomain=='//praha'}}
+a,dt,table th,#logo h2,#logo h1 a,#right-col .menu li.current a,#menu-top li a:hover,#menu-top li.current a,#menu-top li.ancestor a {color: #801515}
+.inputbox:focus {background:#FFAAAA}
+table th {background: #FFAAAA; border-color: #D46A6A #AA3939 #D46A6A #AA3939}
+#top-container:before,.topArea {border-top-color: #AA3939; background: #FFAAAA}
+.bannerfooter_text a {color:#D46A6A}
+div.moduletable h3,span.highlight {color:#AA3939; border-bottom-color: #AA3939} 
+
+{{elseif $subdomain=='//plzen'}}
+a,dt,table th,#logo h2,#logo h1 a,#right-col .menu li.current a,#menu-top li a:hover,#menu-top li.current a,#menu-top li.ancestor a {color: #0655A6}
+.inputbox:focus {background:#B2CFEC}
+table th {background: #B2CFEC; border-color: #4289D2 #1771CF #4289D2 #1771CF}
+#top-container:before,.topArea {border-top-color: #1771CF; background: #B2CFEC}
+.bannerfooter_text a {color:#4289D2}
+div.moduletable h3,span.highlight {color:#1771CF; border-bottom-color: #1771CF} 
+
+{{elseif $subdomain=='//kvary'}}
+a,dt,table th,#logo h2,#logo h1 a,#right-col .menu li.current a,#menu-top li a:hover,#menu-top li.current a,#menu-top li.ancestor a {color: #9F5205}
+.inputbox:focus {background:#F8D0A8}
+table th {background: #F8D0A8; border-color: #D5995D #BA7129 #D5995D #BA7129}
+#top-container:before,.topArea {border-top-color: #BA7129; background: #F8D0A8}
+.bannerfooter_text a {color:#D5995D}
+div.moduletable h3,span.highlight {color:#BA7129; border-bottom-color: #BA7129} 
+{{/if}}
+</style>
+
 </head>
 <body id="com_content" class="background c3 viewfrontpage itemid1">
 <div id="top-container">
@@ -36,8 +63,8 @@
         </div-->
         <div class="clr"></div>
     </div>    
-    <div id="logo"><h1><a href="{dlink $subdomain}" title="Fyzikální olympiáda Praha">Fyzikální olympiáda Praha</a></h1>
-      <h2>Krajská komise Fyzikální olympiády v Praze</h2>
+    <div id="logo"><h1><a href="{dlink $subdomain}" title="Fyzikální olympiáda {$site->name}">Fyzikální olympiáda {$site->name}</a></h1>
+      <h2>{$site->subtitle}</h2>
     </div>
     <div class="clr"></div>
   </div>
