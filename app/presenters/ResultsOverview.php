@@ -13,17 +13,12 @@ class ResultsOverview extends Overview
 {
     public function renderDefault($path)
     {
-        $this->template->link=true;
         list($heading,$rocnik,$kolo,$kategorie)=
             $this->getURLData($this->getParam('path'));
          
-        $heading=$this->template->heading;
-        if($heading!="" || $heading==null){
-            $heading="Výsledkové listiny ".($rocnik>0?$rocnik.". ročníku":"");
+        if(!$this->template->heading) {
+            $this->template->heading="Výsledkové listiny ".($rocnik>0?$rocnik.". ročníku":"");
         }
-        if($rocnik==0)
-            $this->template->link=false;
-        $this->template->heading=$heading;
         parent::renderDefault($path);
     }
 

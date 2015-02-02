@@ -5,14 +5,14 @@
 </div>
 
 {foreach $list as $item}
-{if $link==true}
-<h2>{$item->name}</h2>
-{else}
+{if $item->presenter == 'Eywa\CMS\Presenters\ResultsOverview' || $item->presenter == 'Eywa\CMS\Presenters\Results'}
 <h2><a href="{dlink $item->path}" title="{$item->title}">{$item->name}</a></h2>
+{else}
+<h2>{$item->name}</h2>
 {/if}
 <ul>
 {foreach $presenter->repository->getChildren($item->path,null,array("position","ASC")) as $subitem}
-    {if $link==true}
+    {if $subitem->presenter == 'Eywa\CMS\Presenters\Results' || $subitem->presenter == 'Eywa\CMS\Presenters\ResultsDatabase'}
         <li><a href="{dlink $subitem->path}" title="{$subitem->title}">{$subitem->name}</a></li>
     {else}
         <li><i>{$subitem->name}</i></li>
