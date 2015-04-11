@@ -34,8 +34,13 @@ class Points extends Secured{
         if(!isset($_POST["pr_select"]))$_POST["pr_select"]=0;
         $pr_select=$_POST["pr_select"];
 
+        if(!isset($_POST["kat_select"]))$_POST["kat_select"]="";
+        $kat_select=$_POST["kat_select"];
+
+        if(!isset($_POST["round_select"]))$_POST["round_select"]="";
+        $round_select=$_POST["round_select"];
+
         $kr_select=1;//Praha auto
-        $round=3;
 
         if(isset($_POST["resetBT"])){
             $pr_select=0;
@@ -65,13 +70,15 @@ class Points extends Secured{
                               FROM submit 
                               JOIN (SELECT participant_id FROM advance WHERE round=%s) AS adv USING(participant_id)
                               JOIN participants USING(participant_id)
-                              WHERE category='A' AND problem_id=%s AND prob_round=%s
-                              ORDER BY surname",$round,$pr_select,$round)->fetchAll();
+                              WHERE category=%s AND problem_id=%s AND prob_round=%s
+                              ORDER BY surname",$round_select,$kat_select,$pr_select,$round_select)->fetchAll();
 
 // send to template
         $this->template->heading="Administrační pultík: ".$this->kraje[$kr_select];
         $this->template->data=$data;
         $this->template->pr_select=$pr_select;
+        $this->template->kat_select=$kat_select;
+        $this->template->$round_select=$round_select;
         $this->template->values=$values;
 
         $this->template->okMsg=$okMsg;
