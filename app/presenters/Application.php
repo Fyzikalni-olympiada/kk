@@ -247,7 +247,7 @@ bdump($_POST);
                        "S pozdravem\nza KK FO Praha\nOtokar\npraha@fyzikalniolympiada.cz".
                        "\n\nTento email byl vygenerován automaticky.";
 
-                @mail($dbReferent->email, "Potvrzení o přihlášení studentů do FO", $telo, $header);
+                @mail($dbReferent->referent_email, "Potvrzení o přihlášení studentů do FO", $telo, $header);
                 @mail("backup@fyzikalniolympiada.cz", "Potvrzení o přihlášení studentů do FO", $telo, $header);
                 @mail("lukas.ledvina@fyzikalniolympiada.cz", "Potvrzení o přihlášení studentů do FO", $telo, $header);
 // send emails to students
@@ -347,7 +347,7 @@ bdump($_POST);
             else{
                 if($refMail==$stdMail[$i])
                     $errorMsg.="Email (".($i+1).".) <i>".$stdMail[$i]."</i> se shoduje s Vaším emailem.<br />";
-                for($j=0; $j<$i; $j++)if($stdMail[$j]==$stdMail[$i])
+                for($j=0; $j<$i; $j++)if($stdMail[$j]==$stdMail[$i])if($stdName[$i] != $stdName[$j] || $stdSur[$i] != $stdSur[$j])
                     $errorMsg.="Zadaný email (".($i+1).".) <i>".$stdMail[$i]."</i> je již použit pro studenta ".($j+1).".<br />";
             }
             $emails=dibi::query("SELECT name, surname,email FROM `participants` 
