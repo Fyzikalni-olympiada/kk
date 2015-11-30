@@ -100,7 +100,7 @@ class ResultsDatabase extends Base
 // TODO renderovat data (load z databáze)
 // TODO getKrajId()
         $query="SELECT NULL poradi, 
-              concat(surname,' ',name) jmeno,class,teacher,
+              concat(name,' ',surname) jmeno,class,teacher,
               school_show_name";
         for($i=1;$i<=7;$i++)
               $query.=", U".$i.".points \"U".$i."\" ";
@@ -127,7 +127,7 @@ class ResultsDatabase extends Base
               AND category='".chr(64+$kategorie)."'
               AND advance.round=".$kolo."
             GROUP BY participant_id
-            ORDER BY SUM(sub.points) DESC;";
+            ORDER BY SUM(sub.points) DESC, surname DESC;";
         //die($query);
 
         $data=dibi::query($query)->fetchAll();
@@ -145,7 +145,6 @@ class ResultsDatabase extends Base
                 $row->mod+=$row["U".$i]*(10-$sum/$cnt);
             }
         }
-// TODO resort data
 // TODO fill status
        if($kolo>1)foreach($data as $row){
            $okUl=0;
@@ -153,6 +152,9 @@ class ResultsDatabase extends Base
            if($okUl>=2 && $row->sum>=14)
                $row->status="uspěšný řešitel";
        }
+// TODO resort data
+
+        usort($data,'Eywa\CMS\Presenters\ResultsDatabase::finalSort');
 // poradi
        $poradi=1;
        foreach($data as $row){
@@ -176,6 +178,16 @@ class ResultsDatabase extends Base
             $table.="</tr>\n";
         }
         $this->template->section["postup"]->table=$table;
+    }
+    public static function finalSort($a, $b)
+    {
+        if( $a['status']=='' && $b['status']!='') return  1;
+        if( $a['status']!='' && $b['status']=='') return -1;
+        if( $a['sum'] <  $b['sum']) return  1;
+        if( $a['sum'] >  $b['sum']) return -1;
+        if( $a['mod'] <  $b['mod']) return  1;
+        if( $a['mod'] >  $b['mod']) return -1;
+        return 0;
     }
 
     function getTitleLine($rocnik,$kolo,$kategorie){
