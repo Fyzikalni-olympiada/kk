@@ -78,7 +78,7 @@ class Points extends Secured{
         $this->template->data=$data;
         $this->template->pr_select=$pr_select;
         $this->template->kat_select=$kat_select;
-        $this->template->$round_select=$round_select;
+        $this->template->round_select=$round_select;
         $this->template->values=$values;
 
         $this->template->okMsg=$okMsg;
