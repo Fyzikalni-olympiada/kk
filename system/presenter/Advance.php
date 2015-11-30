@@ -30,11 +30,12 @@ class Advance extends Secured{
             $this->template->error="Neoprávněný přístup.";
             return;
         }
+        if(!isset($_POST["kat_select"]))$_POST["kat_select"]="";
+        $kategorie=$_POST["kat_select"];
 
         $kr_select=1;//Praha auto
         $from_kolo=1;
         $to_kolo=3;
-        $kategorie=1;
         $rocnik=56;
 
         if(isset($_POST["saveBT"])){
@@ -96,6 +97,8 @@ class Advance extends Secured{
 // send to template
         $this->template->heading="Administrační pultík: ".$this->kraje[$kr_select];
         $this->template->data=$data;
+        $this->template->kat_select=$kategorie;
+        $this->template->round_select=$round_select;
         $this->template->values=$values;
 
         $this->template->okMsg=$okMsg;

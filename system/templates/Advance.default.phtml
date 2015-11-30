@@ -12,7 +12,17 @@
 <!-- budeme vůbec něco zobrazovat-->
 *}
 
-<h2>Postup do Krajského kola kategorie A</h2>
+<h2>Postup do Krajského kola kategorie <?php echo chr(64+$kat_select);?></h2>
+<form name="selKat" method="POST" action="">
+<select name="kat_select">
+    <option value="0">---- vyberte kategorii----</option>
+    <option value="1" {if $kat_select==1}selected="selected"{/if}>A</option>
+    <option value="2" {if $kat_select==2}selected="selected"{/if}>B</option>
+    <option value="3" {if $kat_select==3}selected="selected"{/if}>C</option>
+    <option value="4" {if $kat_select==4}selected="selected"{/if}>D</option>
+    </select>
+<input type="submit" value="Vybrat" class="button" /> 
+</form>
 
 
 <style>
