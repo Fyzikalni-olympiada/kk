@@ -224,6 +224,7 @@ bdump($_POST);
 // send emails
                 $header='From: praha@fyzikalniolympiada.cz' . "\r\n" .
                         'Reply-To: praha@fyzikalniolympiada.cz' . "\r\n" .
+                        'Content-Type: text/plain; charset=utf-8'. "\r\n" .
                         'X-Mailer: PHP/' . phpversion();
                 $dbReferent=dibi::query('SELECT * from referents 
                                          JOIN school    USING(school_id) 
