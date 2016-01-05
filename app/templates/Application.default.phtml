@@ -33,13 +33,14 @@ p.error{
 <input type="hidden" name="refNum" value="{$refNum}">
 {/if}
 {for $i=0; $i<$refNum; $i++}
-  <input type="hidden"  value="{$stdName["$i"]}" name="stdName[{$i}]">
-  <input type="hidden"  value="{$stdSur["$i"]}" name="stdSur[{$i}]">
-  <input type="hidden"  value="{$stdKat["$i"]}" name="stdKat[{$i}]">
-  <input type="hidden"  value="{$stdMail["$i"]}" name="stdMail[{$i}]">
-  <input type="hidden"  value="{$stdBorn["$i"]}" name="stdBorn[{$i}]">
-  <input type="hidden"  value="{$stdClss["$i"]}" name="stdClss[{$i}]">
-  <input type="hidden"  value="{$stdTeac["$i"]}" name="stdTeac[{$i}]">
+  <input type="hidden" name="stdId[{$i}]" value="{$stdId["$i"]}">
+  <input type="hidden" value="{$stdName["$i"]}" name="stdName[{$i}]">
+  <input type="hidden" value="{$stdSur["$i"]}" name="stdSur[{$i}]">
+  <input type="hidden" value="{$stdKat["$i"]}" name="stdKat[{$i}]">
+  <input type="hidden" value="{$stdMail["$i"]}" name="stdMail[{$i}]">
+  <input type="hidden" value="{$stdBorn["$i"]}" name="stdBorn[{$i}]">
+  <input type="hidden" value="{$stdClss["$i"]}" name="stdClss[{$i}]">
+  <input type="hidden" value="{$stdTeac["$i"]}" name="stdTeac[{$i}]">
 {/for}
 <table style="border-collapse: separate; border : 0px none; background-color : transparent;">
   <tr><td style="text-align: right">* Škola:</td><td><select name="refSchool">
@@ -95,13 +96,14 @@ p.error{
 <input type="hidden" name="refNum" value="{$refNum}">
 <input type="hidden"  value={$rekap} name="rekapE">
 {for $i=0; $i<$refNum; $i++}
-  <input type="hidden"  value="{$stdName["$i"]}" name="stdName[{$i}]">
-  <input type="hidden"  value="{$stdSur["$i"]}" name="stdSur[{$i}]">
-  <input type="hidden"  value="{$stdKat["$i"]}" name="stdKat[{$i}]">
-  <input type="hidden"  value="{$stdMail["$i"]}" name="stdMail[{$i}]">
-  <input type="hidden"  value="{$stdBorn["$i"]}" name="stdBorn[{$i}]">
-  <input type="hidden"  value="{$stdClss["$i"]}" name="stdClss[{$i}]">
-  <input type="hidden"  value="{$stdTeac["$i"]}" name="stdTeac[{$i}]">
+  <input type="hidden" name="stdId[{$i}]" value="{$stdId["$i"]}">
+  <input type="hidden" value="{$stdName["$i"]}" name="stdName[{$i}]">
+  <input type="hidden" value="{$stdSur["$i"]}" name="stdSur[{$i}]">
+  <input type="hidden" value="{$stdKat["$i"]}" name="stdKat[{$i}]">
+  <input type="hidden" value="{$stdMail["$i"]}" name="stdMail[{$i}]">
+  <input type="hidden" value="{$stdBorn["$i"]}" name="stdBorn[{$i}]">
+  <input type="hidden" value="{$stdClss["$i"]}" name="stdClss[{$i}]">
+  <input type="hidden" value="{$stdTeac["$i"]}" name="stdTeac[{$i}]">
 {/for}
 <table style="border-collapse: separate; border : 0px none; background-color : transparent;">
   <tr>
@@ -144,7 +146,7 @@ p.error{
   </tr>
 {for $i=0; $i<$refNum; $i++}
   <tr>
-    <td>{$i+1}.</td>
+    <td>{$i+1}.</td><input type="hidden" name="stdId[{$i}]" value="{$stdId["$i"]}">
     <td><input class="text" type="text" size="10" value="{$stdName["$i"]}" name="stdName[{$i}]" /></td>
     <td><input class="text" type="text" size="10" value="{$stdSur["$i"]}" name="stdSur[{$i}]" /></td>
     <td><select name="stdKat[{$i}]" size=1>
@@ -154,8 +156,8 @@ p.error{
       <option value="C" {if $stdKat[$i]=='C'}selected='selected'{/if}>C&nbsp;</option>
       <option value="D" {if $stdKat[$i]=='D'}selected='selected'{/if}>D&nbsp;</option>
       </select></td>
-    <td><input class="text" type="text" size="15" value="{$stdMail["$i"]}" name="stdMail[{$i}]" /></td>
-    <td><input class="text" type="text" size="12"  value="{$stdBorn["$i"]}" name="stdBorn[{$i}]" /></td>
+    <td><input class="text" type="text" size="15" value="{$stdMail["$i"]}" name="stdMail[{$i}]" {if $stdId[$i] != ""}readonly{/if}/></td>
+    <td><input class="text" type="text" size="12" value="{$stdBorn["$i"]}" name="stdBorn[{$i}]" {if $stdId[$i] != ""}readonly{/if}/></td>
     <td><input class="text" type="text" size="5"  value="{$stdClss["$i"]}" name="stdClss[{$i}]" /></td>
     <td><input class="text" type="text" size="10" value="{$stdTeac["$i"]}" name="stdTeac[{$i}]" /></td>
     <td><input tabindex=100 class="button" type="submit" name="stdRm[{$i}]" value="Smazat"/></td>
@@ -166,6 +168,28 @@ p.error{
     <td ><input type="submit" name="stdAdd" value="Přidat řádek" class="button" /></td>
   </tr>
   </table>
+<!--<p>Toto níže zatím nefunguje 100%, prosím nepoužívat.</p>-->
+<h3>Studenti přihlášení v minulých letech</h3>
+<table style="border-collapse: separate; border : 0px none; background-color : transparent;">
+  <tr>
+    <td>Jméno</td>
+    <td>Příjmení</td>
+    <td>Třída</td>
+    <td>Vyučující fyziky</td>
+    <td></td>
+  </tr>
+{for $i=0; $i<$oldNum; $i++}
+  <tr>
+    <input type="hidden" name="oldId[{$i}]" value="{$oldStd["$i"]->participant_id}">
+    <td>{$oldStd["$i"]->name}</td>
+    <td>{$oldStd["$i"]->surname}</td>
+    <td>{$oldStd["$i"]->class}</td>
+    <td>{$oldStd["$i"]->teacher}</td>
+    <td><input tabindex=100 class="button" type="submit" name="oldAdd[{$i}]" value="Přihlásit"/></td>
+  </tr>
+{/for}
+
+</table>
   </form>
   </td>
 </tr>
@@ -180,13 +204,14 @@ p.error{
 <input type="hidden" name="refPhone" value="{$refPhone}">
 <input type="hidden" name="refNum" value="{$refNum}">
 {for $i=0; $i<$refNum; $i++}
-  <input type="hidden"  value="{$stdName["$i"]}" name="stdName[{$i}]">
-  <input type="hidden"  value="{$stdSur["$i"]}" name="stdSur[{$i}]">
-  <input type="hidden"  value="{$stdKat["$i"]}" name="stdKat[{$i}]">
-  <input type="hidden"  value="{$stdMail["$i"]}" name="stdMail[{$i}]">
-  <input type="hidden"  value="{$stdBorn["$i"]}" name="stdBorn[{$i}]">
-  <input type="hidden"  value="{$stdClss["$i"]}" name="stdClss[{$i}]">
-  <input type="hidden"  value="{$stdTeac["$i"]}" name="stdTeac[{$i}]">
+  <input type="hidden" name="stdId[{$i}]" value="{$stdId["$i"]}">
+  <input type="hidden" value="{$stdName["$i"]}" name="stdName[{$i}]">
+  <input type="hidden" value="{$stdSur["$i"]}" name="stdSur[{$i}]">
+  <input type="hidden" value="{$stdKat["$i"]}" name="stdKat[{$i}]">
+  <input type="hidden" value="{$stdMail["$i"]}" name="stdMail[{$i}]">
+  <input type="hidden" value="{$stdBorn["$i"]}" name="stdBorn[{$i}]">
+  <input type="hidden" value="{$stdClss["$i"]}" name="stdClss[{$i}]">
+  <input type="hidden" value="{$stdTeac["$i"]}" name="stdTeac[{$i}]">
 {/for}
 <h3>Referent FO: <input tabindex="13" type="submit" name="edit_garant" value="Editovat údaje" class="button" /></h3>
 <table style="border-collapse: separate; border : 0px none; background-color : transparent;">

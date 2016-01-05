@@ -23,7 +23,7 @@ class Application extends Base
 bdump($_POST);
         $step_names=array(
             1    => "Základní údaje o referentovi",
-           "1.5" => "Údaje o škole", 
+           "1.5" => "Údaje o škole",
             2    => "Údaje o řešitelích",
             3    => "Rekapitulace",
             4    => "Hotovo");
@@ -38,11 +38,13 @@ bdump($_POST);
         if(isset($_POST['refMail']))  $refMail  =$_POST['refMail'];  else $refMail  ="@";
         if(isset($_POST['refPhone'])) $refPhone =$_POST['refPhone']; else $refPhone ="";
         if(isset($_POST['refNum']))   $refNum   =$_POST['refNum'];   else $refNum   ="";
+        if(isset($_POST['oldNum']))   $oldNum   =$_POST['oldNum'];   else $oldNum   =0;
         if(isset($_POST['rekapE']))   $rekap    =$_POST['rekapE'];   else $rekap    =false;
 
         if(isset($_POST['schName']))  $schName  =$_POST['schName'];  else $schName  ="";
         if(isset($_POST['schAdr']))   $schAdr   =$_POST['schAdr'];   else $schAdr   ="";
 
+        $stdId  =array();
         $stdName=array();
         $stdSur =array();
         $stdKat =array();
@@ -52,6 +54,7 @@ bdump($_POST);
         $stdTeac=array();
 
         for($i=0; $i<$refNum; $i++){
+            if(isset($_POST['stdId'  ][$i]))$stdId  [$i]=$_POST['stdId'  ][$i];else $stdId  [$i]="";
             if(isset($_POST['stdName'][$i]))$stdName[$i]=$_POST['stdName'][$i];else $stdName[$i]="";
             if(isset($_POST['stdSur' ][$i]))$stdSur [$i]=$_POST['stdSur' ][$i];else $stdSur [$i] ="";
             if(isset($_POST['stdKat' ][$i]))$stdKat [$i]=$_POST['stdKat' ][$i];else $stdKat [$i]="";
@@ -62,7 +65,16 @@ bdump($_POST);
         }
 
         if($refSchool=="NULL")$refSchool=NULL;
-
+// old students
+        $oldStd=dibi::query('SELECT participant_id, name, surname, class, teacher
+                FROM participants
+                JOIN referents USING(referent_id)
+                JOIN school USING(school_id)
+                WHERE school_id=%s AND rocnik>%s
+                ORDER BY surname
+                ;',$refSchool,57-4)->fetchAll();
+                //ORDER BY rocnik DESC
+        $oldNum=count($oldStd);
 // ok press
         if(isset($_POST['garantOk'])){
             $errorMsg.=$this->checkReferent($refSchool,$refName,$refMail,$refNum);
@@ -82,7 +94,7 @@ bdump($_POST);
                 }
             }
             else{
-//                $errorMsg.="<br /> V případě přetrvávajících potíží nás kontaktujte na emailové adrese 
+//                $errorMsg.="<br /> V případě přetrvávajících potíží nás kontaktujte na emailové adrese
 //                    <a href='mailto:praha@fyzikalniolympiada.cz'>praha@fyzikalniolympiada.cz</a>.";
            }
         }
@@ -135,7 +147,7 @@ bdump($_POST);
                 $step=3;
             }
             else{
-                $errorMsg.="<br /> V případě přetrvávajících potíží nás kontaktujte na emailové adrese 
+                $errorMsg.="<br /> V případě přetrvávajících potíží nás kontaktujte na emailové adrese
                     <a href='mailto:praha@fyzikalniolympiada.cz'>praha@fyzikalniolympiada.cz</a>.";
             }
         }
@@ -145,6 +157,7 @@ bdump($_POST);
             $okMsg.="Řádek ".($i+1)." smazán.<br />";
             $refNum--;
             for($j=$i;$j<$refNum; $j++){
+                $stdId  [$j]=$stdId  [$j+1];
                 $stdName[$j]=$stdName[$j+1];
                 $stdSur [$j]=$stdSur [$j+1];
                 $stdKat [$j]=$stdKat [$j+1];
@@ -154,8 +167,26 @@ bdump($_POST);
                 $stdTeac[$j]=$stdTeac[$j+1];
             }
         }
+// old add button
+        for($i=0; $i<$oldNum; $i++)if(isset($_POST['oldAdd'][$i])){
+            $student=dibi::query('SELECT participant_id, name, surname, class, teacher
+                                  FROM participants
+                                  WHERE participant_id=%s;',$_POST['oldId'][$i])->fetchAll()[0];
+            $stdId  [$refNum]=$_POST['oldId'][$i];
+            $stdName[$refNum]=$student->name;
+            $stdSur [$refNum]=$student->surname;
+            $stdKat [$refNum]="";
+            $stdMail[$refNum]="vyplní se z databáze";
+            $stdBorn[$refNum]="vyplní se z databáze";
+            $stdClss[$refNum]=$student->class;
+            $stdTeac[$refNum]=$student->teacher;
+            $refNum++;
+            $okMsg.="Student ".$student->name." ".$student->surname." přidán.";
+        }
+
 // add button
         if(isset($_POST['stdAdd'])){
+            $stdId  [$refNum]="";
             $stdName[$refNum]="";
             $stdSur [$refNum]="";
             $stdKat [$refNum]="";
@@ -181,6 +212,14 @@ bdump($_POST);
 // submit
         if(isset($_POST['submit'])){
             dibi::begin();
+            for($i=0; $i<$refNum; $i++)if($stdId[$i]!=""){
+                $student=dibi::query('SELECT email, born_date
+                                      FROM participants
+                                      WHERE participant_id=%s;',$stdId[$i])->fetchAll()[0];
+                $stdMail[$i]=$student->email;
+                $stdBorn[$i]=$student->born_date;
+            }
+
             $errorMsg.=$this->checkReferent($refSchool,$refName,$refMail,$refNum);
             $errorMsg.=$this->checkStudents($refNum,$refMail,$stdName,$stdSur,$stdKat,$stdMail,$stdBorn,$stdClss,$stdTeac);
             if($errorMsg==""){
@@ -190,7 +229,7 @@ bdump($_POST);
                     "referent_name"  => $refName,
                     "referent_phone" => $refPhone,
                     "referent_email" => $refMail,
-                    "rocnik"         => 56);
+                    "rocnik"         => 57);
                 dibi::insert('referents',$data)->execute();
                 $refid=dibi::insertId();
 // add studetns to db
@@ -207,6 +246,7 @@ bdump($_POST);
                         "solution_count" => 0);
                     dibi::insert('participants',$data)->execute();
                     $stdid=dibi::insertId();
+/*
                     for($j=1;$j<=7;$j++){
                         $data=array(
                             "participant_id" => $stdid,
@@ -214,6 +254,7 @@ bdump($_POST);
                             "problem_id"     => $j);
                         dibi::insert('submit',$data)->execute();
                     }
+*/
                     $data=array(
                         "participant_id" => $stdid,
                         "round"          => "1"
@@ -226,12 +267,12 @@ bdump($_POST);
                         'Reply-To: praha@fyzikalniolympiada.cz' . "\r\n" .
                         'Content-Type: text/plain; charset=utf-8'. "\r\n" .
                         'X-Mailer: PHP/' . phpversion();
-                $dbReferent=dibi::query('SELECT * from referents 
-                                         JOIN school    USING(school_id) 
+                $dbReferent=dibi::query('SELECT * from referents
+                                         JOIN school    USING(school_id)
                                          WHERE referent_id=%s',$refid)->fetchAll()[0];
-                $dbStudents=dibi::query('SELECT * from participants 
-                                         JOIN referents USING(referent_id) 
-                                         JOIN school    USING(school_id) 
+                $dbStudents=dibi::query('SELECT * from participants
+                                         JOIN referents USING(referent_id)
+                                         JOIN school    USING(school_id)
                                          WHERE referent_id=%s',$refid)->fetchAll();
 // send email to referent
                 $telo ="Vážená referentko FO, Vážený referente FO,\n\n".
@@ -245,7 +286,7 @@ bdump($_POST);
                 }
                 $telo.="Prosíme Vás o kontrolu a v případě potíží nás, prosím, kontaktujte na níže uvedeném emailu.\n\n".
                        "Děkujeme za trpělivost.\n".
-                       "S pozdravem\nza KK FO Praha\nOtokar\npraha@fyzikalniolympiada.cz".
+                       "S pozdravem\nza KK FO Praha\nVěrný server Otokar\npraha@fyzikalniolympiada.cz".
                        "\n\nTento email byl vygenerován automaticky.";
 
                 @mail($dbReferent->referent_email, "Potvrzení o přihlášení studentů do FO", $telo, $header);
@@ -263,7 +304,7 @@ bdump($_POST);
                            "    datum narození: ".substr($std->born_date,0,10).".\n\n".
                            "Prosíme Vás o kontrolu a v případě nesrovnalostí nás, prosím, kontaktujte na níže uvedeném emailu.\n\n".
                            "Děkujeme za zájem.\n".
-                           "S pozdravem\nza KK FO Praha\nOtokar\npraha@fyzikalniolympiada.cz".
+                           "S pozdravem\nza KK FO Praha\nVěrný server Otokar\npraha@fyzikalniolympiada.cz".
                            "\n\nTento email byl vygenerován automaticky.";
                     @mail($std->email, "Potvrzení o přihlášení studenta do FO", $telo, $header);
                     @mail("backup@fyzikalniolympiada.cz", "Potvrzení o přihlášení studenta do FO", $telo, $header);
@@ -290,6 +331,7 @@ bdump($_POST);
         $this->template->refMail  =$refMail;
         $this->template->refPhone =$refPhone;
         $this->template->refNum   =$refNum;
+        $this->template->oldNum   =$oldNum;
         $this->template->refSchool=$refSchool;
         $this->template->schName  =$schName;
         $this->template->schAdr   =$schAdr;
@@ -298,6 +340,7 @@ bdump($_POST);
         //$this->template->schools[0]->selected=true;
         //bdump($this->template->schools);
 //        if($step>=2){
+            $this->template->stdId  =$stdId;
             $this->template->stdName=$stdName;
             $this->template->stdSur =$stdSur;
             $this->template->stdKat =$stdKat;
@@ -305,6 +348,7 @@ bdump($_POST);
             $this->template->stdBorn=$stdBorn;
             $this->template->stdClss=$stdClss;;
             $this->template->stdTeac=$stdTeac;
+            $this->template->oldStd =$oldStd;
 //        }
     }
 
@@ -342,35 +386,39 @@ bdump($_POST);
                 $errorMsg.="Příjmení studenta ".($i+1)." nesmí zůstat prázdné.<br />";
             if($stdKat[$i]=="")
                 $errorMsg.="Kategorie studenta ".($i+1)." nesmí zůstat prázdná.<br />";
-            if(!filter_var($stdMail[$i], FILTER_VALIDATE_EMAIL)){
-                $errorMsg.="Zadaný email (".($i+1).".) <i>".$stdMail[$i]."</i> nemá validní formu.<br />";
+            if(strcmp($stdMail[$i],"vyplní se z databáze")!=0){
+                if(!filter_var($stdMail[$i], FILTER_VALIDATE_EMAIL)){
+                    $errorMsg.="Zadaný email (".($i+1).".) <i>".$stdMail[$i]."</i> nemá validní formu.<br />";
+                }
+                else{
+                    if($refMail==$stdMail[$i])
+                        $errorMsg.="Email (".($i+1).".) <i>".$stdMail[$i]."</i> se shoduje s Vaším emailem.<br />";
+                    for($j=0; $j<$i; $j++)if($stdMail[$j]==$stdMail[$i])if($stdName[$i] != $stdName[$j] || $stdSur[$i] != $stdSur[$j])
+                        $errorMsg.="Zadaný email (".($i+1).".) <i>".$stdMail[$i]."</i> je již použit pro studenta ".($j+1).".<br />";
+                }
+                $emails=dibi::query("SELECT name, surname,email FROM `participants`
+                    JOIN referents USING(referent_id)
+                    JOIN school USING(school_id)
+                    WHERE rocnik=57 AND kraj_id=%s AND email=%s AND category=%s;",
+                    $this::getKrajId(),$stdMail[$i],$stdKat[$i])->fetchAll();
+                if($emails!=NULL)if($emails[0]!=NULL){
+                    $errorMsg.="Na emailovou adresu <i>".$stdMail[$i]."</i> je tento rok do kategorie ".$stdKat[$i]."
+                        již registrován student ".$emails[0]->name." ".$emails[0]->surname.".<br />";
+                }
             }
-            else{
-                if($refMail==$stdMail[$i])
-                    $errorMsg.="Email (".($i+1).".) <i>".$stdMail[$i]."</i> se shoduje s Vaším emailem.<br />";
-                for($j=0; $j<$i; $j++)if($stdMail[$j]==$stdMail[$i])if($stdName[$i] != $stdName[$j] || $stdSur[$i] != $stdSur[$j])
-                    $errorMsg.="Zadaný email (".($i+1).".) <i>".$stdMail[$i]."</i> je již použit pro studenta ".($j+1).".<br />";
-            }
-            $emails=dibi::query("SELECT name, surname,email FROM `participants` 
-                JOIN referents USING(referent_id) 
-                JOIN school USING(school_id) 
-                WHERE rocnik=56 AND kraj_id=%s AND email=%s AND category=%s;",
-                $this::getKrajId(),$stdMail[$i],$stdKat[$i])->fetchAll();
-            if($emails!=NULL)if($emails[0]!=NULL){
-                $errorMsg.="Na emailovou adresu <i>".$stdMail[$i]."</i> je tento rok do kategorie ".$stdKat[$i]."
-                    již registrován student ".$emails[0]->name." ".$emails[0]->surname.".<br />";
-            }
-            if(!preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2})/", $stdBorn[$i])){
-                $errorMsg.="Datum narození studenta ".($i+1)." není ve formátu RRRR-MM-DD.<br />";
-            }
-            else{
-                $bYea=substr($stdBorn[$i],0,4);
-                $bMnt=substr($stdBorn[$i],5,2);
-                $bDay=substr($stdBorn[$i],8,2);
-                if(!checkdate($bMnt,$bDay,$bYea))
-                    $errorMsg.="Datum narození studenta ".($i+1)." <i>".$bDay.". ".$bMnt.". ".$bYea."</i> není v kalendáři.<br />";
-                if($bYea<1933+56 || $bYea>1953+56)
-                    $errorMsg.="Věk studenta ".($i+1)." není v rozmezí 5-25 let.<br />";
+            if(strcmp($stdMail[$i],"vyplní se z databáze")!=0){
+                if(!preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2})/", $stdBorn[$i])){
+                    $errorMsg.="Datum narození studenta ".($i+1)." není ve formátu RRRR-MM-DD.<br />";
+                }
+                else{
+                    $bYea=substr($stdBorn[$i],0,4);
+                    $bMnt=substr($stdBorn[$i],5,2);
+                    $bDay=substr($stdBorn[$i],8,2);
+                    if(!checkdate($bMnt,$bDay,$bYea))
+                        $errorMsg.="Datum narození studenta ".($i+1)." <i>".$bDay.". ".$bMnt.". ".$bYea."</i> není v kalendáři.<br />";
+                    if($bYea<1933+57 || $bYea>1953+57)
+                        $errorMsg.="Věk studenta ".($i+1)." není v rozmezí 5-25 let.<br />";
+                }
             }
             if($stdClss[$i]=="")
                 $errorMsg.="Třídu studenta ".($i+1)." je potřeba vyplnit.<br />";
@@ -392,8 +440,8 @@ bdump($_POST);
     }
     function getSchools()
     {
-        return dibi::query('SELECT school_id,school_choice, "" AS selected 
-            FROM school 
+        return dibi::query('SELECT school_id,school_choice, "" AS selected
+            FROM school
             WHERE kraj_id=1
             ORDER BY school_choice;')->fetchAll();
         return dibi::query('SELECT school_id,school_choice, "no" AS selected FROM school WHERE kraj_id=%d;',$this::getKrajId())->fetchAll();
