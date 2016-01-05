@@ -1,0 +1,123 @@
+@{extends @layout.phtml}
+@{block #content}
+{ifset $error}<br />{$error}<a href="./">Zpět</a>{else}
+<h1>{!$heading}</h1>
+
+{*
+<br />
+{control krajSelect}
+
+<br />
+{if $_GET["kr_select"]>0}
+<!-- budeme vůbec něco zobrazovat-->
+*}
+
+<h2>Příjem řešení <?php switch($round_select){case 1: echo "domácího";break;case 3: echo "krajského"; break;}?>  kola kategorie <?php echo chr(64+$kat_select);?></h2>
+<form name="selKat" method="POST" action="">
+<select name="kat_select">
+    <option value="0">---- vyberte kategorii----</option>
+    <option value="1" {if $kat_select==1}selected="selected"{/if}>A</option>
+    <option value="2" {if $kat_select==2}selected="selected"{/if}>B</option>
+    <option value="3" {if $kat_select==3}selected="selected"{/if}>C</option>
+    <option value="4" {if $kat_select==4}selected="selected"{/if}>D</option>
+    </select>
+<select name="round_select">
+    <option value="0">---- vyberte kolo----</option>
+    <option value="1" {if $round_select==1}selected="selected"{/if}>Domácí kolo</option>
+    <option value="3" {if $round_select==3}selected="selected"{/if}>Krajské kolo</option>
+    </select>
+
+<input type="submit" value="Vybrat" class="button" />
+
+
+<style>
+p.error{
+    margin: 10px;
+}
+</style>
+<div style="background-color:#ffaaaa"><p class="error">{!$errorMsg}</p></div>
+<div style="background-color:#aaffaa"><p class="error">{!$okMsg}</p></div>
+
+<br />
+
+{if $students!=NULL}
+<table>
+<thead>
+  <td><strong>Jméno</strong></td>
+  <td><strong>Ú1</strong></td>
+  <td><strong>Ú2</strong></td>
+  <td><strong>Ú3</strong></td>
+  <td><strong>Ú4</strong></td>
+{if $round_select==1}
+  <td><strong>Ú5</strong></td>
+  <td><strong>Ú6</strong></td>
+  <td><strong>Ú7</strong></td>
+{/if}
+</thead>
+<tbody>
+{?$index=0}
+{foreach $students as $row}
+  <tr>
+    <input type="hidden"  value="{$row->participant_id}" name="PID{$index}">
+    <td>{$row->fullname}</td>
+    <td><input type="checkbox" name="submit{$index}[1]" value="1"></td>
+    <td><input type="checkbox" name="submit{$index}[2]" value="1"></td>
+    <td><input type="checkbox" name="submit{$index}[3]" value="1"></td>
+    <td><input type="checkbox" name="submit{$index}[4]" value="1"></td>
+{if $round_select==1}
+    <td><input type="checkbox" name="submit{$index}[5]" value="1"></td>
+    <td><input type="checkbox" name="submit{$index}[6]" value="1"></td>
+    <td><input type="checkbox" name="submit{$index}[7]" value="1"></td>
+{/if}
+</th>
+  </tr><tr><td></tr>
+{?$index++}
+{/foreach}
+  <tr>
+    <td colspan=10>
+      <input type="submit" value="Uložit" class="button" name="saveBT"/>
+    </td>
+  </tr>
+</tbody>
+</table>
+<input type="hidden" value="{$index}" name="STOT">
+
+</form>
+{/if}
+
+{if $submitted!=NULL}
+<h2>Odevzdáno:</h2>
+<table>
+<thead>
+  <td><strong>Jméno</strong></td>
+  <td><strong>Ú1</strong></td>
+  <td><strong>Ú2</strong></td>
+  <td><strong>Ú3</strong></td>
+  <td><strong>Ú4</strong></td>
+{if $round_select==1}
+  <td><strong>Ú5</strong></td>
+  <td><strong>Ú6</strong></td>
+  <td><strong>Ú7</strong></td>
+{/if}
+</thead>
+<tbody>
+{foreach $submitted as $row}
+  <tr>
+    <td>{$row->fullname}</td>
+    <td>{$row->U1}</td>
+    <td>{$row->U2}</td>
+    <td>{$row->U3}</td>
+    <td>{$row->U4}</td>
+{if $round_select==1}
+    <td>{$row->U5}</td>
+    <td>{$row->U6}</td>
+    <td>{$row->U7}</td>
+{/if}
+  </tr>
+{/foreach}
+</tbody>
+</table>
+{/if}
+
+{/if}
+
