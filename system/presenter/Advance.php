@@ -4,6 +4,8 @@ namespace Eywa\CMS\System\Presenters;
 use Nette\Forms\Form;
 use dibi;
 
+//TODO auto rocnik
+
 /**
  * @menu (index=14, title=Schválení postupu, icon=catalog)
  */
@@ -36,7 +38,7 @@ class Advance extends Secured{
         $kr_select=1;//Praha auto
         $from_kolo=1;
         $to_kolo=3;
-        $rocnik=56;
+        $rocnik=57;
 
         if(isset($_POST["saveBT"])){
             for($i=0; $i<$_POST["STOT"];$i++)if(isset($_POST["ADV".$i]))if($_POST["ADV".$i]==1){
@@ -66,22 +68,22 @@ class Advance extends Secured{
         $query.=", SUM(sub.points) `sum`";
         $query.="
             FROM participants
-            JOIN referents       USING(referent_id) 
+            JOIN referents       USING(referent_id)
             JOIN school          USING(school_id)
             JOIN advance AS advF USING(participant_id)
             JOIN submit  AS sub  USING(participant_id)
-            LEFT JOIN (SELECT participant_id ,round  AS toR 
-                           FROM advance 
+            LEFT JOIN (SELECT participant_id ,round  AS toR
+                           FROM advance
                            WHERE round!=".$from_kolo."
                       ) AS advT
                       USING(participant_id)";
         for($i=1;$i<=7;$i++)
-            $query.="LEFT JOIN (SELECT participant_id,sub".$i.".points 
-                           FROM submit AS sub".$i." 
-                           WHERE prob_round=".$from_kolo." AND problem_id=".$i.") AS U".$i." 
+            $query.="LEFT JOIN (SELECT participant_id,sub".$i.".points
+                           FROM submit AS sub".$i."
+                           WHERE prob_round=".$from_kolo." AND problem_id=".$i.") AS U".$i."
                      USING(participant_id)";
-        $query.="WHERE kraj_id=1 
-              AND rocnik=".$rocnik." 
+        $query.="WHERE kraj_id=1
+              AND rocnik=".$rocnik."
               AND category='".chr(64+$kategorie)."'
               AND advF.round=".$from_kolo."
               AND ISNULL(advT.toR)
