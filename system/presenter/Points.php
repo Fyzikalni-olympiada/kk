@@ -56,7 +56,7 @@ class Points extends Secured{
                         dibi::query("UPDATE submit SET points=NULL WHERE submit_id=%s;",$_POST["SID".$i]);
                     else
                         dibi::query("UPDATE submit SET points=%s WHERE submit_id=%s;",$_POST["SDATA".$i],$_POST["SID".$i]);
-                    $values[]=dibi::query("SELECT CONCAT(name,' ',surname) AS fullname,problem_id,points FROM submit 
+                    $values[]=dibi::query("SELECT CONCAT(name,' ',surname) AS fullname,problem_id,points FROM submit
                                            JOIN participants USING(participant_id)
                                            WHERE submit_id=%s;",$_POST["SID".$i])->fetchAll()[0];
                 }
@@ -65,12 +65,13 @@ class Points extends Secured{
         }
 
 // bodovani
-// TODO rocnik
+// TODO rocnik auto
         $data=dibi::query("SELECT submit_id AS s_id,CONCAT(name,' ',surname) AS fullname, points
-                              FROM submit 
+                              FROM submit
                               JOIN (SELECT participant_id FROM advance WHERE round=%s) AS adv USING(participant_id)
                               JOIN participants USING(participant_id)
-                              WHERE category=%s AND problem_id=%s AND prob_round=%s
+                              JOIN referents USING(referent_id)
+                              wHERE category=%s AND problem_id=%s AND prob_round=%s AND rocnik=57
                               ORDER BY surname",$round_select,$kat_select,$pr_select,$round_select)->fetchAll();
 
 // send to template

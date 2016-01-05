@@ -12,7 +12,7 @@
 <!-- budeme vůbec něco zobrazovat-->
 *}
 
-<h2>Krajské kolo kategorie {$kat_select}</h2>
+<h2><?php switch($round_select){case 1: echo "Domácí";break;case 3: echo "Krajské"; break;}?> kolo kategorie {$kat_select}</h2>
 
 
 <style>
@@ -29,7 +29,7 @@ Stručný návod:
 <li>V hlavičce tabulky se objeví číslo úlohy, ke které zadáváte hodnocení,
 <li>pak se zadají body (lze použít desetinnou tečku i čárku) a stiskne se tlačítko <strong>uložit</strong>.
 <li>Pokud potřebujete libovolnou hodnotu upravit, jednoduše jí upravte, po uložení se aktualizuje.
-<li>Pokud někdo úlohu <strong>neodevzdal</strong> nechte políčko <strong>prázdné</strong>. 
+<li>Pokud někdo úlohu <strong>neodevzdal</strong> nechte políčko <strong>prázdné</strong>.
 <li>Veškeré ukládání se provede až po stisku tlačítka uložit, jiná operace vede ke smazání neuložené části tabulky.
 </ul>
 
@@ -58,7 +58,7 @@ Stručný návod:
     <option value="1" {if $round_select==1}selected="selected"{/if}>Domácí kolo</option>
     <option value="3" {if $round_select==3}selected="selected"{/if}>Krajské kolo</option>
     </select>
-<input type="submit" value="Vybrat" class="button" /> 
+<input type="submit" value="Vybrat" class="button" />
 </form>
 
 <br />
