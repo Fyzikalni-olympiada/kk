@@ -21,7 +21,7 @@ class ResultsDatabase extends Base
 // comment
         $stdtitle="";// text pod nadpisem
         if($kolo==1) $stdtitle=
-            "<p>Pro postup do dalšího kola ". 
+            "<p>Pro postup do dalšího kola ".
             "bylo třeba dosáhnout hodnocení alespoň 5&nbsp;bodů ".
             "v&nbsp;alespoň pěti úlohách a&nbsp;odevzdat ".
             "seriózně experimentální úlohu.</p>";
@@ -30,13 +30,13 @@ class ResultsDatabase extends Base
             "alespoň 14&nbsp;bodů a&nbsp;dvě úlohy hodnocené ".
             "alespoň 5&nbsp;body.";
         $qr=dibi::query("
-            SELECT publish_type_id,title_line FROM publish_res 
-            WHERE kraj_id=%i AND rocnik=%i 
+            SELECT publish_type_id,title_line FROM publish_res
+            WHERE kraj_id=%i AND rocnik=%i
             AND round=%i AND category=%s;",
             /*kraj_id*/1,$rocnik,$kolo,$this->KATEGORY[$kategorie])->fetch();
         $publish=$qr["publish_type_id"];
         $title_line=$qr["title_line"];
- 
+
         if($title_line!=null) $stdtitle=$title_line;
         if($publish==null){ // nema se publikovat
             $html=$this->template->document->html;
@@ -64,7 +64,7 @@ class ResultsDatabase extends Base
 //  * jinak -> zpráva+html (input)
 // databaze
 //  * zprava null -> std
-//  * zprava -> zprava 
+//  * zprava -> zprava
 //  + databazova tabulka
 // Excel
 //  * zprava null -> std
@@ -75,10 +75,10 @@ class ResultsDatabase extends Base
 //  * html==null -> Výsledková listina se připravuje.
 //  * html!=null -> html
 //
-// std: 
-//  * vyřešit účastníka a řešitele... -> v html (není potřeba do té doby než se bude migrovat 
+// std:
+//  * vyřešit účastníka a řešitele... -> v html (není potřeba do té doby než se bude migrovat
 //                                       do databáze zpětně
-//  * vyřešit modifikované body 
+//  * vyřešit modifikované body
 
         $this->template->html = $stdtitle;
 //$this->template->document->html;
@@ -99,7 +99,7 @@ class ResultsDatabase extends Base
        }
 // TODO renderovat data (load z databáze)
 // TODO getKrajId()
-        $query="SELECT NULL poradi, 
+        $query="SELECT NULL poradi,
               concat(name,' ',surname) jmeno,class,teacher,
               school_show_name";
         for($i=1;$i<=7;$i++)
@@ -108,26 +108,26 @@ class ResultsDatabase extends Base
                  NULL status,adv,born_date";
         $query.="
             FROM participants
-            JOIN referents     USING(referent_id) 
+            JOIN referents     USING(referent_id)
             JOIN school        USING(school_id)
             JOIN advance       USING(participant_id)
             JOIN (SELECT * FROM submit WHERE prob_round=".$kolo.") AS sub USING(participant_id)
-            LEFT JOIN (SELECT DISTINCT participant_id, 
-                   '<strong>ano</strong>' adv 
-               FROM advance 
-               WHERE round>".$kolo.") AS adv 
+            LEFT JOIN (SELECT DISTINCT participant_id,
+                   '<strong>ano</strong>' adv
+               FROM advance
+               WHERE round>".$kolo.") AS adv
             USING(participant_id)";
         for($i=1;$i<=7;$i++)
-            $query.="LEFT JOIN (SELECT participant_id,sub".$i.".points 
-                           FROM submit AS sub".$i." 
-                           WHERE prob_round=".$kolo." AND problem_id=".$i.") AS U".$i." 
+            $query.="LEFT JOIN (SELECT participant_id,sub".$i.".points
+                           FROM submit AS sub".$i."
+                           WHERE prob_round=".$kolo." AND problem_id=".$i.") AS U".$i."
                      USING(participant_id)";
-        $query.="WHERE kraj_id=1 
-              AND rocnik=".$rocnik." 
+        $query.="WHERE kraj_id=1
+              AND rocnik=".$rocnik."
               AND category='".chr(64+$kategorie)."'
               AND advance.round=".$kolo."
             GROUP BY participant_id
-            ORDER BY SUM(sub.points) DESC, surname DESC;";
+            ORDER BY SUM(sub.points) DESC, born_date ASC;";
         //die($query);
 
         $data=dibi::query($query)->fetchAll();
@@ -218,7 +218,7 @@ class ResultsDatabase extends Base
         $i=-1;
         foreach($arr as $urlname => $expname){
             $i++;
-            if (stristr($path,$urlname)){ 
+            if (stristr($path,$urlname)){
                 $heading.=$expname." ";
 //                $kolo=array_search($urlname,$arr)+1;
                 $kolo=$i+1;
@@ -234,7 +234,7 @@ class ResultsDatabase extends Base
         }
 
         for($i=10;$i<100;$i++){
-            if(stristr($path,$i."-rocnik")){ 
+            if(stristr($path,$i."-rocnik")){
                 $heading.=$i.".&nbsp;ročník";
                 $rocnik=$i;
             }
