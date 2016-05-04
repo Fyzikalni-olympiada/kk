@@ -47,6 +47,7 @@ class Advance extends Secured{
                     "round"          => $to_kolo
                 );
                 dibi::insert('advance',$val)->execute();
+/*
                 for($j=1; $j<=4; $j++){
                     $val=array(
                         "participant_id" => $_POST["PID".$i],
@@ -55,6 +56,7 @@ class Advance extends Secured{
                     );
                     dibi::insert('submit',$val)->execute();
                 }
+ */
                 $values[]=dibi::query("SELECT CONCAT(name,' ',surname) AS fullname FROM advance
                                            JOIN participants USING(participant_id)
                                            WHERE round=%s AND participant_id=%s;",$to_kolo,$_POST["PID".$i])->fetchAll()[0];
