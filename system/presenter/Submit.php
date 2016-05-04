@@ -48,7 +48,8 @@ bdump($round_select);
                 $val=array(
                     "participant_id" => $_POST["PID".$i],
                     "prob_round"     => $round_select,
-                    "problem_id"     => $j
+                    "problem_id"     => $j,
+                    "submit_add"     => NULL
                 );
                 dibi::insert('submit',$val)->execute();
             }
