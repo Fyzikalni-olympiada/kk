@@ -70,7 +70,7 @@ bdump($_POST);
                 FROM participants
                 JOIN referents USING(referent_id)
                 JOIN school USING(school_id)
-                WHERE school_id=%s AND rocnik>%s
+                WHERE school_id=%s AND rocnik>%s AND NOT ISNULL(born_date)
                 ORDER BY surname
                 ;',$refSchool,57-4)->fetchAll();
                 //ORDER BY rocnik DESC
@@ -284,7 +284,8 @@ bdump($_POST);
                            ", jehož vyučující fyziky je ".$std->teacher.
                            " do kategorie ".$std->category.".\n";
                 }
-                $telo.="Prosíme Vás o kontrolu a v případě potíží nás, prosím, kontaktujte na níže uvedeném emailu.\n\n".
+                $telo.="Prosíme Vás o kontrolu a v případě potíží nás, prosím, kontaktujte na níže uvedeném emailu.\n".
+                       "Studentům byl též doručen potvrzovací email na jejich emailovou adresu.\n\n".
                        "Děkujeme za trpělivost.\n".
                        "S pozdravem\nza KK FO Praha\nVěrný server Otokar\npraha@fyzikalniolympiada.cz".
                        "\n\nTento email byl vygenerován automaticky.";
