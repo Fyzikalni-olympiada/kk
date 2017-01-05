@@ -39,7 +39,7 @@ class Submit extends Secured{
         $round_select=$_POST["round_select"];
 
         $kr_select=1;//Praha auto
-        $rocnik=57;
+        $rocnik=58;
 
 bdump($round_select);
 

@@ -71,7 +71,7 @@ class Points extends Secured{
                               JOIN (SELECT participant_id FROM advance WHERE round=%s) AS adv USING(participant_id)
                               JOIN participants USING(participant_id)
                               JOIN referents USING(referent_id)
-                              wHERE category=%s AND problem_id=%s AND prob_round=%s AND rocnik=57
+                              wHERE category=%s AND problem_id=%s AND prob_round=%s AND rocnik=58
                               ORDER BY surname",$round_select,$kat_select,$pr_select,$round_select)->fetchAll();
 
 // send to template

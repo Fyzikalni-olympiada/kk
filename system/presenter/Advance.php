@@ -38,7 +38,7 @@ class Advance extends Secured{
         $kr_select=1;//Praha auto
         $from_kolo=1;
         $to_kolo=3;
-        $rocnik=57;
+        $rocnik=58;
 
         if(isset($_POST["saveBT"])){
             for($i=0; $i<$_POST["STOT"];$i++)if(isset($_POST["ADV".$i]))if($_POST["ADV".$i]==1){

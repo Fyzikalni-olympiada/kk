@@ -72,7 +72,7 @@ bdump($_POST);
                 JOIN school USING(school_id)
                 WHERE school_id=%s AND rocnik>%s AND NOT ISNULL(born_date)
                 ORDER BY surname
-                ;',$refSchool,57-4)->fetchAll();
+                ;',$refSchool,58-4)->fetchAll();
                 //ORDER BY rocnik DESC
         $oldNum=count($oldStd);
 // ok press
@@ -229,7 +229,7 @@ bdump($_POST);
                     "referent_name"  => $refName,
                     "referent_phone" => $refPhone,
                     "referent_email" => $refMail,
-                    "rocnik"         => 57);
+                    "rocnik"         => 58);
                 dibi::insert('referents',$data)->execute();
                 $refid=dibi::insertId();
 // add studetns to db
@@ -400,7 +400,7 @@ bdump($_POST);
                 $emails=dibi::query("SELECT name, surname,email FROM `participants`
                     JOIN referents USING(referent_id)
                     JOIN school USING(school_id)
-                    WHERE rocnik=57 AND kraj_id=%s AND email=%s AND category=%s;",
+                    WHERE rocnik=58 AND kraj_id=%s AND email=%s AND category=%s;",
                     $this::getKrajId(),$stdMail[$i],$stdKat[$i])->fetchAll();
                 if($emails!=NULL)if($emails[0]!=NULL){
                     $errorMsg.="Na emailovou adresu <i>".$stdMail[$i]."</i> je tento rok do kategorie ".$stdKat[$i]."
@@ -417,7 +417,7 @@ bdump($_POST);
                     $bDay=substr($stdBorn[$i],8,2);
                     if(!checkdate($bMnt,$bDay,$bYea))
                         $errorMsg.="Datum narození studenta ".($i+1)." <i>".$bDay.". ".$bMnt.". ".$bYea."</i> není v kalendáři.<br />";
-                    if($bYea<1933+57 || $bYea>1953+57)
+                    if($bYea<1933+58 || $bYea>1953+58)
                         $errorMsg.="Věk studenta ".($i+1)." není v rozmezí 5-25 let.<br />";
                 }
             }
