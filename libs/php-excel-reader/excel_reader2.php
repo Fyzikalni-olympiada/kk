@@ -1487,7 +1487,7 @@ class Spreadsheet_Excel_Reader {
 					$rknum = $this->_GetInt4d($data, $spos + 6);
 					$numValue = $this->_GetIEEE754($rknum);
 					$info = $this->_getCellDetails($spos,$numValue,$column);
-					$this->addcell($row, $column, $info['string'],$info);
+					$this->addcell($row, $column, str_replace('.', ',',$info['string']=='General'?$info['raw']:$info['string']),$info);
 					break;
 				case SPREADSHEET_EXCEL_READER_TYPE_LABELSST:
 					$row		= ord($data[$spos]) | ord($data[$spos+1])<<8;
@@ -1506,7 +1506,7 @@ class Spreadsheet_Excel_Reader {
 						$numValue = $this->_GetIEEE754($this->_GetInt4d($data, $tmppos + 2));
 						$info = $this->_getCellDetails($tmppos-4,$numValue,$colFirst + $i + 1);
 						$tmppos += 6;
-						$this->addcell($row, $colFirst + $i, $info['string'], $info);
+						$this->addcell($row, $colFirst + $i, str_replace('.', ',',$info['string']=='General'?$info['raw']:$info['string']), $info);
 					}
 					break;
 				case SPREADSHEET_EXCEL_READER_TYPE_NUMBER:
@@ -1520,7 +1520,7 @@ class Spreadsheet_Excel_Reader {
 						$numValue = $this->createNumber($spos);
 					}
 					$info = $this->_getCellDetails($spos,$numValue,$column);
-					$this->addcell($row, $column, $info['string'], $info);
+					$this->addcell($row, $column, str_replace('.', ',',$info['string']=='General'?$info['raw']:$info['string']), $info);
 					break;
 
 				case SPREADSHEET_EXCEL_READER_TYPE_FORMULA:
@@ -1556,7 +1556,7 @@ class Spreadsheet_Excel_Reader {
 								$numValue = $this->createNumber($spos);
 							  }
 						$info = $this->_getCellDetails($spos,$numValue,$column);
-						$this->addcell($row, $column, $info['string'], $info);
+						$this->addcell($row, $column, str_replace('.', ',',$info['string']=='General'?$info['raw']:$info['string']), $info);
 					}
 					break;
 				case SPREADSHEET_EXCEL_READER_TYPE_BOOLERR:
