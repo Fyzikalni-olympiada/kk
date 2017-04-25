@@ -6,11 +6,29 @@
 </div>
 
 <div class="news">
+{var $prevDate}
 {foreach $list as $item}
     <h2>{$item->heading}</h2>
     {!$item->html}
+
+	{var $createDate}
+	{if $item->createdAt->format('Y') == date('Y')}
+		{?$createDate = $item->createdAt}
+	{/if}
+	{if !$createDate}
+		{foreach array_reverse($item->changes) as $change}
+			{if !$prevDate || $prevDate > $change->datetime && $prevDate->diff($change->datetime)->days > 0}
+				{?$createDate = $change->datetime; break}
+			{/if}
+		{/foreach}
+	{/if}
+	{if !$createDate}
+		{?$createDate = $item->createdAt}
+	{/if}
+	{?$prevDate = $createDate}
+
     <p class="createdate">
-         {$item->createdAt->format('j. n. Y H:i')} napsal <span class="small">{$item->changes[0]->identity}</span>
+		{$createDate->format('j. n. Y H:i')} napsal <span class="small">{$item->changes[0]->identity}</span>
     </p>
     <span class="article_separator">&nbsp;</span>
 {/foreach}
