@@ -89,7 +89,8 @@ class ResultsDatabase extends Base
         //$this->template->section= new stdClass();
         $titleline=$this->getTitleLine($rocnik,$kolo,$kategorie);
 
-        $this->template->section["postup"]->name="Postupující do krajského kola";
+        $this->template->section["postup"] = new \stdClass();
+        $this->template->section["postup"]->name = "Postupující do krajského kola";
         $this->template->section["postup"]->titleline=$titleline;
         if($kategorie==5 && $kolo==2){
             $this->template->section["usp"]->name="Další úspěšní řešitelé";
