@@ -1,0 +1,51 @@
+@{extends @layout.phtml}
+@{block #content}
+{ifset $error}<br />{$error}<a href="./">Zpět</a>{else}
+<h1>{!$heading}</h1>
+
+{*
+<br />
+{control krajSelect}
+
+<br />
+{if $_GET["kr_select"]>0}
+<!-- budeme vůbec něco zobrazovat-->
+*}
+
+<h2>Neopravená řešení</h2>
+<ol>
+<li>Seznam úloh, co jsme označili jako přijaté, ale neopravili je.
+Potenciální zdroj průšvihu.
+<li>kolo: 1--Domácí, 2--Okresní, 3--Krajské
+</ol>
+
+{if $students!=NULL}
+<table>
+<thead>
+  <td><strong>Jméno</strong></td>
+  <td><strong>Příjmení</strong></td>
+  <td><strong>Kategorie</strong></td>
+  <td><strong>Ročník</strong></td>
+  <td><strong>Úloha</strong></td>
+  <td><strong>Kolo</strong></td>
+  <td><strong>Škola</strong></td>
+  <td><strong>submit_id</strong></td>
+</thead>
+<tbody>
+{foreach $students as $row}
+  <tr>
+    <td>{$row->name}</td>
+    <td>{$row->surname}</td>
+    <td>{$row->category}</td>
+    <td>{$row->rocnik}</td>
+    <td>{$row->problem_id}</td>
+    <td>{$row->prob_round}</td>
+    <td>{$row->school_show_name}</td>
+    <td>{$row->submit_id}</td>
+  </tr>
+{/foreach}
+</tbody>
+</table>
+{/if}
+{/if}
+
