@@ -1,0 +1,102 @@
+@{extends @layout.phtml}
+@{block #content}
+{ifset $error}<br />{$error}<a href="./">Zpět</a>{else}
+<h1>{!$heading}</h1>
+
+{*
+<br />
+{control krajSelect}
+
+<br />
+{if $_GET["kr_select"]>0}
+<!-- budeme vůbec něco zobrazovat-->
+*}
+
+<h2><?php switch($round_select){case 1: echo "Domácí";break;case 3: echo "Krajské"; break;}?> kolo kategorie {$kat_select}</h2>
+
+
+<style>
+p.error{
+    margin: 10px;
+}
+</style>
+<div style="background-color:#ffaaaa"><p class="error">{!$errorMsg}</p></div>
+<div style="background-color:#aaffaa"><p class="error">{!$okMsg}</p></div>
+
+Stručný návod:
+<ul>
+</ul>
+
+<br />
+
+<form name="selProb" method="POST" action="">
+<select name="kat_select">
+    <option value="0">---- vyberte kategorii----</option>
+    <option value="A" {if $kat_select=='A'}selected="selected"{/if}>A</option>
+    <option value="B" {if $kat_select=='B'}selected="selected"{/if}>B</option>
+    <option value="C" {if $kat_select=='C'}selected="selected"{/if}>C</option>
+    <option value="D" {if $kat_select=='D'}selected="selected"{/if}>D</option>
+    </select>
+<select name="round_select">
+    <option value="0">---- vyberte kolo----</option>
+    <option value="1" {if $round_select==1}selected="selected"{/if}>Domácí kolo</option>
+    <option value="3" {if $round_select==3}selected="selected"{/if}>Krajské kolo</option>
+    </select>
+<input type="submit" value="Vybrat" class="button" />
+</form>
+
+<br />
+
+{if $data!=NULL}
+<form name="bodyForm" method="POST" action="" autocomplete="off">
+<table>
+<thead>
+<tr><td><strong>Jméno</strong></td>
+<td><strong>Třída</strong></td>
+<td><strong>Učitel</strong></td>
+<td><strong>Škola</strong></td>
+<td><strong>U1</strong></td>
+<td><strong>U2</strong></td>
+<td><strong>U3</strong></td>
+<td><strong>U4</strong></td>
+<td><strong>U5</strong></td>
+<td><strong>U6</strong></td>
+<td><strong>U7</strong></td>
+<td><strong>Suma</strong></td>
+<td><strong>Postup do KK</strong></td>
+<td><strong>Úspěšnost</strong></td>
+</thead>
+<tbody>
+{foreach $data as $row}
+  <tr>
+    <td>{$row->jmeno}</td>
+    <td>{$row->class}</td>
+    <td>{$row->teacher}</td>
+    <td>{$row->school_show_name}</td>
+    <td>{$row->U1}</td>
+    <td>{$row->U2}</td>
+    <td>{$row->U3}</td>
+    <td>{$row->U4}</td>
+    <td>{$row->U5}</td>
+    <td>{$row->U6}</td>
+    <td>{$row->U7}</td>
+    <td>{$row->sum}</td>
+    <td>{$row->adv}</td>
+    <td>{$row->status}</td>
+  </tr>
+{/foreach}
+  <tr>
+    <td colspan=2>
+      <input type="submit" value="Zveřejnit" class="button" name="publishBT"/>
+    </td>
+  </tr>
+</table>
+</form>
+{/if}
+
+{/if}
+
+{*
+{/if}<!--error-->
+*}
+
