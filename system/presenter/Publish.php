@@ -43,14 +43,18 @@ class Publish extends Secured{
                 'kraj_id' => $kr_select,
                 'rocnik'  => 58,
                 'round'   => $round_select,
-                'category'=> $category,
+                'category'=> $kat_select,
                 'publish_type_id' => 1
                 ];
-             dibi::query("INSERT INTO publish_res",$arr);
-            $okMsg.="Výsledkovky zveřejněny.";
+            try {
+                dibi::query("INSERT INTO publish_res",$arr);
+                $okMsg.="Výsledkovky zveřejněny.";
+            }
+            catch(Exception $e) {
+                $errorMsg.="Nastala chyba ";
+                $errorMsg.=$e->getMessage();
+            }
         }
-        bdump($kat_select);
-        bdump($round_select);
         $data=dibi::query('
             SELECT NULL poradi, concat(name,\' \',surname) jmeno,class,teacher, school_show_name,
                 U1.points "U1" , U2.points "U2" , U3.points "U3" , U4.points "U4" , U5.points "U5" , U6.points "U6" , U7.points "U7" ,

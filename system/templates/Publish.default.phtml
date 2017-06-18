@@ -43,12 +43,12 @@ Stručný návod:
     <option value="3" {if $round_select==3}selected="selected"{/if}>Krajské kolo</option>
     </select>
 <input type="submit" value="Vybrat" class="button" />
+<input type="submit" value="Zveřejnit" class="button" name="publishBT"/>
 </form>
 
 <br />
 
 {if $data!=NULL}
-<form name="bodyForm" method="POST" action="" autocomplete="off">
 <table>
 <thead>
 <tr><td><strong>Jméno</strong></td>
@@ -85,13 +85,7 @@ Stručný návod:
     <td>{$row->status}</td>
   </tr>
 {/foreach}
-  <tr>
-    <td colspan=2>
-      <input type="submit" value="Zveřejnit" class="button" name="publishBT"/>
-    </td>
-  </tr>
 </table>
-</form>
 {/if}
 
 {/if}
