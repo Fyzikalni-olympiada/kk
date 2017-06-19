@@ -10,8 +10,6 @@ use dibi;
  * @model Eywa\CMS\Model\Page
  */
 
-// TODO kontrola na konci znovu (vyclenit do funkce)
-
 // TODO emaily
 
 // TODO thead+tbody
@@ -75,7 +73,7 @@ bdump($_POST);
                 ;',$refSchool,58-4)->fetchAll();
                 //ORDER BY rocnik DESC
         $oldNum=count($oldStd);
-// ok press
+// garant ok press
         if(isset($_POST['garantOk'])){
             $errorMsg.=$this->checkReferent($refSchool,$refName,$refMail,$refNum);
             if($errorMsg==""){
@@ -93,10 +91,6 @@ bdump($_POST);
                     $stdTeac=array_fill(0,$refNum,"");
                 }
             }
-            else{
-//                $errorMsg.="<br /> V případě přetrvávajících potíží nás kontaktujte na emailové adrese
-//                    <a href='mailto:praha@fyzikalniolympiada.cz'>praha@fyzikalniolympiada.cz</a>.";
-           }
         }
 // add school press
         if(isset($_POST['missschool'])){
@@ -146,10 +140,6 @@ bdump($_POST);
             if($errorMsg==""){
                 $step=3;
             }
-            else{
-                $errorMsg.="<br /> V případě přetrvávajících potíží nás kontaktujte na emailové adrese
-                    <a href='mailto:praha@fyzikalniolympiada.cz'>praha@fyzikalniolympiada.cz</a>.";
-            }
         }
 
 // delete button
@@ -178,10 +168,32 @@ bdump($_POST);
             $stdKat [$refNum]="";
             $stdMail[$refNum]="vyplní se z databáze";
             $stdBorn[$refNum]="vyplní se z databáze";
-            $stdClss[$refNum]=$student->class;
+            $stdClss[$refNum]=$student->class; // TODO
             $stdTeac[$refNum]=$student->teacher;
             $refNum++;
             $okMsg.="Student ".$student->name." ".$student->surname." přidán.";
+            for($k=0; $k<$refNum; $k++) {
+                if( $stdId  [$k]!="" ) continue;
+                if( $stdName[$k]!="" ) continue;
+                if( $stdSur [$k]!="" ) continue;
+                if( $stdKat [$k]!="" ) continue;
+                if( $stdMail[$k]!="@") continue;
+                if( $stdBorn[$k]!="" ) continue;
+                if( $stdClss[$k]!="" ) continue;
+                if( $stdTeac[$k]!="" ) continue;
+                $refNum--;
+                for($j=$k;$j<$refNum; $j++){
+                    $stdId  [$j]=$stdId  [$j+1];
+                    $stdName[$j]=$stdName[$j+1];
+                    $stdSur [$j]=$stdSur [$j+1];
+                    $stdKat [$j]=$stdKat [$j+1];
+                    $stdMail[$j]=$stdMail[$j+1];
+                    $stdBorn[$j]=$stdBorn[$j+1];
+                    $stdClss[$j]=$stdClss[$j+1];
+                    $stdTeac[$j]=$stdTeac[$j+1];
+                }
+                break;
+            }
         }
 
 // add button
@@ -228,8 +240,7 @@ bdump($_POST);
                     "school_id"      => $refSchool,
                     "referent_name"  => $refName,
                     "referent_phone" => $refPhone,
-                    "referent_email" => $refMail,
-                    "rocnik"         => 58);
+                    "referent_email" => $refMail);
                 dibi::insert('referents',$data)->execute();
                 $refid=dibi::insertId();
 // add studetns to db
@@ -243,18 +254,11 @@ bdump($_POST);
                         "email"          => $stdMail[$i],
                         "category"       => $stdKat[$i],
                         "born_date"      => $stdBorn[$i],
-                        "solution_count" => 0);
+                        "solution_count" => 0,
+                        "rocnik"         => 58);
                     dibi::insert('participants',$data)->execute();
                     $stdid=dibi::insertId();
-/*
-                    for($j=1;$j<=7;$j++){
-                        $data=array(
-                            "participant_id" => $stdid,
-                            "prob_round"     => 1,
-                            "problem_id"     => $j);
-                        dibi::insert('submit',$data)->execute();
-                    }
-*/
+
                     $data=array(
                         "participant_id" => $stdid,
                         "round"          => "1"
@@ -313,6 +317,7 @@ bdump($_POST);
                 }
 // TODO lepší zpráva
                 $step=1;
+                dibi::commit();
                 $this->flashMessage('Přihlášení proběhlo úspěšně, byly rozeslány potvrzovací emaily.','Úspěch');
                 $this->redirect('this');
             }
@@ -323,6 +328,9 @@ bdump($_POST);
 
 
 // send data to template
+        if( $errorMsg != "" )
+            $errorMsg.="<br /> V případě přetrvávajících potíží nás kontaktujte na emailové adrese
+                        <a href='mailto:praha@fyzikalniolympiada.cz'>praha@fyzikalniolympiada.cz</a>.";
         $this->template->step     =$step;
         $this->template->stepname =$step_names[$step];
         $this->template->errorMsg =$errorMsg;
