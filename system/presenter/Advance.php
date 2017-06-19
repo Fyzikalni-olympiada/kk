@@ -102,7 +102,6 @@ class Advance extends Secured{
         $this->template->heading="Administrační pultík: ".$this->kraje[$kr_select];
         $this->template->data=$data;
         $this->template->kat_select=$kategorie;
-        $this->template->round_select=$round_select;
         $this->template->values=$values;
 
         $this->template->okMsg=$okMsg;
