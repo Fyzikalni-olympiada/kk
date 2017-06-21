@@ -5,7 +5,7 @@ use Nette\Forms\Form;
 use dibi;
 
 /**
- * @menu (index=16, title=Zveřejnění výsledkovky, icon=catalog)
+ * @menu (index=16, title=Výsledkovky, icon=catalog)
  */
 class Publish extends Secured{
     private $kraje=array();
@@ -36,6 +36,9 @@ class Publish extends Secured{
         if(!isset($_POST["round_select"]))$_POST["round_select"]="";
         $round_select=$_POST["round_select"];
 
+        if(!isset($_POST["type_select"]))$_POST["type_select"]="";
+        $type_select=$_POST["type_select"];
+
         $kr_select=1;//Praha auto
 
         if(isset($_POST["publishBT"])){
@@ -44,7 +47,7 @@ class Publish extends Secured{
                 'rocnik'  => 58,
                 'round'   => $round_select,
                 'category'=> $kat_select,
-                'publish_type_id' => 1
+                'publish_type_id' => $type_select
                 ];
             try {
                 dibi::query("INSERT INTO publish_res",$arr);
@@ -108,6 +111,7 @@ class Publish extends Secured{
         $this->template->data=$data;
         $this->template->kat_select=$kat_select;
         $this->template->round_select=$round_select;
+        $this->template->type_select=$type_select;
 
         $this->template->okMsg=$okMsg;
         $this->template->errorMsg=$errMsg;
