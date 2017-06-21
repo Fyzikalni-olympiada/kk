@@ -47,9 +47,9 @@ class Deduplicate extends Secured{
             $keys = array_keys((array)($data[0]));
             $data=dibi::query("SELECT * FROM ".$table." WHERE 1 ORDER BY $order,$keys[0]")->fetchAll();
         }
-// find merging indexes
+// find merging indexes (check box)
         $idx=$idy=0;
-        foreach( $data as $rowx ) {
+        foreach(     $data as $rowx ) {
             $idx=$rowx[$keys[0]];
             if(isset($_POST['ADV'.$idx])){
                 foreach( $data as $rowy ) {
@@ -66,24 +66,43 @@ class Deduplicate extends Secured{
             $idx=$idy;
             $idy=$tmp;
         }
+        // automatics
+        $chnull = 1;
+        $testonly = 0;
+        if(isset($_POST["adeduplBTnulltest"]) || isset($_POST["adeduplBTnull"]))
+            $chnull = 0;
+        if(isset($_POST["adeduplBTtest"]) || isset($_POST["adeduplBTnulltest"]))
+            $testonly = 1;
+        if(isset($_POST["adeduplBTtest"]) || isset($_POST["adeduplBTnulltest"]) ||
+           isset($_POST["adeduplBT"    ]) || isset($_POST["adeduplBTnull"    ])){
+            foreach(     $data as $rowx ) {
+                $idx=$rowx[$keys[0]];
+                foreach( $data as $rowy ) {
+                    $idy=$rowy[$keys[0]];
+                    if( $idx >= $idy )
+                        continue;
+                    $diff = 0;
+                    for($i=1;$i<count($keys); $i++){
+                        if(strval($rowx[$keys[$i]]) != strval($rowy[$keys[$i]]))
+                            $diff++;
+                        if( strval($rowx[$keys[$i]]) == "" && $chnull) {
+                            $diff++;
+                        }
+                    }
+                    if($diff==0) {
+                        if( $testonly==1 )
+                            $okMsg.="DEDUPL $idx->$idy<br />";
+                        else
+                            $okMsg .= $this::dedupl($table, $keys, $idx, $idy);
+                    }
+                }
+            }
+           }
+        // checkboxes
         if($idx!=$idy) {
             // prepis odkazu
             if(isset($_POST["deduplBT"])){
-                if($table=="referents") $rewr=array("participants");
-
-                foreach( $rewr as $rewrtab) {
-                    $query="
-                        UPDATE $rewrtab
-                        SET $keys[0]=$idx
-                        WHERE $keys[0] = $idy";
-                    dibi::query($query);
-                    $okMsg.="Přepsáno v $rewrtab: $idy->$idx<br />";
-                }
-                $query="
-                    DELETE FROM $table
-                    WHERE $keys[0]=$idy";
-                dibi::query($query);
-                $okMsg.="Smazáno z $table: $idy<br />";
+                $okMsg .= $this::dedupl($table, $keys, $idx, $idy);
             }
             // mergování
             if(isset($_POST["mergeTH"])){
@@ -92,21 +111,7 @@ class Deduplicate extends Secured{
                 $idy=$tmp;
             }
             if(isset($_POST["mergeTL"]) || isset($_POST["mergeTH"]) ){
-                $query=
-                    "UPDATE $table t2,
-                    (
-                        SELECT *
-                        FROM $table
-                        WHERE $keys[0]=$idy
-                    ) t1
-                    SET ";
-                //t2.f1 = t1.f1,t2.f2 = t1.f2
-                $query.="t2.$keys[1]=t1.$keys[1]";
-                for($i=2; $i<count($keys); $i++)
-                    $query.=",t2.$keys[$i]=t1.$keys[$i] ";
-                $query.="WHERE t2.$keys[0] = $idx";
-                dibi::query($query);
-                $okMsg.="Mergováno: $idy->$idx";
+                $okMsg .= $this::merge($table, $keys, $idx, $idy);
             }
         }
 
@@ -127,6 +132,50 @@ class Deduplicate extends Secured{
 
         $this->template->okMsg=$okMsg;
         $this->template->errorMsg=$errMsg;
+    }
+
+    function dedupl($table, $keys, $idx, $idy) {
+        if($idx==0 || $idy==0)
+            return;
+        $okMsg="";
+        if($table=="referents") $rewr=array("registration");
+        if($table=="persons")   $rewr=array("registration");
+
+        foreach( $rewr as $rewrtab) {
+            $query="
+                UPDATE $rewrtab
+                SET $keys[0]=$idx
+                WHERE $keys[0] = $idy";
+            dibi::query($query);
+            $okMsg.="Přepsáno v $rewrtab: $idy->$idx<br />";
+        }
+        $query="
+            DELETE FROM $table
+            WHERE $keys[0]=$idy";
+        dibi::query($query);
+        $okMsg.="Smazáno z $table: $idy<br />";
+        return $okMsg;
+    }
+
+
+    function merge($table, $keys, $idx, $idy) {
+        $okMsg="";
+        $query=
+            "UPDATE $table t2,
+            (
+                SELECT *
+                FROM $table
+                WHERE $keys[0]=$idy
+            ) t1
+            SET ";
+        //t2.f1 = t1.f1,t2.f2 = t1.f2
+        $query.="t2.$keys[1]=t1.$keys[1]";
+        for($i=2; $i<count($keys); $i++)
+            $query.=",t2.$keys[$i]=t1.$keys[$i] ";
+        $query.="WHERE t2.$keys[0] = $idx";
+        dibi::query($query);
+        $okMsg.="Mergováno: $idy->$idx";
+        return $okMsg;
     }
 
     function createComponentKrajSelect($name){
