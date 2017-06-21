@@ -3,8 +3,7 @@ namespace Eywa\CMS\System\Presenters;
 
 use Nette\Forms\Form;
 use dibi;
-
-//TODO auto rocnik
+use Nette\Environment;
 
 /**
  * @menu (index=12, title=Příjem řešení, icon=catalog)
@@ -22,6 +21,7 @@ class Submit extends Secured{
 
     function renderDefault(){
         bdump($_POST);
+        $rocnik=Environment::getVariable('rocnik');
         $okMsg="";
         $errMsg="";
         $values=array();
@@ -39,7 +39,6 @@ class Submit extends Secured{
         $round_select=$_POST["round_select"];
 
         $kr_select=1;//Praha auto
-        $rocnik=58;
 
 bdump($round_select);
 

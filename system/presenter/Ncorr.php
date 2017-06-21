@@ -3,8 +3,7 @@ namespace Eywa\CMS\System\Presenters;
 
 use Nette\Forms\Form;
 use dibi;
-
-//TODO auto rocnik
+use Nette\Environment;
 
 /**
  * @menu (index=15, title=Neopravená řešení, icon=catalog)
@@ -22,6 +21,7 @@ class Ncorr extends Secured{
 
     function renderDefault(){
         bdump($_POST);
+        $rocnik=Environment::getVariable('rocnik');
         $okMsg="";
         $errMsg="";
         $values=array();
@@ -34,7 +34,6 @@ class Ncorr extends Secured{
             return;
         }
         $kr_select=1;//Praha auto
-        $rocnik=58;
 
         $students=dibi::query(
             'SELECT *

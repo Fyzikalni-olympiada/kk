@@ -3,6 +3,7 @@ namespace Eywa\CMS\System\Presenters;
 
 use Nette\Forms\Form;
 use dibi;
+use Nette\Environment;
 
 /**
  * @menu (index=16, title=Výsledkovky, icon=catalog)
@@ -19,6 +20,7 @@ class Publish extends Secured{
     }
 
     function renderDefault(){
+        $rocnik=Environment::getVariable('rocnik');
         $okMsg="";
         $errMsg="";
 
@@ -44,7 +46,7 @@ class Publish extends Secured{
         if(isset($_POST["publishBT"])){
             $arr = [
                 'kraj_id' => $kr_select,
-                'rocnik'  => 58,
+                'rocnik'  => $rocnik,
                 'round'   => $round_select,
                 'category'=> $kat_select,
                 'publish_type_id' => $type_select
@@ -80,7 +82,7 @@ class Publish extends Secured{
                     ORDER BY SUM(sub.points) DESC, surname DESC;',
                         $round_select,$round_select,$round_select,$round_select,
                         $round_select,$round_select,$round_select,$round_select,
-                        $kr_select,58,$kat_select,$round_select)->fetchAll();
+                        $kr_select,$rocnik,$kat_select,$round_select)->fetchAll();
         foreach ($data as $student ) {
             if( $round_select == 1 ) {
                 $usp = 0;
