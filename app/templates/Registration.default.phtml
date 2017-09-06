@@ -1,0 +1,131 @@
+@{block #page}
+
+<script type="text/javascript">
+  function noBack()
+  {
+    window.history.forward()
+  }
+  noBack();
+  window.onload = noBack;
+  window.onpageshow = function(evt) { if (evt.persisted) noBack() }
+  window.onunload = function() { void(0) }
+</script>
+
+<h1>{$heading}</h1>
+<div id="editable">
+    {!$document->html}
+</div>
+
+<style>
+p.error{
+    margin: 10px;
+}
+</style>
+<div style="background-color:#ffaaaa"><p class="error">{!$errorMsg}</p></div>
+<div style="background-color:#ffffaa"><p class="error">{!$warnMsg}</p></div>
+<div style="background-color:#aaffaa"><p class="error">{!$okMsg}</p></div>
+
+
+<form name="header" method="POST" action="./">
+  <input type="hidden" name="status" value="{$status}">
+
+
+  <p>
+    status={$status}<br />
+    Uživatel: {$user}<br />
+    <input type="submit" name="logoutBT" value="Odhlásit se" class="button" ><br />
+  </p>
+
+
+{*login*}
+{if $status==0}
+<h2>Přihlášení</h2>
+<table style="border-collapse: separate; border : 0px none; background-color : transparent;">
+  <tbody>
+    <tr>
+      <td>Email</td>
+      <td><input class="text" type="text" size="40" name="logEmail" value="{$logEmail}"/></td>
+    </tr>
+    <tr>
+      <td>Heslo</td>
+      <td><input class="text" type="password" size="40" name="logPass"/></td>
+    </tr>
+    <tr>
+      <td colspan=2>
+        <input type="submit" name="loginBT" value="Přihlásit se" class="button" >
+        <input type="submit" name="newPassBT" value="Registrovat se, zapomenuté heslo" class="button" >
+      </td>
+    </tr>
+  </tbody>
+</table>
+{*registrace fáze 1*}
+{elseif $status==10}
+<h2>Registrace, zapomenuté heslo</h2>
+<table style="border-collapse: separate; border : 0px none; background-color : transparent;">
+  <tbody>
+<!--
+    <tr>
+      <td><input type="radio" name="role" value="referent"></td>
+      <td>Referent (vyučující)</td>
+    </tr>
+    <tr>
+      <td><input type="radio" name="role" value="student"></td>
+      <td>Student</td>
+    </tr>
+-->
+    <tr>
+      <td>Email</td>
+      <td><input class="text" type="text" size="40" name="logEmail" value="{$logEmail}"/></td>
+    </tr>
+    <tr>
+      <td colspan=2>
+        <input type="submit" name="regContBT" value="Pokračovat" class="button" >
+      </td>
+    </tr>
+  </tbody>
+</table>
+{*registrace fáze 2*}
+{elseif $status==11}
+<h2>Registrace 1/???</h2>
+<table style="border-collapse: separate; border : 0px none; background-color : transparent;">
+  <tbody>
+    <tr>
+      <td><input type="radio" name="roleRAD" value="referent"></td>
+      <td>Referent (vyučující)</td>
+    </tr>
+    <tr>
+      <td><input type="radio" name="roleRAD" value="student"></td>
+      <td>Student</td>
+    </tr>
+    <tr>
+      <td colspan=2>
+        <input type="submit" name="regCont2BT" value="Pokračovat" class="button" >
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+{*registrace fáze 3ref*}
+{elseif $status==121}
+<h2>Registrace 2/???</h2>
+<table style="border-collapse: separate; border : 0px none; background-color : transparent;">
+  <tbody>
+    <tr>
+      <td colspan=2>
+        <input type="submit" name="regCont31BT" value="Pokračovat" class="button" >
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+{*dashboard*}
+{elseif $status==20}
+TODO Dashboard.
+{else}
+<p>Nastala chyba {$status}.</p>
+{/if}
+
+</form>
+
+
+{control overview}
