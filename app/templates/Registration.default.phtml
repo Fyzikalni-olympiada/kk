@@ -27,7 +27,15 @@ p.error{
 
 
 <form name="header" method="POST" action="./">
-  <input type="hidden" name="status" value="{$status}">
+  <input type="hidden" name="status"      value="{$status}">
+  <input type="hidden" name="refName"     value="{$refName}">
+  <input type="hidden" name="refMail"     value="{$refMail}">
+  <input type="hidden" name="refPhone"    value="{$refPhone}">
+  <input type="hidden" name="refSchool"   value="{$refSchool}">
+  <input type="hidden" name="schName"     value="{$schName}">
+  <input type="hidden" name="schFullName" value="{$schFullName}">
+  <input type="hidden" name="schAdr"      value="{$schAdr}">
+  <input type="hidden" name="schEmail"    value="{$schEmail}">
 
 
   <p>
@@ -63,16 +71,6 @@ p.error{
 <h2>Registrace, zapomenuté heslo</h2>
 <table style="border-collapse: separate; border : 0px none; background-color : transparent;">
   <tbody>
-<!--
-    <tr>
-      <td><input type="radio" name="role" value="referent"></td>
-      <td>Referent (vyučující)</td>
-    </tr>
-    <tr>
-      <td><input type="radio" name="role" value="student"></td>
-      <td>Student</td>
-    </tr>
--->
     <tr>
       <td>Email</td>
       <td><input class="text" type="text" size="40" name="logEmail" value="{$logEmail}"/></td>
@@ -86,7 +84,7 @@ p.error{
 </table>
 {*registrace fáze 2*}
 {elseif $status==11}
-<h2>Registrace 1/???</h2>
+<h2>Registrace 1/2</h2>
 <table style="border-collapse: separate; border : 0px none; background-color : transparent;">
   <tbody>
     <tr>
@@ -107,10 +105,39 @@ p.error{
 </table>
 {*registrace fáze 3ref*}
 {elseif $status==121}
-<h2>Registrace 2/???</h2>
+<h2>Registrace 2/2</h2>
 <table style="border-collapse: separate; border : 0px none; background-color : transparent;">
   <tbody>
-    <tr>
+    <tr><td style="text-align: right">* Škola:</td><td><select name="refSchool" tabindex=1>
+     <option value="NULL">---- vyberte školu ----</option>
+ {foreach $schools as $school}
+     <option value={$school->school_id} {if $school->selected}selected="selected"{/if}>{$school->school_choice}</option>
+ {/foreach}
+     </select>
+     <input tabindex="13" type="submit" name="missSchoolBT" value="Škola není na seznamu" class="button" />
+     </td>
+   </tr>
+   <tr>
+     <td style="text-align: right">* Jméno referenta FO:</td>
+     <td><input class="text" tabindex="2" type="text" size="40" value="{$refName}" name="refName" /></td>
+   </tr>
+   <tr>
+     <td style="text-align: right">* Vaš email:</td>
+     <td><input class="text" tabindex="3" type="text" size="40" value="{$refMail}" name="refMail" /></td>
+   </tr>
+   <tr>
+     <td style="text-align: right">Váš telefon:</td>
+     <td><input class="text" tabindex="4" type="text" size="40" value="{$refPhone}" name="refPhone" /></td>
+   </tr>
+   <tr>
+     <td style="text-align: right">Heslo:</td>
+     <td><input class="text" tabindex="6" type="password" size="40" value="" name="newPass" /></td>
+   </tr>
+   <tr>
+     <td style="text-align: right">Heslo znovu:</td>
+     <td><input class="text" tabindex="7" type="password" size="40" value="" name="newPass2" /></td>
+   </tr>
+   <tr>
       <td colspan=2>
         <input type="submit" name="regCont31BT" value="Pokračovat" class="button" >
       </td>
@@ -118,9 +145,42 @@ p.error{
   </tbody>
 </table>
 
+{*registrace fáze 3stud*}
+{elseif $status==122}
+
+TODO
+
+{*registrace školy*}
+{elseif $status==131 || $status==132}
+<h2>Registrace školy</h2>
+<table style="border-collapse: separate; border : 0px none; background-color : transparent;">
+  <tbody>
+  <tr>
+    <td style="text-align: right">Zkratka názvu školy:</td>
+    <td><input class="text" type="text" size="40" value="{$schName}" name="schName" /></td>
+  </tr>
+  <tr>
+    <td style="text-align: right">Úplný název školy dle MŠMT:</td>
+    <td><input class="text" type="text" size="40" value="{$schFullName}" name="schFullName" /></td>
+  </tr>
+  <tr>
+    <td style="text-align: right">Adresa školy:</td>
+    <td><input class="text" type="text" size="40" value="{$schAdr}" name="schAdr" /></td>
+  </tr>
+  <tr>
+    <td style="text-align: right">Kontakní email na ředitelství:</td>
+    <td><input class="text" type="text" size="40" value="{$schEmail}" name="schEmail" /></td>
+  </tr>
+  <tr>
+        <td><input type="submit" name="schSaveBT" value="Uložit školu" class="button" /></td>
+        <td><input type="submit" name="schCancBT" value="Zpět" class="button" /></td>
+  </tr>
+  </tbody>
+</table>
+
 {*dashboard*}
 {elseif $status==20}
-TODO Dashboard.
+    TODO Dashboard.
 {else}
 <p>Nastala chyba {$status}.</p>
 {/if}

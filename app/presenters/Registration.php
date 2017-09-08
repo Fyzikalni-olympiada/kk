@@ -55,10 +55,38 @@ class Registration extends Base
     private $role = null; // 1 - referent, 2 - student
 
     private $status=0;
-    // 0 -- Přihlášení
-    // 10 -- registrace, zapomenuté heslo
-    // 11 -- nová registrace registrace
-    // 20 -- dashboard
+    // 0   -- Přihlášení
+    // 10  -- registrace, zapomenuté heslo
+    // 11  -- nová registrace registrace
+    // 121 -- registrace referenta
+    // 122 -- registrace studenta TODO
+    // 131,2  -- registrace školy
+    // 20  -- dashboard
+
+
+    private $refName;
+    private $refMail;
+    private $refPhone;
+    private $refSchool;
+    private $refSchoolName;
+
+    private $schName;
+    private $schFullName;
+    private $schAdr;
+    private $schEmail;
+
+    private $schools;
+
+    private $newPass  = "";
+    private $newPass2 = "";
+
+    private $stdName = array();
+    private $stdSur  = array();
+    private $stdKat  = array();
+    private $stdMail = array();
+    private $stdBorn = array();
+    private $stdClss = array();
+    private $stdTeac = array();
 
 
     public function renderDefault($path)
@@ -92,6 +120,28 @@ class Registration extends Base
             if( $_POST['roleRAD'] === "student" )
                 $this->role = 2;
         }
+        if( isset($_POST['refName']) )
+            $this->refName = $_POST['refName'];
+        if( isset($_POST['refMail']) )
+            $this->refMail = $_POST['refMail'];
+        if( isset($_POST['refPhone']) )
+            $this->refPhone = $_POST['refPhone'];
+        if( isset($_POST['refSchool']) )
+            $this->refSchool = $_POST['refSchool'];
+        $this->setSchool();
+
+        $this->newPass = $_POST['newPass'];
+        $this->newPass2 = $_POST['newPass2'];
+
+        if( isset($_POST['schName']) )
+            $this->schName = $_POST['schName'];
+        if( isset($_POST['schFullName']) )
+            $this->schFullName = $_POST['schFullName'];
+        if( isset($_POST['schAdr']) )
+            $this->schAdr = $_POST['schAdr'];
+        if( isset($_POST['schEmail']) )
+            $this->schEmail = $_POST['schEmail'];
+
     }
 
     function buttonAction()
@@ -106,28 +156,42 @@ class Registration extends Base
             $this->regContBTPress();
         if(isset($_POST['regCont2BT']))
             $this->regCont2BTPress();
+        if(isset($_POST['regCont31BT']))
+            $this->regCont31BTPress();
+        if(isset($_POST['missSchoolBT']))
+            $this->missSchoolBTPress();
+        if(isset($_POST['schSaveBT']))
+            $this->schSaveBTPress();
+        if(isset($_POST['schCancBT']))
+            $this->schCancBTPress();
     }
 
     function sendToTemplate()
     {
-        $this->template->status   = $this->status;
-        $this->template->errorMsg = $this->errorMsg;
-        $this->template->warnMsg  = $this->warnMsg;
-        $this->template->okMsg    = $this->okMsg;
-        $this->template->logEmail = $this->logEmail;
+        $this->template->status        = $this->status;
+        $this->template->errorMsg      = $this->errorMsg;
+        $this->template->warnMsg       = $this->warnMsg;
+        $this->template->okMsg         = $this->okMsg;
+        $this->template->logEmail      = $this->logEmail;
+
+        $this->template->refName       = $this->refName;
+        $this->template->refMail       = $this->refMail;
+        $this->template->refPhone      = $this->refPhone;
+        $this->template->refSchool     = $this->refSchool;
+        $this->template->schName       = $this->schName;
+        $this->template->schFullName   = $this->schFullName;
+        $this->template->schAdr        = $this->schAdr;
+        $this->template->schEmail      = $this->schEmail;
         $this->template->user = "Nepřihlášen";
         if( $this->getUser()->isLoggedIn() ) {
             $this->template->user = $this->getUser()->getIdentity()->getName();
         }
+        $this->template->schools  = $this->schools;
 
     }
 
     function setAuthentificator()
     {
-//        $authenticator = new \Nette\Security\SimpleAuthenticator([
-//                'pokus@gmail.com' => 'abc',
-//                'lukasl' => 'qwe',
-//                ]);
         $this->authenticator = new MySQLAuthenticator();
         $this->getUser()->setAuthenticationHandler( $this->authenticator );
     }
@@ -182,7 +246,7 @@ class Registration extends Base
 
         if( $newpass == null) {
         // nová registrace
-            $this->errorMsg .= "Uživatel nenalezen.<br />";
+            $this->okMsg .= "Uživatel nenalezen, pokračujeme k registraci.<br />";
             $this->status = 11;
         }
         else {
@@ -205,6 +269,125 @@ class Registration extends Base
         if( $this->role === 2 ) { // student
             $this->status = 122;
         }
+    }
+
+    function regCont31BTPress()
+    {
+        $this->errorMsg .= $this->checkReferent($this->refSchool,$this->refName,$this->refMail);
+        if( $this->errorMsg != "" )
+            return;
+        // TODO
+        // setup/generate password
+        // write to dtb
+        // send email
+        // login
+        // redirect to dashboard
+    }
+
+    function missSchoolBTPress()
+    {
+        $this->status = 131;
+    }
+
+    function schSaveBTPress()
+    {
+        $this->errorMsg .= $this->checkSchool($this->schName, $this->schFullName, $this->schAdr, $this->schEmail);
+        if($this->errorMsg == "" ) {
+            if(dibi::query('SELECT * from school WHERE school_show_name=%s;',$this->schName)->fetchAll()[0]==null){
+                $data=array(
+                    "kraj_id"          => $this::getKrajId(),
+                    "school_show_name" => $this->schName,
+                    "school_choice"    => $this->schName,
+                    "school_address"   => $this->schAdr,
+                    "school_full_name" => $this->schFullName,
+                    "school_email"     => $this->schEmail,
+                );
+                dibi::insert('school',$data)->execute();
+                $this->okMsg .= "Škola byla uložena do databáze.<br />";
+            }
+            else{
+                $this->okMsg .= "Byla použita škola stejného jména z databáze.<br />";
+            }
+            $this->refSchool = dibi::query(
+                'SELECT school_id
+                 FROM school
+                 WHERE school_show_name=%s',$this->schName)->fetchAll()[0]->school_id;
+        }
+        $this->schCancBTPress();
+        $this->setSchool();
+    }
+
+    function schCancBTPress()
+    {
+        if( $this->status == 131 )
+            $this->status = 121;
+        if( $this->status == 132 )
+            $this->status = 122;
+    }
+
+    function checkSchool($schName, $schFullName, $schAdr, $schEmail)
+    {
+        $errorMsg="";
+        if($schName=="")
+            $errorMsg.="Zobrazované jméno školy musí být vypněno.<br />";
+        if($schFullName=="")
+            $errorMsg.="Úplný název školy musí být vyplněn.<br />";
+        if($schAdr=="")
+            $errorMsg.="Adresa školy musí být vyplněna.<br />";
+        if($schEmail=="")
+            $errorMsg.="Kontaktní email školy musí být vyplněn.<br />";
+        if( !filter_var($schEmail, FILTER_VALIDATE_EMAIL) )
+            $errorMsg.="Kontaktní email " . $schEmail . " nemá validní formu.<br />";
+        return $errorMsg;
+    }
+
+    function checkReferent($refSchool,$refName,$refMail)
+    {
+        $errorMsg="";
+        if($refSchool == "NULL")
+            $errorMsg.="Musíte nejprve vyplnit svou školu.<br />";
+        if($refName=="")
+            $errorMsg.="Musíte nejprve vyplnit své jméno.<br />";
+        if(!filter_var($refMail, FILTER_VALIDATE_EMAIL))
+            $errorMsg.="Zadaný email není ve validní formě.<br />";
+        if( $this->newPass !== $this->newPass2 )
+            $errorMsg.="Zadaná hesla se neshodují.<br />";
+        if( $this->newPass == "" && $this->newPass2 == "" )
+            $this->warnMsg .= "Heslo nebylo zadáno, bude vygenerováno automaticky.<br />";
+
+        return $errorMsg;
+    }
+
+    function setSchool()
+    {
+        $this->schools =$this::getSchools();
+        foreach($this->schools as $school)
+            if($this->refSchool==$school->school_id)
+                $this->refSchool=$school->school_id;
+//        if($this->refSchool!="null")
+            foreach($this->schools as $school) {
+                if($school->school_id==$this->refSchool){
+                    $school->selected=true;
+                    $this->refSchoolName=$school->school_choice;
+                }
+                else
+                    $school->selected=false;
+            }
+    }
+
+    function getSchools()
+    {
+        return dibi::query('SELECT school_id,school_choice, "" AS selected
+            FROM school
+            WHERE kraj_id=1
+            ORDER BY school_choice;')->fetchAll();
+        return dibi::query('SELECT school_id,school_choice, "no" AS selected FROM school WHERE kraj_id=%d;',$this::getKrajId())->fetchAll();
+    }
+
+    function getKrajId()
+    {
+        return dibi::query('SELECT kraj_id FROM kraj WHERE webpage=%s',$this::getSubdomain())->fetchAll()[0]->kraj_id;
+        return 1;
     }
 
 }
@@ -304,73 +487,17 @@ class Registration extends Base
 ///* *****************************************************************************
 // * Actions
 // * *****************************************************************************/
-//// garant ok press
-//        if(isset($_POST['schoolOk'])){
-//            $errorMsg.=$this->checkSchool($refSchool);
-//            if($errorMsg==""){
-//                if($rekap){
-//                    $step=4;
-//                }
-//                else{
-//                    $step=2;
-//                }
-//            }
+//        if( $this->errorMsg == "" ) {
+//            $this->stdName=array_fill(0,$refNum,"");
+//            $this->stdSur =array_fill(0,$refNum,"");
+//            $this->stdKat =array_fill(0,$refNum,"");
+//            $this->stdMail=array_fill(0,$refNum,"@");
+//            $this->stdBorn=array_fill(0,$refNum,"");
+//            $this->stdClss=array_fill(0,$refNum,"");
+//            $this->stdTeac=array_fill(0,$refNum,"");
 //        }
-//
-//// add school press
-//        if(isset($_POST['missschool'])){
-//            //$okMsg.="Add school pressed<br />";
-//            $step="1.5";
-//        }
-//// cancel school
-//        if(isset($_POST['schCanc'])){
-//            $step=1;
-//        }
-//
-//// save new school
-//        if(isset($_POST['schSave'])){
-//            $errorMsg.=$this->checkAddSchool($schName,$schAdr,$schFull,$schMail);
-//            if($errorMsg==""){
-//                if(dibi::query('SELECT * from school WHERE school_show_name=%s;',$schName)->fetchAll()[0]==NULL){
-//                    $data=array(
-//                        "kraj_id"          => $this::getKrajId(),
-//                        "school_show_name" => $schName,
-//                        "school_choice"    => $schName,
-//                        "school_address"   => $schAdr,
-//                        "school_full_name" => $schFull,
-//                        "school_email"     => $schMail);
-//                    dibi::insert('school',$data)->execute();
-//                    $okMsg.="Škola byla uložena do databáze.<br />";
-//                }
-//                else{
-//                    $okMsg.="Byla použita škola stejného jména z databáze.<br />";
-//                }
-//                $refSchool=dibi::query('SELECT school_id FROM school WHERE school_show_name=%s',$schName)->fetchAll()[0]->school_id;
-//
-//                $step=1;
-//            }
-//        }
-//// garant ok press
-//        if(isset($_POST['garantOk'])){
-//            $errorMsg.=$this->checkReferent($refSchool,$refName,$refMail,$refNum);
-//            if($errorMsg==""){
-//                if($rekap){
-//                    $step=4;
-//                }
-//                else{
-//                    $step=3;
-//                    $stdName=array_fill(0,$refNum,"");
-//                    $stdSur =array_fill(0,$refNum,"");
-//                    $stdKat =array_fill(0,$refNum,"");
-//                    $stdMail=array_fill(0,$refNum,"@");
-//                    $stdBorn=array_fill(0,$refNum,"");
-//                    $stdClss=array_fill(0,$refNum,"");
-//                    $stdTeac=array_fill(0,$refNum,"");
-//                }
-//            }
-//        }
-//
-//
+
+
 //// continue to rekapitulation
 //        if(isset($_POST['rekap'])){
 //            $errorMsg.=$this->checkStudents($refNum,$refMail,$stdName,$stdSur,$stdKat,$stdMail,$stdBorn,$stdClss,$stdTeac);
@@ -601,17 +728,6 @@ class Registration extends Base
 ////        }
 //    }
 //
-//    function checkReferent($refSchool,$refName,$refMail,$refNum)
-//    {
-//        $errorMsg="";
-//        if($refName=="")
-//            $errorMsg.="Musíte nejprve vyplnit své jméno.<br />";
-//        if(!filter_var($refMail, FILTER_VALIDATE_EMAIL))
-//            $errorMsg.="Zadaný email není ve validní formě.<br />";
-//        if(!filter_var($refNum, FILTER_VALIDATE_INT))
-//            $errorMsg.="Počet přihlašovaných studentů musí být přirozené číslo.<br />";
-//       return $errorMsg;
-//    }
 //
 //    function checkSchool($refSchool)
 //    {
