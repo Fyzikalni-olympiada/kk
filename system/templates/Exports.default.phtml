@@ -1,0 +1,99 @@
+@{extends @layout.phtml}
+@{block #content}
+{ifset $error}<br />{$error}<a href="./">Zpět</a>{else}
+<h1>{!$heading}</h1>
+
+{*
+<br />
+{control krajSelect}
+
+<br />
+{if $_GET["kr_select"]>0}
+<!-- budeme vůbec něco zobrazovat-->
+*}
+
+<h2>Exporty</h2>
+
+
+<style>
+p.error{
+    margin: 10px;
+}
+</style>
+<div style="background-color:#ffaaaa"><p class="error">{!$errorMsg}</p></div>
+<div style="background-color:#aaffaa"><p class="error">{!$okMsg}</p></div>
+
+Stručný návod:
+<ul>
+  <li> V budoucnu bude, bude-li potřeba.
+  <li> Vysvětlivky:
+  <li><ul>
+    <li> kolo, postup do kola: 1--domácí, 3--krajské
+    <li> kraj_id: 1--Praha
+    <li> V případě více kategorií stačí vyplnit ty, které chcete vypisovat, ostatní nechat prázdné.
+  </ul>
+</ul>
+
+<br />
+
+<form name="selExport" method="POST" action="">
+<select name="exp_select">
+    <option value="0">---- vyberte export ----</option>
+{$i=0}
+{foreach $exports as $export}
+    <!--<option value={$export->export_id} {if $exp_select==$export->export_id}selected="selected"{/if}>{$export->comment}</option>-->
+    <option value={$i} {if $exp_select==$i}selected="selected"{/if}>{$export->comment}</option>
+    {$i++}
+{/foreach}
+    </select>
+<input type="submit" value="Vybrat" class="button" name="selectBT"/>
+
+<h3> Parametry </h3>
+<table>
+  <tr>
+    <th>Parametr
+    <th> Hodnota
+{foreach $inputFileds as $inpf}
+  <tr>
+    <th>{$inpf}
+    <th><input type="text" name="param_{$inpf}" value="{$params[$inpf]}">
+{/foreach}
+  <tr><th> <input type="submit" value="Provést" class="button" name="runBT"/>
+</table>
+</form>
+
+<br />
+
+<h3>Výstup</h3>
+{if $data!=NULL}
+<table>
+<thead>
+  {foreach $keys as $key}
+    <th>{$key}</th>
+  {/foreach}
+</thead>
+<tbody>
+{foreach $data as $row}
+  <tr>
+  {foreach $keys as $key}
+    <td>{$row->$key}</td>
+  {/foreach}
+  </tr>
+{/foreach}
+</table>
+</form>
+{/if}
+
+
+<h3>Načtený (provedený) SQL dotaz</h3>
+<p>
+{$sql}
+</p>
+
+
+{/if}
+
+{*
+{/if}<!--error-->
+*}
+
