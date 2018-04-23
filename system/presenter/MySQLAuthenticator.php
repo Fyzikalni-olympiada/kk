@@ -49,9 +49,11 @@ class MySQLAuthenticator extends \Nette\Security\SimpleAuthenticator
         throw new \Nette\Security\AuthenticationException("Invalid password.", self::INVALID_CREDENTIAL);
     }
 
-    function setPass( $username )
+    function setPass( $username, $newpass )
     {
-        $newpass = $this->getPass();
+        if( func_num_args() == 1)
+            $newpass = $this->getPass();
+
         $hash = crypt( $newpass );
         foreach ($this->userList as $user) {
             if( strcasecmp($username, $user['email']) == 0){
