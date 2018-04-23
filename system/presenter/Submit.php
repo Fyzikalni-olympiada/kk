@@ -40,10 +40,9 @@ class Submit extends Secured{
 
         $kr_select=1;//Praha auto
 
-bdump($round_select);
-
         if(isset($_POST["saveBT"])){
             for($i=0; $i<$_POST["STOT"];$i++)for($j=1;$j<=7;$j++)if($_POST['submit'.$i][$j]=="1"){
+                // TODO check if not submitted!!!
                 $val=array(
                     "participant_id" => $_POST["PID".$i],
                     "prob_round"     => $round_select,
@@ -58,11 +57,28 @@ bdump($round_select);
                            FROM participants
                            JOIN referents USING(referent_id)
                            JOIN advance USING(participant_id)
-                           WHERE rocnik=%s AND round=%s
+                           WHERE rocnik=%s AND round=%s AND category=%s
                            AND participant_id NOT IN (
                                SELECT participant_id FROM submit WHERE prob_round=%s)
                            ORDER BY surname
-                           ',$rocnik,$round_select,$round_select)->fetchAll();
+                           ',$rocnik,$round_select,chr(64+$kategorie),$round_select)->fetchAll();
+        if(isset($_POST['showall']))
+            $students=dibi::query('SELECT participant_id, CONCAT(name, " ", surname) AS fullname, U1.submit_id AS U1P, U2.submit_id AS U2P, U3.submit_id AS U3P, U4.submit_id AS U4P, U5.submit_id AS U5P, U6.submit_id AS U6P, U7.submit_id AS U7P
+                               FROM participants
+                               JOIN referents USING(referent_id)
+                               JOIN advance USING(participant_id)
+                               LEFT JOIN (SELECT participant_id,sub1.submit_id FROM submit AS sub1 WHERE prob_round=%s AND problem_id=1) AS U1 USING(participant_id)
+                               LEFT JOIN (SELECT participant_id,sub2.submit_id FROM submit AS sub2 WHERE prob_round=%s AND problem_id=2) AS U2 USING(participant_id)
+                               LEFT JOIN (SELECT participant_id,sub3.submit_id FROM submit AS sub3 WHERE prob_round=%s AND problem_id=3) AS U3 USING(participant_id)
+                               LEFT JOIN (SELECT participant_id,sub4.submit_id FROM submit AS sub4 WHERE prob_round=%s AND problem_id=4) AS U4 USING(participant_id)
+                               LEFT JOIN (SELECT participant_id,sub5.submit_id FROM submit AS sub5 WHERE prob_round=%s AND problem_id=5) AS U5 USING(participant_id)
+                               LEFT JOIN (SELECT participant_id,sub6.submit_id FROM submit AS sub6 WHERE prob_round=%s AND problem_id=6) AS U6 USING(participant_id)
+                               LEFT JOIN (SELECT participant_id,sub7.submit_id FROM submit AS sub7 WHERE prob_round=%s AND problem_id=7) AS U7 USING(participant_id)
+                               WHERE rocnik=%s AND round=%s AND category=%s
+                               ORDER BY surname
+                               ',$round_select,$round_select,$round_select,$round_select,$round_select,$round_select,$round_select,$rocnik,$round_select,chr(64+$kategorie))->fetchAll();
+        bdump($students);
+
         $query="SELECT concat(name,' ',surname) AS fullname";
         for($i=1;$i<=7;$i++)
               $query.=', U'.$i.'.submit "U'.$i.'" ';

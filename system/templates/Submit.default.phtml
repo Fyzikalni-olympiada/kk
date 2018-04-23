@@ -26,7 +26,7 @@
     <option value="1" {if $round_select==1}selected="selected"{/if}>Domácí kolo</option>
     <option value="3" {if $round_select==3}selected="selected"{/if}>Krajské kolo</option>
     </select>
-
+<input type="checkbox" name="showall" value="showall">Zobrazi všechny studenty.<br>
 <input type="submit" value="Vybrat" class="button" />
 
 
@@ -60,14 +60,14 @@ p.error{
   <tr>
     <input type="hidden"  value="{$row->participant_id}" name="PID{$index}">
     <td>{$row->fullname}</td>
-    <td><input type="checkbox" name="submit{$index}[1]" value="1"></td>
-    <td><input type="checkbox" name="submit{$index}[2]" value="1"></td>
-    <td><input type="checkbox" name="submit{$index}[3]" value="1"></td>
-    <td><input type="checkbox" name="submit{$index}[4]" value="1"></td>
+    <td><input type="checkbox" name="submit{$index}[1]" value="1" {if $row->U1P != NULL}disabled="disabled" checked{/if}></td>
+    <td><input type="checkbox" name="submit{$index}[2]" value="1" {if $row->U2P != NULL}disabled="disabled" checked{/if}></td>
+    <td><input type="checkbox" name="submit{$index}[3]" value="1" {if $row->U3P != NULL}disabled="disabled" checked{/if}></td>
+    <td><input type="checkbox" name="submit{$index}[4]" value="1" {if $row->U4P != NULL}disabled="disabled" checked{/if}></td>
 {if $round_select==1}
-    <td><input type="checkbox" name="submit{$index}[5]" value="1"></td>
-    <td><input type="checkbox" name="submit{$index}[6]" value="1"></td>
-    <td><input type="checkbox" name="submit{$index}[7]" value="1"></td>
+    <td><input type="checkbox" name="submit{$index}[5]" value="1" {if $row->U5P != NULL}disabled="disabled" checked{/if}></td>
+    <td><input type="checkbox" name="submit{$index}[6]" value="1" {if $row->U6P != NULL}disabled="disabled" checked{/if}></td>
+    <td><input type="checkbox" name="submit{$index}[7]" value="1" {if $row->U7P != NULL}disabled="disabled" checked{/if}></td>
 {/if}
 </th>
   </tr><tr><td></tr>
