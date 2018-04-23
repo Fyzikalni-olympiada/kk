@@ -39,7 +39,7 @@ class Ncorr extends Secured{
             'SELECT *
              FROM `v_neopravene`
              WHERE `kraj_id`=%i
-             ORDER BY prob_round,problem_id,school_show_name',$kr_select)->fetchAll();
+             ORDER BY rocnik,prob_round,category,problem_id,school_show_name',$kr_select)->fetchAll();
 // send to template
         $this->template->heading="Administrační pultík: ".$this->kraje[$kr_select];
         $this->template->students=$students;
