@@ -83,6 +83,8 @@ class Deduplicate extends Secured{
                         continue;
                     $diff = 0;
                     for($i=1;$i<count($keys); $i++){
+                        if( $keys[$i] == "datetime" )
+                            continue;
                         if(strval($rowx[$keys[$i]]) != strval($rowy[$keys[$i]]))
                             $diff++;
                         if( strval($rowx[$keys[$i]]) == "" && $chnull) {
