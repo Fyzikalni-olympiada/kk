@@ -42,16 +42,7 @@ Stručný návod:
     <option value="1" {if $round_select==1}selected="selected"{/if}>Domácí kolo</option>
     <option value="3" {if $round_select==3}selected="selected"{/if}>Krajské kolo</option>
     </select>
-<select name="type_select">
-    <option value="0">---- vyberte zdroj, pouze pro zveřejnění----</option>
-    <option value="1" {if $type_select==1}selected="selected"{/if}>Databáze</option>
-    <option value="2" {if $type_select==3}selected="selected"{/if}>html</option>
-    <option value="3" {if $type_select==3}selected="selected"{/if}>Excel</option>
-    </select>
-
-<input type="submit" value="Vybrat" class="button" />
-<input type="submit" value="Zveřejnit" class="button" name="publishBT"/>
-</form>
+<input type="submit" value="Zobrazit" class="button" />
 
 <br />
 
@@ -93,8 +84,18 @@ Stručný návod:
   </tr>
 {/foreach}
 </table>
-{/if}
+<select name="type_select">
+    <option value="0">---- vyberte zdroj, pouze pro zveřejnění----</option>
+    <option value="1" {if $type_select==1}selected="selected"{/if}>Databáze</option>
+    <option value="2" {if $type_select==3}selected="selected"{/if}>html</option>
+    <option value="3" {if $type_select==3}selected="selected"{/if}>Excel</option>
+    </select>
 
+
+<input type="submit" value="Zveřejnit na webu" class="button" name="publishBT"/>
+</form>
+
+{/if}
 {/if}
 
 {*
