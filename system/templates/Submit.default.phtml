@@ -54,6 +54,8 @@ p.error{
   <td><strong>Ú6</strong></td>
   <td><strong>Ú7</strong></td>
 {/if}
+  <td><strong>Škola</strong></td>
+  <td><strong>Třída</strong></td>
 </thead>
 <tbody>
 {?$index=0}
@@ -71,6 +73,8 @@ p.error{
     <td><input type="checkbox" name="submit{$index}[6]" value="1" {if $row->U6P != NULL}disabled="disabled" checked{/if}></td>
     <td><input type="checkbox" name="submit{$index}[7]" value="1" {if $row->U7P != NULL}disabled="disabled" checked{/if}></td>
 {/if}
+    <td>{$row->school_show_name}</td>
+    <td>{$row->class}</td>
 </th>
   </tr><tr><td></tr>
 {?$index++}
@@ -101,6 +105,8 @@ p.error{
   <td><strong>Ú6</strong></td>
   <td><strong>Ú7</strong></td>
 {/if}
+  <td><strong>Škola</strong></td>
+  <td><strong>Třída</strong></td>
 </thead>
 <tbody>
 {foreach $submitted as $row}
@@ -115,6 +121,8 @@ p.error{
     <td>{$row->U6}</td>
     <td>{$row->U7}</td>
 {/if}
+    <td>{$row->school_show_name}</td>
+    <td>{$row->class}</td>
   </tr>
 {/foreach}
 </tbody>

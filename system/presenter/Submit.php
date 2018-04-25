@@ -66,19 +66,21 @@ class Submit extends Secured{
             }
             $okMsg.="Odevzdání uloženo.";
         }
-        $students=dibi::query('SELECT participant_id, CONCAT(name, " ", surname) AS fullname
+        $students=dibi::query('SELECT participant_id, CONCAT(name, " ", surname) AS fullname, school_show_name, class
                            FROM participants
                            JOIN referents USING(referent_id)
                            JOIN advance USING(participant_id)
+                           JOIN school USING(school_id)
                            WHERE rocnik=%s AND round=%s AND category=%s
                            AND participant_id NOT IN (
                                SELECT participant_id FROM submit WHERE prob_round=%s)
                            ORDER BY surname
                            ',$rocnik,$round_select,chr(64+$kategorie),$round_select)->fetchAll();
         if(isset($_POST['showall']))
-            $students=dibi::query('SELECT participant_id, CONCAT(name, " ", surname) AS fullname, U1.submit_id AS U1P, U2.submit_id AS U2P, U3.submit_id AS U3P, U4.submit_id AS U4P, U5.submit_id AS U5P, U6.submit_id AS U6P, U7.submit_id AS U7P
+            $students=dibi::query('SELECT participant_id, CONCAT(name, " ", surname) AS fullname, school_show_name, class, U1.submit_id AS U1P, U2.submit_id AS U2P, U3.submit_id AS U3P, U4.submit_id AS U4P, U5.submit_id AS U5P, U6.submit_id AS U6P, U7.submit_id AS U7P
                                FROM participants
                                JOIN referents USING(referent_id)
+                               JOIN school USING(school_id)
                                JOIN advance USING(participant_id)
                                LEFT JOIN (SELECT participant_id,sub1.submit_id FROM submit AS sub1 WHERE prob_round=%s AND problem_id=1) AS U1 USING(participant_id)
                                LEFT JOIN (SELECT participant_id,sub2.submit_id FROM submit AS sub2 WHERE prob_round=%s AND problem_id=2) AS U2 USING(participant_id)
@@ -92,7 +94,7 @@ class Submit extends Secured{
                                ',$round_select,$round_select,$round_select,$round_select,$round_select,$round_select,$round_select,$rocnik,$round_select,chr(64+$kategorie))->fetchAll();
         bdump($students);
 
-        $query="SELECT concat(name,' ',surname) AS fullname";
+        $query="SELECT concat(name,' ',surname) AS fullname, school_show_name, class";
         for($i=1;$i<=7;$i++)
               $query.=', U'.$i.'.submit "U'.$i.'" ';
         $query.="
