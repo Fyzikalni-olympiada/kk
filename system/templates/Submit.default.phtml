@@ -44,6 +44,7 @@ p.error{
 <table>
 <thead>
   <td><strong>Jméno</strong></td>
+  <td><strong>Vše</strong></td>
   <td><strong>Ú1</strong></td>
   <td><strong>Ú2</strong></td>
   <td><strong>Ú3</strong></td>
@@ -60,6 +61,7 @@ p.error{
   <tr>
     <input type="hidden"  value="{$row->participant_id}" name="PID{$index}">
     <td>{$row->fullname}</td>
+    <td><input type="checkbox" name="submit{$index}[0]" value="1" ></td>
     <td><input type="checkbox" name="submit{$index}[1]" value="1" {if $row->U1P != NULL}disabled="disabled" checked{/if}></td>
     <td><input type="checkbox" name="submit{$index}[2]" value="1" {if $row->U2P != NULL}disabled="disabled" checked{/if}></td>
     <td><input type="checkbox" name="submit{$index}[3]" value="1" {if $row->U3P != NULL}disabled="disabled" checked{/if}></td>

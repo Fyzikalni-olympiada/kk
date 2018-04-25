@@ -41,15 +41,28 @@ class Submit extends Secured{
         $kr_select=1;//Praha auto
 
         if(isset($_POST["saveBT"])){
-            for($i=0; $i<$_POST["STOT"];$i++)for($j=1;$j<=7;$j++)if($_POST['submit'.$i][$j]=="1"){
+            for($i=0; $i<$_POST["STOT"];$i++)for($j=0;$j<=7;$j++)if($_POST['submit'.$i][$j]=="1"){
                 // TODO check if not submitted!!!
-                $val=array(
-                    "participant_id" => $_POST["PID".$i],
-                    "prob_round"     => $round_select,
-                    "problem_id"     => $j,
-                    "submit_add"     => NULL
-                );
-                dibi::insert('submit',$val)->execute();
+                if( $j != 0 ){
+                    $val=array(
+                        "participant_id" => $_POST["PID".$i],
+                        "prob_round"     => $round_select,
+                        "problem_id"     => $j,
+                        "submit_add"     => NULL
+                    );
+                    dibi::insert('submit',$val)->execute();
+                }
+                else{
+                    for( $k=1; $k <= ($round_select == 1 ? 7 : 4); $k++){
+                        $val=array(
+                            "participant_id" => $_POST["PID".$i],
+                            "prob_round"     => $round_select,
+                            "problem_id"     => $k,
+                            "submit_add"     => NULL
+                        );
+                        dibi::insert('submit',$val)->execute();
+                    }
+                }
             }
             $okMsg.="Odevzdání uloženo.";
         }
