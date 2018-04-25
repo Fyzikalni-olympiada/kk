@@ -55,9 +55,9 @@ class Points extends Secured{
                     $_POST["SDATA".$i]=str_replace(",",".",$_POST["SDATA".$i]);
                     if($_POST["SDATA".$i]<0 || $_POST["SDATA".$i]>10) continue;
                     if($_POST["SDATA".$i]=="")
-                        dibi::query("UPDATE submit SET points=NULL WHERE submit_id=%s;",$_POST["SID".$i]);
+                        dibi::query("UPDATE submit SET points=NULL,user=%s WHERE submit_id=%s;",$this->template->user->name,$_POST["SID".$i]);
                     else
-                        dibi::query("UPDATE submit SET points=%s WHERE submit_id=%s;",$_POST["SDATA".$i],$_POST["SID".$i]);
+                        dibi::query("UPDATE submit SET points=%s,user=%s WHERE submit_id=%s;",$_POST["SDATA".$i],$this->template->user->name,$_POST["SID".$i]);
                     $values[]=dibi::query("SELECT CONCAT(name,' ',surname) AS fullname,problem_id,points FROM submit
                                            JOIN participants USING(participant_id)
                                            WHERE submit_id=%s;",$_POST["SID".$i])->fetchAll()[0];

@@ -49,7 +49,8 @@ class Publish extends Secured{
                 'rocnik'  => $rocnik,
                 'round'   => $round_select,
                 'category'=> $kat_select,
-                'publish_type_id' => $type_select
+                'publish_type_id' => $type_select,
+                'user'    => $this->template->user->name
                 ];
             try {
                 dibi::query("INSERT INTO publish_res",$arr);

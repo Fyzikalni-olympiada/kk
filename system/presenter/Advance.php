@@ -43,7 +43,8 @@ class Advance extends Secured{
             for($i=0; $i<$_POST["STOT"];$i++)if(isset($_POST["ADV".$i]))if($_POST["ADV".$i]==1){
                 $val=array(
                     "participant_id" => $_POST["PID".$i],
-                    "round"          => $to_kolo
+                    "round"          => $to_kolo,
+                    "user"           => $this->template->user->name
                 );
                 dibi::insert('advance',$val)->execute();
 /*
