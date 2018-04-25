@@ -67,11 +67,12 @@ class Points extends Secured{
         }
 
 // bodovani
-        $data=dibi::query("SELECT submit_id AS s_id,CONCAT(name,' ',surname) AS fullname, points
+        $data=dibi::query("SELECT submit_id AS s_id,CONCAT(name,' ',surname) AS fullname, points, school_show_name, class
                               FROM submit
                               JOIN (SELECT participant_id FROM advance WHERE round=%s) AS adv USING(participant_id)
                               JOIN participants USING(participant_id)
                               JOIN referents USING(referent_id)
+                              JOIN school USING(school_id)
                               wHERE category=%s AND problem_id=%s AND prob_round=%s AND rocnik=%i
                               ORDER BY surname",
                               $round_select,$kat_select,$pr_select,$round_select,$rocnik)->fetchAll();

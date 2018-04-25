@@ -67,8 +67,13 @@ Stručný návod:
 <form name="bodyForm" method="POST" action="" autocomplete="off">
 <table>
 <thead>
-<tr><td colspan=2><strong>Úloha {$pr_select}</strong></td></tr>
-<tr><td><strong>Jméno</strong></td><td><strong>Body</strong></td></tr>
+<tr><td colspan=4><strong>Úloha {$pr_select}</strong></td></tr>
+<tr>
+  <td><strong>Jméno</strong></td>
+  <td><strong>Body</strong></td>
+  <td><strong>Škola</strong></td>
+  <td><strong>Třída</strong></td>
+</tr>
 </thead>
 <tbody>
 {?$index=0}
@@ -80,6 +85,8 @@ Stručný návod:
         <input type="hidden"  value="{$row->points}" name="SDATAOLD{$index}">
         <input type="hidden"  value="{$row->s_id}" name="SID{$index}">
     </td>
+    <td>{$row->school_show_name}</td>
+    <td>{$row->class}</td>
   </tr>
 {?$index++}
 {/foreach}
