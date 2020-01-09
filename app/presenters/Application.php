@@ -4,6 +4,8 @@ namespace Eywa\CMS\Presenters;
 
 use Eywa\CMS\Navigation;
 use dibi;
+use Nette\Environment;
+
 
 /**
  * @title Přihláška
@@ -19,6 +21,7 @@ class Application extends Base
     public function renderDefault($path)
     {
 bdump($_POST);
+        $rocnik=Environment::getVariable('rocnik');
         $step_names=array(
             1    => "Základní údaje o referentovi",
            "1.5" => "Údaje o škole",
@@ -70,7 +73,7 @@ bdump($_POST);
                 JOIN school USING(school_id)
                 WHERE school_id=%s AND rocnik>%s AND NOT ISNULL(born_date)
                 ORDER BY surname
-                ;',$refSchool,58-4)->fetchAll();
+                ;',$refSchool,$rocnik-4)->fetchAll();
                 //ORDER BY rocnik DESC
         $oldNum=count($oldStd);
 // garant ok press
@@ -245,24 +248,31 @@ bdump($_POST);
                 $refid=dibi::insertId();
 // add studetns to db
                 for($i=0; $i<$refNum; $i++){
+//                INSERT INTO persons (name, surname, email, born_date)
                     $data=array(
-                        "referent_id"    => $refid,
                         "name"           => $stdName[$i],
                         "surname"        => $stdSur[$i],
+                        "email"          => $stdMail[$i],
+                        "born_date"      => $stdBorn[$i]);
+
+                    dibi::insert('persons',$data)->execute();
+                    $personid=dibi::insertId();
+
+//                INSERT INTO registration (person_id, referent_id, class, teacher, category, rocnik)
+                    $data=array(
+                        "person_id"      => $personid,
+                        "referent_id"    => $refid,
                         "class"          => $stdClss[$i],
                         "teacher"        => $stdTeac[$i],
-                        "email"          => $stdMail[$i],
                         "category"       => $stdKat[$i],
-                        "born_date"      => $stdBorn[$i],
-                        "solution_count" => 0,
-                        "rocnik"         => 58);
-                    dibi::insert('participants',$data)->execute();
-                    $stdid=dibi::insertId();
+                        "rocnik"         => $rocnik);
+                    dibi::insert('registration',$data)->execute();
+                    $participid=dibi::insertId();
 
-                    $data=array(
-                        "participant_id" => $stdid,
-                        "round"          => "1"
-                    );
+//                INSERT INTO advance (participant_id, round)
+                     $data=array(
+                        "participant_id" => $participid,
+                        "round"          => 1);
                     dibi::insert('advance',$data)->execute();
                 }
 // TODO škola
@@ -387,6 +397,7 @@ bdump($_POST);
 
     function checkStudents($refNum,$refMail,$stdName,$stdSur,$stdKat,$stdMail,$stdBorn,$stdClss,$stdTeac)
     {
+        $rocnik=Environment::getVariable('rocnik');
         $errorMsg="";
         for($i=0; $i<$refNum; $i++){
         if($stdName[$i]=="")
@@ -408,8 +419,8 @@ bdump($_POST);
                 $emails=dibi::query("SELECT name, surname,email FROM `participants`
                     JOIN referents USING(referent_id)
                     JOIN school USING(school_id)
-                    WHERE rocnik=58 AND kraj_id=%s AND email=%s AND category=%s;",
-                    $this::getKrajId(),$stdMail[$i],$stdKat[$i])->fetchAll();
+                    WHERE rocnik=%d AND kraj_id=%s AND email=%s AND category=%s;",
+                    $rocnik,$this::getKrajId(),$stdMail[$i],$stdKat[$i])->fetchAll();
                 if($emails!=NULL)if($emails[0]!=NULL){
                     $errorMsg.="Na emailovou adresu <i>".$stdMail[$i]."</i> je tento rok do kategorie ".$stdKat[$i]."
                         již registrován student ".$emails[0]->name." ".$emails[0]->surname.".<br />";
@@ -425,7 +436,7 @@ bdump($_POST);
                     $bDay=substr($stdBorn[$i],8,2);
                     if(!checkdate($bMnt,$bDay,$bYea))
                         $errorMsg.="Datum narození studenta ".($i+1)." <i>".$bDay.". ".$bMnt.". ".$bYea."</i> není v kalendáři.<br />";
-                    if($bYea<1933+58 || $bYea>1953+58)
+                    if($bYea<1933+$rocnik || $bYea>1953+$rocnik)
                         $errorMsg.="Věk studenta ".($i+1)." není v rozmezí 5-25 let.<br />";
                 }
             }
