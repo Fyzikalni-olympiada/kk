@@ -17,7 +17,7 @@
 	{/if}
 	{if !$createDate}
 		{foreach array_reverse($item->changes) as $change}
-			{if !$prevDate || $prevDate > $change->datetime && $prevDate->diff($change->datetime)->days > 0}
+			{if !$prevDate || $prevDate > $change->datetime}
 				{?$createDate = $change->datetime; break}
 			{/if}
 		{/foreach}
