@@ -151,7 +151,7 @@ class ResultsDatabase extends Base
            $okUl=0;
            for($i=1;$i<=4;$i++)if($row["U".$i]>=5)$okUl++;
            if($okUl>=2 && $row->sum>=14)
-               $row->status="uspěšný řešitel";
+               $row->status="úspěšný řešitel";
        }
 // TODO resort data
 
@@ -169,6 +169,18 @@ class ResultsDatabase extends Base
             if($kolo!=1)   unset($row->adv);
             if($kolo!=1)for($i=5;$i<=7;$i++) unset($row["U".$i]);
             $row->mod=number_format( $row->mod, 2,',','');
+            if($rocnik==61 && $kolo==1) {
+                $row->mod = "";
+                $row->sum = "";
+                for($i=1;$i<=7;$i++) {
+                    if( $row["U".$i] != "") {
+                        if($row["U".$i] >= 5 )
+                            $row["U".$i] = "✓";
+                        else
+                            $row["U".$i] = "✗";
+                    }
+                }
+            }
             for($i=1;$i<=($kolo==1?7:4);$i++)
                 $row["U".$i]=str_replace('.',',',$row["U".$i]);
             $row->sum=str_replace('.',',',$row->sum);
