@@ -14,6 +14,7 @@ class Overview extends Base
 
     public function renderDefault($path)
     {
+        $this['overview']->setClass('\Eywa\CMS\Model\Presentable');
         $this->template->list = $this['overview']->getDocuments();
     }
 

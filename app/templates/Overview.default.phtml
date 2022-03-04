@@ -6,7 +6,11 @@
 
 <ul>
 {foreach $list as $item}
+    {if $item instanceof Eywa\CMS\Model\Page}
     <li><a href="{dlink $item->path}" title="{$item->title}">{$item->name}</a></li>
+    {elseif $item instanceof Eywa\CMS\Model\Redirect}
+    <li><a href="{$item->location}" target="_blank">{$item->name}</a></li>
+    {/if}
 {/foreach}
 </ul>
 

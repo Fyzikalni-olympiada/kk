@@ -7,20 +7,32 @@
 {foreach $list as $item}
 {if $item->presenter == 'Eywa\CMS\Presenters\ResultsOverview' || $item->presenter == 'Eywa\CMS\Presenters\Results'}
 <h2><a href="{dlink $item->path}" title="{$item->title}">{$item->name}</a></h2>
+{elseif $item instanceof Eywa\CMS\Model\Redirect}
+<h2><a href="{$item->location}" target="_blank">{$item->name}</a></h2>
 {else}
 <h2>{$item->name}</h2>
 {/if}
 <ul>
 {foreach $presenter->repository->getChildren($item->path,null,array("position","ASC")) as $subitem}
+    <li style="margin-top: 0.5em">
     {if $subitem->presenter == 'Eywa\CMS\Presenters\Results' || $subitem->presenter == 'Eywa\CMS\Presenters\ResultsDatabase'}
-        <li><a href="{dlink $subitem->path}" title="{$subitem->title}">{$subitem->name}</a></li>
+        <a href="{dlink $subitem->path}" title="{$subitem->title}">{$subitem->name}</a><br>
+    {elseif $subitem instanceof Eywa\CMS\Model\Redirect}
+        <a href="{$subitem->location}" target="_blank">{$subitem->name}</a>
     {else}
-        <li><i>{$subitem->name}</i></li>
+        <i>{$subitem->name}</i><br>
     {/if}
     {foreach $presenter->repository->getChildren($subitem->path,null,array("position","ASC")) as $subitem}
+        {if $subitem instanceof Eywa\CMS\Model\Page}
         <a href="{dlink $subitem->path}" title="{$subitem->title}">{$subitem->name}</a>
+        {elseif $subitem instanceof Eywa\CMS\Model\Redirect}
+        <a href="{$subitem->location}" target="_blank">{$subitem->name}</a>
+        {else}
+        <i>{$subitem->name}</i>
+        {/if}
         <span style="width: 15px;">&nbsp;</span>
     {/foreach}
+    </li>
 {/foreach}
 </ul>
 {/foreach}
