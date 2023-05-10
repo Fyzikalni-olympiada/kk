@@ -8,7 +8,7 @@
 {if $item->presenter == 'Eywa\CMS\Presenters\ResultsOverview' || $item->presenter == 'Eywa\CMS\Presenters\Results'}
 <h2><a href="{dlink $item->path}" title="{$item->title}">{$item->name}</a></h2>
 {elseif $item instanceof Eywa\CMS\Model\Redirect}
-<h2><a href="{$item->location}" target="_blank">{$item->name}</a></h2>
+<h2>{if $item->location}<a href="{$item->location}" target="_blank">{/if}{$item->name}{if $item->location}</a>{/if}</h2>
 {else}
 <h2>{$item->name}</h2>
 {/if}
@@ -18,7 +18,7 @@
     {if $subitem->presenter == 'Eywa\CMS\Presenters\Results' || $subitem->presenter == 'Eywa\CMS\Presenters\ResultsDatabase'}
         <a href="{dlink $subitem->path}" title="{$subitem->title}">{$subitem->name}</a><br>
     {elseif $subitem instanceof Eywa\CMS\Model\Redirect}
-        <a href="{$subitem->location}" target="_blank">{$subitem->name}</a>
+        {if $subitem->location}<a href="{$subitem->location}" target="_blank">{/if}{$subitem->name}{if $subitem->location}</a>{/if}
     {else}
         <i>{$subitem->name}</i><br>
     {/if}
@@ -26,7 +26,7 @@
         {if $subitem instanceof Eywa\CMS\Model\Page}
         <a href="{dlink $subitem->path}" title="{$subitem->title}">{$subitem->name}</a>
         {elseif $subitem instanceof Eywa\CMS\Model\Redirect}
-        <a href="{$subitem->location}" target="_blank">{$subitem->name}</a>
+        {if $subitem->location}<a href="{$subitem->location}" target="_blank">{/if}{$subitem->name}{if $subitem->location}</a>{/if}
         {else}
         <i>{$subitem->name}</i>
         {/if}
