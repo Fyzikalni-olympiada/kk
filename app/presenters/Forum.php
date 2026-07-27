@@ -103,7 +103,6 @@ class Forum extends Overview
                         }
                     }
                 }
-                $this->flashMessage('Příspěvek byl přidán.','Úspěch');
                 $this->redirect('this');
             }
         }

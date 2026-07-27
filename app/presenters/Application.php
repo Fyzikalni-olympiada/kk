@@ -328,7 +328,6 @@ bdump($_POST);
 // TODO lepší zpráva
                 $step=1;
                 dibi::commit();
-                $this->flashMessage('Přihlášení proběhlo úspěšně, byly rozeslány potvrzovací emaily.','Úspěch');
                 $this->redirect('this');
             }
             dibi::commit();
