@@ -1,0 +1,6 @@
+{
+    "description": "Statické weby krajských komisí Fyzikální olympiády",
+    "require": {
+        "symfony/yaml": "^8.1"
+    }
+}

@@ -1,0 +1,779 @@
+
+/*
+Template name: Simple Organization
+Template URI: http://templates.arcsin.se/simple-organization-website-template/
+Release date: 2009-09-20
+Last updated: 2009-09-24
+Description: A simple and elegant template suitable for organizations.
+Author: Viktor Persson
+Author URI: http://arcsin.se/
+
+This template is licensed under a Creative Commons Attribution 2.5 License:
+http://templates.arcsin.se/license/
+*/
+
+
+/*
+   Reset
+------------------------------------------------------------------- */
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, textarea, input, select {margin: 0; padding: 0; border: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: inherit; vertical-align: baseline;}
+table {border-collapse: collapse; border-spacing: 0;}
+caption, th, td {text-align: left; font-weight: normal;}
+table, td, th {vertical-align: middle;}
+blockquote:before, blockquote:after, q:before, q:after {content: "";}
+blockquote, q {quotes: "" "";}
+a img {border: none;}
+:focus {outline: 0;}
+
+
+/*
+   General
+------------------------------------------------------------------- */
+
+html {
+	height: 100%;
+	padding-bottom: 1px; /* force scrollbars */
+}
+
+body {
+	background: #FFF;
+	color: #444;
+	font: normal 100% "DejaVu Sans", "Lucida Sans", sans-serif;
+	line-height: 1.5;
+}
+
+
+/*
+   Typography
+------------------------------------------------------------------- */
+
+/* Headings */
+
+h1,h2,h3,h4,h5,h6 {
+	color: #444;
+	font-weight: normal;
+	line-height: 1.4;
+	margin-bottom: 0.3em;
+}
+/* h1 bez horního marginu (nuluje ho reset výše) */
+h2,h3,h4,h5,h6 {
+	margin-top: 0.4em;
+}
+h4,h5,h6 {font-weight: bold;}
+
+h1, h2 {font-size: 1.8em;}
+h3 {font-size: 1.45em;}
+/* nadpisy sdílí font nápisu u loga */
+h1, h2, h3 {font-family: "Space Grotesk", "DejaVu Sans", "Lucida Sans", sans-serif; font-weight: 700;}
+h4 {font-size: 1.25em;}
+h5 {font-size: 1.1em;}
+h6 {font-size: 1em;}
+
+h2 img, h3 img, h4 img, h5 img, h6 img {margin: 0;}
+
+
+/* Links */
+
+a:focus,a:hover {color: var(--akcent-odkaz, #039);}
+a {
+	color: var(--akcent-odkaz, #459);
+	text-decoration: none;
+}
+a:hover {text-decoration: underline;}
+
+a.more {
+	color: #579;
+	font-weight: bold;
+}
+a.more:hover {color: #234;}
+
+
+/* Text elements */
+
+p {margin-bottom: 1em;}
+
+abbr, acronym {border-bottom: 1px dotted #666;}
+address {margin-bottom: 1.5em;}
+blockquote {margin: 1.5em;}
+del, blockquote { color:#666; }
+em, dfn, blockquote, address {font-style: italic;}
+strong, dfn {font-weight: bold;}
+sup, sub {line-height: 0;}
+
+pre {
+	margin: 1.5em 0;
+	white-space: pre;
+}
+pre,code,tt {
+	font: 1em monospace;
+	line-height: 1.5;
+}
+
+
+/* Lists */
+
+li ul, li ol {margin-left: 1.5em;}
+ul, ol {margin: 0 0 1.5em 1.5em;}
+td>ul, td>ol {margin-bottom: 0}
+
+ul {list-style-type: disc;}
+ol {
+	list-style-type: decimal !important;
+	margin-left: 1.9em;
+}
+ol li {
+	list-style-type: decimal !important;
+    background: none !important;
+}
+
+dl {margin: 0 0 1.5em 0;}
+dl dt {font-weight: bold;}
+dd {margin-left: 1.5em;}
+
+
+/* Special lists */
+
+ul.plain-list li, ul.nice-list li, ul.tabbed > li {
+	list-style: none;
+	margin-top: 0;
+}
+
+ul.tabbed {
+	margin: 0;
+	padding: 0;
+}
+ul.tabbed > li {display: inline-block;}
+
+ul.plain-list {margin: 0;}
+
+ul.nice-list {margin-left: 0; padding-left: 0;}
+ul.nice-list li {
+	border-top: 1px solid #EEE;
+	list-style: none;
+	padding: 4px 0;
+}
+ul.nice-list li:first-child {border-top: none;}
+ul.nice-list li .right {color: #999;}
+li a.selected {font-weight: bold;}
+
+
+/* Tables */
+
+table {margin-bottom: 1.4em; width: 100%;}
+th {font-weight: bold;}
+thead th {background: var(--akcent-svetla, #C3D9FF);}
+th,td,caption {padding: 4px 10px 4px 5px;}
+tr.even td {background: #F2F6FA;}
+tfoot {font-style: italic;}
+caption {background: #EEE;}
+
+table {
+	border: 1px solid #CCB;
+	margin-bottom: 2em;
+	width: 100%;
+}
+table th {
+	background: #F0F0F0;
+	border: 1px solid #DDD;
+	color: #555;
+	text-align: left;
+}
+table tr {border-bottom: 1px solid #DDD;}
+table td, table th {padding: 5px;}
+table td {
+	background: #F6F6F6;
+	border: 1px solid #DDD;
+}
+table.data-table tr.even td {background: #FCFCFC;}
+
+td p, td ul {margin-bottom: 0}
+
+
+/* Misc classes */
+
+.small {font-size: 0.9em;}
+.smaller {font-size: 0.8em;}
+.smallest {font-size: 0.7em;}
+
+.large {font-size: 1.15em;}
+.larger {font-size: 1.25em;}
+.largest {font-size: 1.35em;}
+
+.hidden {display: none;}
+
+.quiet, .quiet a {color: #999;}
+.loud, .loud a {color: #000;}
+.highlight, .highlight a {background:#ff0;}
+
+.text-left {text-align: left;}
+.text-right {text-align: right;}
+.text-center {text-align: center;}
+.text-separator {padding: 0 5px;}
+
+.error, .notice, .success {
+	border: 1px solid #DDD;
+	margin-bottom: 1em;
+	padding: 0.6em 0.8em;
+}
+
+.error, .chyba_vstupu, .chyba {background: #FBE3E4; color: #8A1F11; border-color: #FBC2C4;}
+.error a {color: #8A1F11;}
+
+.notice {background: #FFF6BF; color: #514721; border-color: #FFD324;}
+.notice a {color: #514721;}
+
+.success {background: #E6EFC2; color: #264409; border-color: #C6D880;}
+.success a {color: #264409;}
+
+/* Specific */
+
+form .required {font-weight: bold;}
+
+.legend {
+	background: #e8edff;/*#F0FAF0;*/
+	border: 1px solid #9fabdc;/*#D6DFD6;*/
+	margin: 0;
+	padding: 0px 14px 14px;
+}
+.legend h3 {
+	font-size: 1.5em;
+}
+/*
+   Alignment
+------------------------------------------------------------------- */
+
+/* General */
+
+.center,.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+/* Images */
+
+img.bordered,img.alignleft,img.alignright,img.aligncenter {
+	background-color: #FFF;
+	border: 1px solid #DDD;
+	padding: 3px;
+}
+img.alignleft, img.left {margin: 0 1.5em 1em 0;}
+img.alignright, img.right {margin: 0 0 1em 1.5em;}
+
+
+/* Floats */
+
+.left,.alignleft {float: left;}
+.right,.alignright {float: right;}
+
+.clear,.clearer {clear: both;}
+.clearer {
+	display: block;
+	font-size: 0;
+	line-height: 0;
+	height: 0;
+}
+
+
+/*
+   Separators
+------------------------------------------------------------------- */
+
+.content-separator, .archive-separator {
+	background: #E5E5E5;
+	clear: both;
+	color: #FFE;
+	display: block;
+	font-size: 0;
+	line-height: 0;
+	height: 1px;
+}
+.content-separator {margin: 32px 0;}
+.archive-separator {margin-bottom: 20px;}
+
+
+/*
+   Posts
+------------------------------------------------------------------- */
+
+.post {margin-bottom: 20px;}
+.post h1, .post h3 {line-height: 1.1; font-size: 1.9em; margin-top: 0;}
+
+.post img.left, .post img.right {margin-bottom: 0;}
+
+.post-date {
+	color: #777;
+	margin: 2px 0 10px;
+}
+.post-date a {color: #777;}
+
+.post-meta a {color: #345; }
+.post-meta a:hover {color: #001;}
+
+.post-body {font-size: 1.1em;}
+.post-body a {color: #039;}
+.post-body a:hover {color: #039;}
+
+.post-body img.left, .post-body img.right {margin-bottom: 1em;}
+
+
+/* Archives */
+.archive-pagination {
+	color: #777;
+	padding: 10px 0;
+}
+.archive-pagination-top {
+	border-bottom: 2px solid #DDD;
+	margin-bottom: 24px;
+}
+.archive-post-date {
+	background: #F5F5F5;
+	border-bottom: 1px solid #C5C5C5;
+	border-right: 1px solid #CFCFCF;
+	float: left;
+	margin-right: 12px;
+	padding: 2px 2px 5px;
+	text-align: center;
+	width: 60px;
+}
+.archive-post-title .post-date {margin: 0;}
+.archive-post-title {padding-top: 4px;}
+.archive-post-day {font: normal 1.6em Georgia,serif;}
+.archive-post-day:after {content: "."}
+
+
+/*
+   Comments
+------------------------------------------------------------------- */
+
+/* Comment list */
+
+.comment-list-wrapper {
+	background: #F6F6F6;
+	margin: 10px 0 0;
+	padding: 5px 12px 10px 7px;
+}
+.comment-list {
+	margin: 0;
+	padding: 0;
+}
+.comment-list li {list-style: none;}
+.comment-list ul {margin-bottom: 0;}
+
+.comment-profile-wrapper {
+	text-align: center;
+	width: 105px;
+}
+
+.comment-gravatar {margin-bottom: 3px;}
+
+.comment-content-wrapper {
+	float: right;
+	width: 541px;
+}
+
+.comment-parent, .comment-single {margin-top: 15px;}
+
+.comment-list ul.children {
+	border-left: 1px solid #CCC;
+	margin: 0 0 0 15px;
+}
+.comment-list ul.children ul.children {margin-left: 15px;}
+
+.comment-list ul.children li {
+	margin: 0;
+	padding: 10px 0 0 15px;
+}
+
+.comment-body {
+	background: #FFF;
+	border: 1px solid #DDD;
+	padding: 10px 12px 0;
+}
+.comment-list ul.children .comment-body {background: #FCFCFC;}
+
+.comment-author {padding-top: 2px;}
+
+.comment-text p {margin-bottom: 0.8em;}
+
+.comment .post-date, .comment-author {font-size: 0.9em;}
+.comment .post-date .right a {color: #BBB;}
+.comment .post-date .right a:hover {color: #234;}
+
+/*
+   Layout
+------------------------------------------------------------------- */
+
+/* Header */
+#header {padding-top: 14px;position: relative}
+
+/* Logo: grid — vlevo název + vlna + odznak ročníku, vpravo znak FO přes oba řádky */
+#logo img {float:right; width: 132px;}
+/* Space Grotesk (SIL OFL, self-hostovaný) jen pro nápis u loga */
+@font-face {
+	font-family: "Space Grotesk";
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url(../fonts/space-grotesk-700-latin.woff2) format("woff2");
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+	font-family: "Space Grotesk";
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url(../fonts/space-grotesk-700-latin-ext.woff2) format("woff2");
+	unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+#logo span {font-size: 50px; line-height: 62px; font-family: "Space Grotesk", "DejaVu Sans", sans-serif; font-weight: 700; color: #000; display:block;}
+#logo a:hover {text-decoration: none; color: #000;}
+#logo .rocnik {font-size: 19px; color: #222}
+#logo .rocnik b {font-family: "Space Grotesk", "DejaVu Sans", "Lucida Sans", sans-serif}
+
+/* Navigation */
+.navigation a {
+	text-decoration: none;
+}
+.navigation .ikona-menu {height: 0.85em; width: auto; margin-right: 7px; vertical-align: baseline}
+/* menší položky mají ikonu jen ve sbaleném (hamburger) menu */
+@media (min-width: 641px) {
+	#main-nav li.smaller .ikona-menu {display: none}
+}
+/* ikony se při hoveru vyplní světlým tintem; vnitřní kresba (.detail) zůstává bez výplně */
+.navigation .ikona-menu * {fill: transparent; transition: fill 0.2s}
+.navigation a:hover .ikona-menu * {fill: #ccd5ee}
+.navigation a:hover .ikona-menu .detail {fill: transparent}
+.navigation li.current-tab > a {color: var(--akcent, #3E5199);}
+
+#search {position: absolute; bottom: -35px; right: 0px;}
+#search .ikona-lupa {width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; vertical-align: -2px}
+
+/* Main navigation */
+/* Hamburger (jen malé displeje): tlačítko s popiskem pod ročníkem, otevírá menu */
+#menu-tlacitko {
+	display: none;
+	height: 42px;
+	margin-top: 10px;
+	padding: 0 14px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	background: #fff;
+	color: #333;
+	font-size: 15px;
+	align-items: center;
+	gap: 9px;
+	cursor: pointer;
+	transition: background 0.25s;
+}
+#menu-tlacitko[aria-expanded="true"] {background: #eee}
+/* tři linky se při otevření plynule složí do křížku */
+#menu-tlacitko .linky {display: block; width: 17px}
+#menu-tlacitko .linky span {
+	display: block;
+	height: 2.4px;
+	margin: 3.2px 0;
+	border-radius: 2px;
+	background: var(--akcent, #3E5199);
+	transition: translate 0.25s, rotate 0.25s, opacity 0.25s;
+}
+#menu-tlacitko[aria-expanded="true"] .linky span:nth-child(1) {translate: 0 5.6px; rotate: 45deg}
+#menu-tlacitko[aria-expanded="true"] .linky span:nth-child(2) {opacity: 0}
+#menu-tlacitko[aria-expanded="true"] .linky span:nth-child(3) {translate: 0 -5.6px; rotate: -45deg}
+#main-nav > ul > li {margin: 0 20px; position: relative}
+#main-nav > ul > li > a {
+	font-size: 1.6em;
+	line-height: 52px;
+	padding-bottom: 2px;
+}
+#main-nav > ul > li > a:hover,
+#main-nav > ul > li.current-tab > a {border-bottom: 2px solid var(--akcent, #3E5199);}
+#main-nav .dropdown-menu {font-size: 1.2em;}
+/* animace rozbalení submenu (stejně jako hamburger níže) + otočení šipky */
+#main-nav .dropdown-menu {
+	opacity: 0;
+	translate: 0 -8px;
+	transition: opacity 0.2s ease-out, translate 0.2s ease-out, display 0.2s allow-discrete;
+}
+#main-nav .open > .dropdown-menu {
+	opacity: 1;
+	translate: 0 0;
+}
+@starting-style {
+	#main-nav .open > .dropdown-menu {
+		opacity: 0;
+		translate: 0 -8px;
+	}
+}
+#main-nav .caret {transition: rotate 0.2s ease-out}
+#main-nav .open > a .caret {rotate: 180deg}
+@media (max-width: 1199px) {
+	#logo span {font-size: 55px}
+	#logo small {padding-left: 9em;}
+	#main-nav {margin-top: 20px}
+	#main-nav > ul > li {margin: 0 18px;}
+	#main-nav > ul > li > a {line-height: 46px;}
+}
+@media (max-width: 991px) {
+	#logo span {font-size: 45px; line-height: 50px}
+	#logo small {padding-left: 7em;}
+	#main-nav > ul > li {margin: 0 16px;}
+	#main-nav > ul > li > a {line-height: 40px}
+}
+@media (max-width: 767px) {
+	#logo img {width: 120px}
+	#logo span {font-size: 40px; line-height: 45px}
+	#logo small {font-size: 17px; padding-left: 0}
+	#main-nav > ul > li {margin: 0 12px;}
+	#main-nav > ul > li > a {font-size: 1.4em; line-height: 36px;}
+}
+@media (max-width: 640px) {
+	#logo img {width: 90px}
+	#menu-tlacitko {display: inline-flex}
+	#main-nav {
+		display: none;
+		opacity: 0;
+		translate: 0 -10px;
+		transition: opacity 0.25s ease-out, translate 0.25s ease-out, display 0.25s allow-discrete;
+	}
+	#main-nav.open {
+		display: block;
+		opacity: 1;
+		translate: 0 0;
+	}
+	@starting-style {
+		#main-nav.open {
+			opacity: 0;
+			translate: 0 -10px;
+		}
+	}
+	#main-nav > ul > li {display: block; margin: 0; border-top: 1px solid #eee}
+	#main-nav > ul > li:first-child {border-top: none}
+	#main-nav > ul > li > a {display: block}
+	#main-nav .dropdown-menu {position: relative; z-index: 1000; float: none; width: 100%; box-shadow: none; border: none}
+}
+@media (max-width: 360px) {
+	#logo img {width: 70px}
+	#logo span {font-size: 36px;}
+	#search {width: 67%}
+}
+
+
+/* Subnav */
+#sub-nav {
+	margin-top: 32px;
+	border-top: 1px solid #DDD;
+	border-bottom: 1px solid #DDD;
+	padding-top: 12px;
+	padding-bottom: 12px;
+    background-color: #e8edff/*#e3e9ff*/;
+}
+#sub-nav > ul > li > a {
+    color: #666;
+	font-size: 1.0em;
+	text-decoration: none;
+}
+#sub-nav > ul > li {margin: 0 1em;}
+#sub-nav > ul > li >a:hover {color: #002;}
+#sub-nav > ul > li.current-tab > a {color: #222; font-weight: bold;}
+
+
+/* Main */
+#main-two-columns {margin-top: 24px; margin-bottom: 24px;}
+#main-content {position:relative}
+#main-content p, #main-content li, #main-content dl { font-family: "DejaVu Serif", "Lucida Bright", Georgia, serif; line-height: 1.7; }
+#main-content table {font-size: 0.9em}
+
+/* Columns */
+.col3, .col3-mid {width: 31%;}
+.col3-mid {margin-left: 3%;}
+
+/* Sections */
+.section {margin-bottom: 24px;}
+.section-title {
+	background-color: #F9F9F9;
+	border-top: 2px solid #DDD;
+	color: #7A7A7A;
+	font: bold 1.1em sans-serif;
+	margin-bottom: 16px;
+	padding: 7px 10px 6px;
+}
+/* Footer */
+
+/* Partneři: pás nad patičkou */
+#partneri {
+	display: flex;
+	align-items: center;
+	gap: 16px 30px;
+	flex-wrap: wrap;
+	border-top: 1px solid #DDD;
+	margin-top: 32px;
+	padding: 12px 0px 8px;
+}
+#partneri .nadpis {
+	flex-basis: 100%;
+	color: #7A7A7A;
+	font: bold 1.1em sans-serif;
+}
+#partneri ul {
+	display: flex;
+	align-items: center;
+	gap: 16px 30px;
+	flex-wrap: wrap;
+	flex: 1;
+	justify-content: space-between;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#partneri li {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin: 0;
+	font-size: 0.85em;
+	color: #777;
+}
+#partneri img, #partneri svg {
+	height: 48px;
+	width: auto;
+}
+
+#footer {
+	border-top: 1px solid #DDD;
+	color: #777;
+	padding: 16px 0 4px;
+        font-size: 80%;
+}
+#footer p {margin-bottom: 0.4em;}
+#footer .text-separator {
+	padding: 0 3px;
+	color: #BBB;
+}
+#footer p.large a {white-space: nowrap}
+#footer a:hover {color: #000;}
+#footer img.logo {width: 62px}
+@media (max-width: 767px) {
+	#footer img.fb {width: 105px}
+	#footer img.logo {width: 40px}
+}
+
+
+
+
+/*
+   Misc overriding classes
+------------------------------------------------------------------- */
+
+/* Border */
+
+.noborder {border: 0;}
+.notborder {border-top: 0;}
+.norborder {border-right: 0;}
+.nobborder {border-bottom: 0;}
+.nolborder {border-left: 0;}
+
+/* Margin */
+
+.nomargin {margin: 0;}
+.notmargin {margin-top: 0;}
+.normargin {margin-right: 0;}
+.nobmargin {margin-bottom: 0;}
+.nolmargin {margin-left: 0;}
+
+/* Padding */
+
+.nopadding {padding: 0;}
+.notpadding {padding-top: 0;}
+.norpadding {padding-right: 0;}
+.nobpadding {padding-bottom: 0;}
+.nolpadding {padding-left: 0;}
+
+
+/*
+   IE Fixes (zzz)
+------------------------------------------------------------------- */
+
+* html .navigation, * html #footer, * html #splash, * html .comment ul {height: 0.01%;}
+.navigation, #splash, .comment ul {min-height: 0.01%;}
+
+
+/*
+   Accordion
+------------------------------------------------------------------- */
+.accordion {
+	cursor: pointer;
+	display: block;
+	padding: 8px 15px;
+	border: 1px solid #ddd;
+	border-bottom: none;
+	text-decoration: none;
+	color: var(--akcent-odkaz, #459);
+	margin: 0;
+	background-color: #f9f9f9;
+}
+.accordion:hover {
+	text-decoration: underline;
+	color: #039;
+}
+.accordion.off {
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 2px;
+}
+.accordion + div {
+	padding: 9px 15px;
+	margin-bottom: 2px;
+	border: 1px solid #ddd;
+	border-top: none;
+	position: relative;
+}
+.accordion + div > ul.nav {
+	position: absolute;
+	top: -44px;
+	right: 3px;
+}
+.accordion + div > ul.nav > li > a {
+	height: 44px;
+}
+@media (max-width: 640px) {
+	.accordion + div > ul {
+		position: static;
+	}
+}
+
+/* Bootstrap related */
+.nav {
+	margin-left: 0;
+}
+.table-responsive > .table td > div {
+	white-space: normal;
+}
+
+/** Google custom search */
+.gsc-control-cse {
+	padding: 0 !important;
+}
+.gsc-table-result,
+.gsc-thumbnail-inside,
+.gsc-url-top {
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+}
+.gsc-control-cse table {
+	font-size: 1em !important;
+	border: none;
+	margin: 0;
+}
+.gsc-control-cse tr, .gsc-control-cse td {
+	border: none;
+	background: none;
+	padding: 0;
+}
+
+/** smap */
+.smap {line-height: 1}
+.smap .label {margin: 0; padding: 0; border:none;}
+.smap table {border: none; background: none;}
+.smap td, .smap tr {border: none; padding: 0; background: none}

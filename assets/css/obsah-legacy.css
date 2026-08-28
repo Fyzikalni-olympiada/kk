@@ -1,0 +1,26 @@
+/*
+ * Obsah přenesený z WYSIWYG editoru starého CMS byl psaný proti stylu
+ * z roku 2012 (table {border-collapse:collapse}).  Nový layout.css dává
+ * tabulkám width:100% a rámečky, což rozbíjí tabulky použité k sazbě.
+ * Tyto výjimky se týkají jen těla stránky, aby layout.css a content.css
+ * zůstaly totožné s ../fo a šlo z něj dál přebírat opravy.
+ */
+
+/* Tabulky bez třídy sloužily k rozvržení, ne k datům. */
+.obsah table:not([class]) {width: auto; margin: 1em 0;}
+.obsah table:not([class]) th,
+.obsah table:not([class]) td {background: none; border: 0; padding: 2px 8px;}
+
+/* Výsledkové listiny (z XLS i ze starých stránek Karlových Varů). */
+.obsah table.vysledkovka {width: auto; border-collapse: collapse;}
+.obsah table.vysledkovka th,
+.obsah table.vysledkovka td {border: 1px solid #ccc; padding: 3px 6px;}
+.obsah table.vysledkovka thead th {background: var(--akcent-svetla, #C3D9FF);}
+
+/* Vložený obsah (OSMO) se musí vejít do sloupce; <img> v obsahu není. */
+.obsah iframe {max-width: 100%;}
+
+/* Rozcestníky generované ze stromu. */
+ul.rozcestnik {margin: 0 0 1.4em 1.5em;}
+
+.ke-stazeni {margin-top: 1.4em;}

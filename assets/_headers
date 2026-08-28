@@ -1,0 +1,21 @@
+# Výchozí: HTML se může měnit každou editací, den stačí.
+/*
+  Cache-Control: public, max-age=86400
+
+# Obrázky a dokumenty archivu se nemění; adresa je dána obsahem.
+/*.png
+  Cache-Control: public, max-age=604800
+/*.svg
+  Cache-Control: public, max-age=604800
+/*.pdf
+  Cache-Control: public, max-age=604800
+/*.xls
+  Cache-Control: public, max-age=604800
+/*.doc
+  Cache-Control: public, max-age=604800
+/*.zip
+  Cache-Control: public, max-age=604800
+
+# Fonty a CSS/JS mají v adrese otisk obsahu (asset()), můžou žít dlouho.
+/fonts/*
+  Cache-Control: public, max-age=2592000

@@ -1,0 +1,49 @@
+body {
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+a {
+	color: black;
+}
+
+/* header */
+
+#header {
+	display:none;
+}
+
+/* Sidebar */
+
+#sidebar {
+	display: none;
+}
+
+
+/* Page */
+
+#page {
+	clear: both;
+}
+
+/* Splash */
+
+#splash {
+	display: none;
+}
+
+/* Content */
+
+#content {
+}
+
+/* Footer */
+
+#footer {
+	clear: both;
+	background: #FFFFFF;
+
+}
+
+#footer-right {
+    display: none;
+}

@@ -1,0 +1,6 @@
+# Ruční pravidla — pravidla z dokumentů typu redirect
+# generuje build/build.php ze stromu content/.
+
+/forum  /kontakty  301
+/vysledky/rocnik-53/*  /vysledky/53-rocnik/:splat  301
+/vysledky/60-rocnik-2017-2018/*  /vysledky/60-rocnik-2018-2019/:splat  301

@@ -21,6 +21,10 @@ import urllib.parse
 
 import yaml
 
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import fo_sqlite                                                # noqa: E402
+import results_db                                               # noqa: E402
+
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 EXPORT = ROOT / "data" / "export"
 SITES = ("praha", "kvary")
@@ -55,10 +59,6 @@ HTTPS_HOSTS = ("fyzikalniolympiada.cz", "www.fyzikalniolympiada.cz",
 
 LINK_RE = re.compile(r'(?P<attr>\b(?:href|src)\s*=\s*)(?P<q>["\']?)(?P<url>[^"\'>\s]+)',
                      re.I)
-
-MESICE = ["", "ledna", "února", "března", "dubna", "května", "června",
-          "července", "srpna", "září", "října", "listopadu", "prosince"]
-
 
 # ---------------------------------------------------------------- pomocné --
 
@@ -115,7 +115,13 @@ class Migration:
         self.notes = []
         self.redirects = collections.defaultdict(list)
         self.xls_fail = []
-        self.link_targets = []
+        self.link_targets = set()
+        mp = EXPORT / "manifest.json"
+        self.prev_manifest = json.loads(mp.read_text(encoding="utf-8")) if mp.exists() else {}
+        db = ROOT / "temp" / "fo.sqlite"
+        if not db.exists():
+            fo_sqlite.build()
+        self.vysledky = results_db.Results(db)
 
     @staticmethod
     def _keep(d):
@@ -176,7 +182,7 @@ class Migration:
         if len(path) > 1 and path.endswith("/"):
             path = path.rstrip("/")
         out = urllib.parse.urlunsplit(("", "", path, parts.query, parts.fragment))
-        self.link_targets.append((doc_id, path))
+        self.link_targets.add((doc_id, path))
         return out
 
     # -- novinky ---------------------------------------------------------
@@ -217,18 +223,29 @@ class Migration:
     # -- běh -------------------------------------------------------------
     def copy_recovered_doc(self):
         """web/doc/ ze starého serveru — na něj míří odkazy v novinkách.
+
+        Kopíruje se JEN to, na co obsah opravdu odkazuje: adresář má 27 MB,
+        ale odkazovaných je pět souborů. Zbytek jsou staré pozvánky a práce
+        studentů, na které po migraci nevede žádná cesta.
+
         Symlinky se přeskakují (mířily mimo docroot; jeden cíl má 721 MB,
-        což je nad limitem Cloudflare Pages)."""
+        což je stejně nad limitem Cloudflare Pages)."""
         src = ROOT / ".recovered" / "doc"
         if not src.is_dir():
             self.notes.append("POZOR: .recovered/doc chybí, odkazy na /doc/ nebudou fungovat")
             return
-        for f in sorted(src.iterdir()):
-            if f.is_symlink() or not f.is_file():
-                self.notes.append(f"přeskočen symlink/adresář: doc/{f.name}")
+        chtene = {t.split("/doc/", 1)[1] for _doc, t in self.link_targets
+                  if t.startswith("/doc/")}
+        for jmeno in sorted(chtene):
+            f = src / jmeno
+            if not f.is_file() or f.is_symlink():
+                self.notes.append(f"odkazovaný soubor chybí nebo je symlink: doc/{jmeno}")
                 continue
-            self.write(ROOT / "files" / "praha" / "doc" / f.name, f.read_bytes(), binary=True)
+            self.write(ROOT / "files" / "praha" / "doc" / jmeno, f.read_bytes(), binary=True)
             self.report["soubor:doc"] += 1
+        self.report["doc: nepoužito v archivu"] = sum(
+            1 for f in src.iterdir() if f.is_file() and not f.is_symlink()
+            and f.name not in chtene)
 
     def run(self):
         dates = self.news_dates()
@@ -267,9 +284,7 @@ class Migration:
         if typ == "redirect":
             fm["location"] = self.upgrade_scheme(body.get("location") or "")
             fm["code"] = int(body.get("code") or 302)
-            if fm["location"]:
-                self.redirects[site].append(("/" + rel, fm["location"], fm["code"]))
-            else:
+            if not fm["location"]:
                 self.notes.append(f"redirect bez cíle: {d['_id']}")
         if typ == "news":
             for c in NEWS_CONTAINERS:
@@ -285,19 +300,34 @@ class Migration:
                 fm["subtitle"] = sub
 
         # binární přílohy -> files/<web>/<cesta>[-N].<ext>
+        # Publikuje se jen první příloha — právě tu eywa vydávala jako
+        # $document->resources[0] a jen na ni stránka odkazuje. Druhá příloha
+        # jediného dokumentu, který ji má, nebyla veřejná ani dřív.
         bins = self.binaries(d)
-        for n, att in enumerate(bins, start=1):
+        if bins:
+            att = bins[0]
             ext = att["name"].rsplit(".", 1)[-1].lower() if "." in att["name"] else "bin"
-            suffix = "" if n == 1 else f"-{n}"
-            fpath = ROOT / "files" / site / f"{rel}{suffix}.{ext}"
-            self.write(fpath, self.blob(att), binary=True)
-            if n == 1:
-                fm["soubor"] = f"/{rel}{suffix}.{ext}"
-                fm["soubor_nazev"] = att["name"]
+            self.write(ROOT / "files" / site / f"{rel}.{ext}", self.blob(att), binary=True)
+            fm["soubor"] = f"/{rel}.{ext}"
+            fm["soubor_nazev"] = att["name"]
             self.report["soubor:" + ext] += 1
+        for att in bins[1:]:
+            self.notes.append(f"nepublikovaná další příloha: {d['_id']} / {att['name']}")
 
-        # tabulka z XLS se vkládá za tělo (pořadí dle Results.default.phtml)
-        if typ == "results" and bins and bins[0]["name"].lower().endswith(".xls"):
+        presenter = body.get("presenter") or ""
+        # Nadpis výsledkových stránek skládal presenter z URL (getURLData);
+        # zapeče se sem, aby ho build nemusel dopočítávat — parser originálu
+        # navíc pro Karlovy Vary nefungoval (nezná „okresni“, ani holé „56“).
+        url_data = results_db.get_url_data(d["_id"])
+        if typ in ("results", "results-overview") and "heading" not in fm:
+            odvozeny = url_data[0].strip().rstrip(",")
+            if odvozeny:
+                fm["heading"] = odvozeny
+                self.report["nadpis odvozen z URL"] += 1
+        if presenter.endswith("ResultsDatabase"):
+            html = self.results_db_body(d, html, bins, fm, url_data)
+        elif typ == "results" and bins and bins[0]["name"].lower().endswith(".xls"):
+            # Results.default.phtml: tělo, pak tabulka z přílohy
             table = self.xls_table(EXPORT / bins[0]["blob"], d["_id"])
             if table:
                 html = html.rstrip() + "\n" + table + "\n"
@@ -333,6 +363,40 @@ class Migration:
             doc_id = parent.rsplit("/", 1)[0]      # rozcestník novinek
         return self.internal_url(doc_id).rstrip("/") + "/"
 
+    def results_db_body(self, d, html, bins, fm, url_data):
+        """Poskládá tělo přesně jako ResultsDatabase.default.phtml:
+        úvodní odstavec, pak tabulka (publish 1) nebo XLS (publish 3),
+        pak vlastní HTML dokumentu."""
+        _h, rocnik, kolo, kat = url_data
+        if not (rocnik and kolo and kat):
+            self.notes.append(f"nelze určit ročník/kolo/kategorii: {d['_id']}")
+            return html
+        publish, title_line = self.vysledky.publish(rocnik, kolo, kat)
+        fm["rocnik"], fm["kolo"] = rocnik, kolo
+        fm["kategorie"] = results_db.KATEGORIE[kat]
+
+        uvod = title_line if title_line is not None else results_db.std_title(kolo)
+        tabulka = ""
+        if publish is None:
+            uvod = "<p>Výsledková listina se připravuje.</p>" if html.strip() == "" else ""
+            self.report["vysledky:nepublikováno"] += 1
+        elif publish == 1:
+            try:
+                tabulka = self.vysledky.render(rocnik, kolo, kat) or ""
+            except AssertionError as e:
+                self.notes.append(f"tabulka nesedí: {e}")
+            self.report["vysledky:z databáze"] += 1
+        elif publish == 2:
+            self.report["vysledky:html"] += 1
+        elif publish == 3:
+            if bins and bins[0]["name"].lower().endswith(".xls"):
+                tabulka = self.xls_table(EXPORT / bins[0]["blob"], d["_id"])
+            else:
+                tabulka = "<p>Výsledková listina nebyla nahrána do repozitáře.</p>"
+            self.report["vysledky:z excelu"] += 1
+
+        return "\n".join(x for x in (uvod, tabulka, html.strip()) if x) + "\n"
+
     def internal_url(self, dest):
         """//praha/aktualni-rocnik -> /aktualni-rocnik ; externí nechá být."""
         if dest.startswith("//"):
@@ -358,16 +422,18 @@ class Migration:
         extra = {
             "praha": [("/vysledky/rocnik-53/*", "/vysledky/53-rocnik/:splat", 301),
                       ("/vysledky/60-rocnik-2017-2018/*", "/vysledky/60-rocnik-2018-2019/:splat", 301)],
-            "kvary": [],
         }
+        # Pravidla z dokumentů typu redirect generuje build ze stromu obsahu;
+        # sem patří jen to, co v obsahu nemá svůj dokument (zahozené sekce
+        # a osiřelé cesty, které měly živé potomky).
         for site in SITES:
-            rules = sorted(self.redirects[site]) + extra.get(site, [])
-            lines = ["# Generováno tools/migrate_content.py — needitovat ručně.",
-                     "# Ruční pravidla patří do assets/<web>/_redirects-rucni.", ""]
+            rules = sorted(r for r in self.redirects[site]) + extra.get(site, [])
+            lines = ["# Ruční pravidla — pravidla z dokumentů typu redirect",
+                     "# generuje build/build.php ze stromu content/.", ""]
             lines += [f"{src}  {dst}  {code}" for src, dst, code in rules]
-            self.write(ROOT / "assets" / site / "_redirects-generovane",
+            self.write(ROOT / "assets" / site / "_redirects-rucni",
                        "\n".join(lines) + "\n")
-            self.report[f"presmerovani:{site}"] = len(rules)
+            self.report[f"presmerovani-rucni:{site}"] = len(rules)
 
     # -- zápis s ochranou ručních úprav -----------------------------------
     def write(self, path, data, binary=False):
@@ -389,8 +455,6 @@ class Migration:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(raw)
         self.report["zapsáno"] += 1
-
-    prev_manifest = {}
 
     def write_manifest(self):
         if self.mode == "check":
@@ -415,7 +479,7 @@ class Migration:
         for site in SITES:
             for src, _dst, _c in self.redirects[site]:
                 routes.add(src)
-        dead = sorted({(doc, t) for doc, t in self.link_targets if t not in routes})
+        dead = sorted((doc, t) for doc, t in self.link_targets if t not in routes)
         self.report["mrtvých interních odkazů"] = len(dead)
         for doc, t in dead:
             self.notes.append(f"mrtvý odkaz {t}  (v {doc})")
@@ -437,14 +501,10 @@ class Migration:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--check", action="store_const", const="check", dest="mode")
     ap.add_argument("--write", action="store_const", const="write", dest="mode")
     ap.add_argument("--force", action="store_const", const="force", dest="mode")
     args = ap.parse_args()
     m = Migration(args.mode or "check")
-    mp = EXPORT / "manifest.json"
-    if mp.exists():
-        m.prev_manifest = json.loads(mp.read_text(encoding="utf-8"))
     m.run()
     return 1 if m.xls_fail else 0
 
