@@ -1,6 +1,0 @@
-[submodule "libs/eywa"]
-	path = libs/eywa
-	url = ssh://minyon.intya.cz/var/shares/repos/eywa.git
-[submodule "libs/dibi"]
-	path = libs/dibi
-	url = git://github.com/dg/dibi.git

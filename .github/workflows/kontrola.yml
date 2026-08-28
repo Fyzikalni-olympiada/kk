@@ -1,0 +1,27 @@
+name: Kontrola obsahu
+
+# Editoři upravují stránky přes webové rozhraní GitHubu; když rozbijí YAML
+# hlavičku nebo odkaz, ať se to ozve červeným křížkem, ne tichým výpadkem
+# nasazení.
+# Jen pull requesty: push do PR větve spouštěl oba triggery na stejném SHA,
+# tedy dvojí běh. Větev static hlídá deploy.yml, který kontrolu spouští taky.
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  kontrola:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring
+          tools: composer
+      - run: composer install --no-interaction --no-progress
+      - run: php tools/kontrola.php
+      - name: Zkušební sestavení
+        run: php build/build.php

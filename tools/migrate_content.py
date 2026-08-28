@@ -269,6 +269,9 @@ class Migration:
             return
 
         html = self.html_of(d)
+        # Chybějící úvodní uvozovka v href — překlep autora, prohlížeč z toho
+        # udělá odkaz na `https:` a zbytek adresy zahodí.
+        html = re.sub(r'href=(?!["\'])(\S+?)"', r'href="\1"', html)
         if html:
             base = self.link_base(d["_id"])
             html = self.fix_links(html, base, d["_id"])

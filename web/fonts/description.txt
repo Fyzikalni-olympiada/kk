@@ -1,1 +1,0 @@
-Web fonts (in formats eot, svg, ttf, woff)

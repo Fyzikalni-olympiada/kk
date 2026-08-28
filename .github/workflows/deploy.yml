@@ -1,0 +1,64 @@
+name: Nasazení na Cloudflare Pages
+
+on:
+  push:
+    branches: [static]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring
+          tools: composer
+
+      - run: composer install --no-interaction --no-progress
+
+      - name: Kontrola obsahu
+        run: php tools/kontrola.php
+
+      - name: Sestavení obou webů
+        run: php build/build.php
+
+      # Klíč je vždy nový, aby se cache po každém běhu opravdu uložila
+      # (actions/cache při zásahu do klíče ukládání přeskočí); restore-keys
+      # najde manifest z minulého běhu podle prefixu.
+      - uses: actions/cache@v4
+        with:
+          path: temp
+          key: manifest-${{ github.run_id }}
+          restore-keys: manifest-
+
+      - name: Nasazení praha
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist/praha --project-name=fo-praha --branch=static --commit-dirty=true
+
+      - name: Nasazení kvary
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist/kvary --project-name=fo-kvary --branch=static --commit-dirty=true
+
+      - name: Purge změněných URL
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+        run: |
+          bash build/purge.sh praha https://praha.fyzikalniolympiada.cz
+          bash build/purge.sh kvary https://kvary.fyzikalniolympiada.cz
