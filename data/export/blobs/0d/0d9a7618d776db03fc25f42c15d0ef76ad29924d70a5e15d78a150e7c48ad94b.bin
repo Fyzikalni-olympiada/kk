@@ -1,0 +1,180 @@
+<table style="font-size:110%;">
+<thead>
+	<tr>
+		<th></th>
+		<th>jméno</th>
+		<th>příjmení</th>
+		<th>třída</th>
+		<th>učitel</th>
+		<th>škola</th>
+		<th>1</th>
+		<th>2</th>
+		<th>3</th>
+		<th>4</th>
+		<th>celkem</th>
+		<th>&nbsp;</th>
+		<th>mod. body</th>
+		</tr>
+
+</thead>
+<tbody>
+	<tr>
+		<td style="text-align: right">1</td>
+		<td>Jakub</td>
+		<td>Rösler</td>
+		<td>VIII. B - G</td>
+		<td>Marie Anna Horáková Trtková</td>
+		<td>Gymnázium Jiřího Gutha Jarkovského</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;"><b>38</b></td>
+		<td>úspěšný řešitel</td>
+		<td style="text-align:right;">150,94</td>
+		</tr>
+
+	<tr>
+		<td style="text-align: right">2</td>
+		<td>Ráchel</td>
+		<td>Sgallová</td>
+		<td>8. M</td>
+		<td>&nbsp;</td>
+		<td>Gymnázium Christiana Dopplera</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">7,5</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;"><b>30,5</b></td>
+		<td>úspěšný řešitel</td>
+		<td style="text-align:right;">108,99</td>
+		</tr>
+
+	<tr>
+		<td style="text-align: right">3</td>
+		<td>Štěpán</td>
+		<td>Marek</td>
+		<td>R7.A</td>
+		<td>Kapoun</td>
+		<td>G Jana Keplera</td>
+		<td style="text-align:center;">9,5</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;"><b>30,5</b></td>
+		<td>úspěšný řešitel</td>
+		<td style="text-align:right;">103,54</td>
+		</tr>
+
+	<tr>
+		<td style="text-align: right">4</td>
+		<td>Filip</td>
+		<td>Bialas</td>
+		<td>5.E</td>
+		<td>Jahelková</td>
+		<td>Gymnázium Opatov</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">1</td>
+		<td style="text-align:center;">8,5</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;"><b>26,5</b></td>
+		<td>úspěšný řešitel</td>
+		<td style="text-align:right;">80,84</td>
+		</tr>
+
+	<tr>
+		<td style="text-align: right">5</td>
+		<td>Jiří</td>
+		<td>Kučera</td>
+		<td>3.A</td>
+		<td>Lahodová</td>
+		<td>G Jana Keplera</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">2</td>
+		<td style="text-align:center;"><b>25</b></td>
+		<td>úspěšný řešitel</td>
+		<td style="text-align:right;">68,76</td>
+		</tr>
+
+	<tr>
+		<td style="text-align: right">6</td>
+		<td>Jakub</td>
+		<td>Sláma</td>
+		<td>7.J</td>
+		<td>Krchová</td>
+		<td>Gymnázium Opatov</td>
+		<td style="text-align:center;">10</td>
+		<td>&nbsp;</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">2</td>
+		<td style="text-align:center;"><b>21</b></td>
+		<td>úspěšný řešitel</td>
+		<td style="text-align:right;">45,20</td>
+		</tr>
+
+	<tr>
+		<td style="text-align: right">7</td>
+		<td>Daniel</td>
+		<td>Borák</td>
+		<td>3. C</td>
+		<td>&nbsp;</td>
+		<td>Gymnázium Christiana Dopplera</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">2</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">1</td>
+		<td style="text-align:center;"><b>18</b></td>
+		<td>úspěšný účastník</td>
+		<td style="text-align:right;">43,08</td>
+		</tr>
+
+	<tr>
+		<td style="text-align: right">8</td>
+		<td>Petr</td>
+		<td>Kouba</td>
+		<td>VIII. A - G</td>
+		<td>Marie Anna Horáková Trtková</td>
+		<td>Gymnázium Jiřího Gutha Jarkovského</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">2</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">2</td>
+		<td style="text-align:center;"><b>16</b></td>
+		<td>úspěšný účastník</td>
+		<td style="text-align:right;">44,68</td>
+		</tr>
+
+	<tr>
+		<td style="text-align: right">9</td>
+		<td>Jakub</td>
+		<td>Malíř</td>
+		<td>4.C</td>
+		<td>Jakub Šafařík</td>
+		<td>Gymnázium Botičská</td>
+		<td style="text-align:center;">3</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">1</td>
+		<td style="text-align:center;"><b>14</b></td>
+		<td>&nbsp;</td>
+		<td style="text-align:right;">44,51</td>
+		</tr>
+
+	<tr>
+		<td style="text-align: right">10</td>
+		<td>Tomáš</td>
+		<td>Jirman</td>
+		<td>MB</td>
+		<td>Dana Sýkorová</td>
+		<td>Gymnázium Praha 6, Nad Alejí 1952</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">1</td>
+		<td style="text-align:center;">2</td>
+		<td style="text-align:center;">2</td>
+		<td style="text-align:center;"><b>12</b></td>
+		<td>&nbsp;</td>
+		<td style="text-align:right;">34,74</td>
+		</tr>
+</tbody></table>

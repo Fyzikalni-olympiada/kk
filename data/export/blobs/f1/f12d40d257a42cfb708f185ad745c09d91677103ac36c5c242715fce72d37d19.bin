@@ -1,0 +1,248 @@
+<table style="font-size:110%;">
+	<tr>
+		<th></th>
+		<th>Jméno</th>
+		<th>Třída</th>
+		<th>Škola</th>
+		<th>Učitel</th>
+		<th colspan="5">Body</th>
+	</tr>
+	<tr>
+		<td align="right">1.</td>
+		<td>Kazda Alexandr</td>
+		<td>OA</td>
+		<td>P6, Nad Alejí 1952</td>
+		<td>Dr. Töpferová</td>
+		<td width="20px" align="center">10</td>
+		<td width="20px" align="center">10</td>
+		<td width="20px" align="center">10</td>
+		<td width="20px" align="center">9,5</td>
+		<td width="20px" align="center"><b>39,5</b></td>
+	</tr>
+	<tr>
+		<td align="right">2.</td>
+		<td>Kocourek Pavel</td>
+		<td>4.C</td>
+		<td>P1, Panská 2</td>
+		<td>Ing. Malát</td>
+		<td align="center">10</td>
+		<td align="center">10</td>
+		<td align="center">7</td>
+		<td align="center">5,5</td>
+		<td align="center"><b>32,5</b></td>
+	</tr>
+	<tr>
+		<td align="right">3.</td>
+		<td>Potoček Václav</td>
+		<td>4.M</td>
+		<td>P1, Panská 856/3</td>
+		<td>Mgr. Reichl</td>
+		<td align="center">8</td>
+		<td align="center">3</td>
+		<td align="center">10</td>
+		<td align="center">9,5</td>
+		<td align="center"><b>30,5</b></td>
+	</tr>
+	<tr>
+		<td align="right">4.-5.</td>
+		<td>Pokorný Pavel</td>
+		<td>4.A</td>
+		<td>P6, Parléřova 2</td>
+		<td>Dr. Kapoun</td>
+		<td align="center">10</td>
+		<td align="center">4</td>
+		<td align="center">9</td>
+		<td align="center">6</td>
+		<td align="center"><b>29</b></td>
+	</tr>
+	<tr>
+		<td align="right">4.-5.</td>
+		<td>Škoda Petr</td>
+		<td>&nbsp;</td>
+		<td>P8, Ústavní 400</td>
+		<td>&nbsp;</td>
+		<td align="center">7</td>
+		<td align="center">8</td>
+		<td align="center">8</td>
+		<td align="center">6</td>
+		<td align="center"><b>29</b></td>
+	</tr>
+	<tr>
+		<td align="right">6.-7.</td>
+		<td>Daniel Pavel</td>
+		<td>4.C</td>
+		<td>P5, Zborovská 45</td>
+		<td>Pacáková</td>
+		<td align="center">5</td>
+		<td align="center">6</td>
+		<td align="center">9</td>
+		<td align="center">5,5</td>
+		<td align="center"><b>25,5</b></td>
+	</tr>
+	<tr>
+		<td align="right">6.-7.</td>
+		<td>Sedlák František</td>
+		<td>VI</td>
+		<td>P4, Ohradní 55</td>
+		<td>Pešková</td>
+		<td align="center">9</td>
+		<td align="center">3</td>
+		<td align="center">7</td>
+		<td align="center">6,5</td>
+		<td align="center"><b>25,5</b></td>
+	</tr>
+	<tr>
+		<td align="right">8.</td>
+		<td>Římal Václav</td>
+		<td>&nbsp;</td>
+		<td>P6, Parléřova 2</td>
+		<td>Dr. Kapoun</td>
+		<td align="center">6</td>
+		<td align="center">10</td>
+		<td align="center">-</td>
+		<td align="center">7,5</td>
+		<td align="center"><b>23,5</b></td>
+	</tr>
+	<tr>
+		<td align="right">9.</td>
+		<td>Dušek Boris</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">7,5</td>
+		<td align="center">5</td>
+		<td align="center">1</td>
+		<td align="center">8,5</td>
+		<td align="center"><b>22</b></td>
+	</tr>
+	<tr>
+		<td align="right">10.</td>
+		<td>Procházka Jiří</td>
+		<td>&nbsp;</td>
+		<td>P4, Konstantinova 1500</td>
+		<td>Mgr. Ničová</td>
+		<td align="center">4</td>
+		<td align="center">-</td>
+		<td align="center">9,5</td>
+		<td align="center">8</td>
+		<td align="center"><b>21,5</b></td>
+	</tr>
+	<tr>
+		<td align="right">11.</td>
+		<td>Pastrňák Martin</td>
+		<td>4.C</td>
+		<td>P1, Panská 2</td>
+		<td>Ing. Malát</td>
+		<td align="center">4</td>
+		<td align="center">4</td>
+		<td align="center">8</td>
+		<td align="center">5</td>
+		<td align="center"><b>21</b></td>
+	</tr>
+	<tr>
+		<td align="right">12.</td>
+		<td>Dušek Ondřej</td>
+		<td>8.A</td>
+		<td>P6, Nad Alejí 1952</td>
+		<td>Dr. Töpferová</td>
+		<td align="center">8,5</td>
+		<td align="center">9</td>
+		<td align="center">-</td>
+		<td align="center">1</td>
+		<td align="center"><b>18,5</b></td>
+	</tr>
+	<tr>
+		<td align="right">13.</td>
+		<td>Machek Ondřej</td>
+		<td>4.A</td>
+		<td>P2, Botičská 1</td>
+		<td>Mgr. Luňák</td>
+		<td align="center">7</td>
+		<td align="center">2</td>
+		<td align="center">8</td>
+		<td align="center">1</td>
+		<td align="center"><b>18</b></td>
+	</tr>
+	<tr>
+		<td align="right">14.</td>
+		<td>Malina Lukáš</td>
+		<td>I.C</td>
+		<td>P5, Zborovská 45</td>
+		<td>Mgr. Prouza</td>
+		<td align="center">6</td>
+		<td align="center">3</td>
+		<td align="center">-</td>
+		<td align="center">6</td>
+		<td align="center"><b>15</b></td>
+	</tr>
+	<tr>
+		<td colspan="10" class="bezmrizky">&nbsp;</td>
+	</tr>
+	<tr>
+		<td colspan="10" class="bezmrizky">
+<b>Neúpěšní řešitelé</b>
+
+		</td>
+	</tr>
+	<tr>
+		<td align="right">15.</td>
+		<td>Trnka Filip</td>
+		<td>7.M</td>
+		<td>P5, Zborovská 45</td>
+		<td>Pacáková</td>
+		<td width="20px" align="center">5</td>
+		<td width="20px" align="center">3</td>
+		<td width="20px" align="center">4</td>
+		<td width="20px" align="center">-</td>
+		<td width="20px" align="center"><b>12</b></td>
+	</tr>
+	<tr>
+		<td align="right">16.</td>
+		<td>Chvoj Martin</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Pacáková</td>
+		<td align="center">4</td>
+		<td align="center">-</td>
+		<td align="center">2</td>
+		<td align="center">-</td>
+		<td align="center"><b>6</b></td>
+	</tr>
+	<tr>
+		<td align="right">17.</td>
+		<td>Ornová Darina</td>
+		<td>4.C</td>
+		<td>P2, Botičská 1</td>
+		<td>Šmejkalová</td>
+		<td align="center">5</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">0,5</td>
+		<td align="center"><b>5,5</b></td>
+	</tr>
+	<tr>
+		<td align="right">18.</td>
+		<td>Helcl Jindřich</td>
+		<td>I.C</td>
+		<td>P5, Zborovská 45</td>
+		<td>Mgr. Prouza</td>
+		<td align="center">-</td>
+		<td align="center">1</td>
+		<td align="center">-</td>
+		<td align="center">0</td>
+		<td align="center"><b>1</b></td>
+	</tr>
+	<tr>
+		<td align="right">19.</td>
+		<td>Studnička Tomáš</td>
+		<td>4.C</td>
+		<td>P5, Zborovská 45</td>
+		<td>Pacáková</td>
+		<td align="center">-</td>
+		<td align="center">0</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center"><b>0</b></td>
+	</tr>
+</table>
+

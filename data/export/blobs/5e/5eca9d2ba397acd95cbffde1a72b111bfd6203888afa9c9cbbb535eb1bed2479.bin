@@ -1,0 +1,259 @@
+<table style="font-size:110%;">
+<thead>
+	<tr>
+		<th>jméno</th>
+		<th>příjmení</th>
+		<th>třída</th>
+		<th>učitel</th>
+		<th>škola</th>
+		<th>1</th>
+		<th>2</th>
+		<th>3</th>
+		<th>4</th>
+		<th>5</th>
+		<th>6</th>
+		<th>7</th>
+		<th>postup</th></tr>
+
+</thead>
+<tbody>
+	<tr>
+		<td>Tomáš</td>
+		<td>Ducháček</td>
+		<td>07.B</td>
+		<td>Miloslav Hrubeš</td>
+		<td>Gymnázium Praha 6,Nad Alejí 1952</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;"><b>ano</b></td></tr>
+
+	<tr>
+		<td>Marie </td>
+		<td>Fořtová</td>
+		<td>Kvinta A</td>
+		<td>Pacáková</td>
+		<td>Gymnázium na Pražačce</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">9,5</td>
+		<td style="text-align:center;">9,5</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;"><b>ano</b></td></tr>
+
+	<tr>
+		<td>Adam</td>
+		<td>Karkulín</td>
+		<td>7.M</td>
+		<td>Štěpánka Jirošová</td>
+		<td>Gymnázium Christiana Dopplera</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;"><b>ano</b></td></tr>
+
+	<tr>
+		<td>Tomáš</td>
+		<td>Kodad </td>
+		<td>3M</td>
+		<td>Jindřich Chval</td>
+		<td>SPŠST Panská</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;"><b>ano</b></td></tr>
+
+	<tr>
+		<td>Václav</td>
+		<td>Košík </td>
+		<td>3.A</td>
+		<td>Alena Šmejkalová</td>
+		<td>Gymnázium Botičská</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;"><b>ano</b></td></tr>
+
+	<tr>
+		<td>Petr</td>
+		<td>Kouba</td>
+		<td>VII.AG</td>
+		<td>&nbsp;</td>
+		<td>Gymnázium J.Gutha-Jarkovského</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;"><b>ne</b></td></tr>
+
+	<tr>
+		<td>Jan</td>
+		<td>Kůstka</td>
+		<td>3.C</td>
+		<td>Dagmar Švarcová</td>
+		<td>Gymnázium Christiana Dopplera</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;"><b>ne</b></td></tr>
+
+	<tr>
+		<td>Tomáš</td>
+		<td>Malina</td>
+		<td>07.B</td>
+		<td>Miloslav Hrubeš</td>
+		<td>Gymnázium Praha 6,Nad Alejí 1952</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">.</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;"><b>ne</b></td></tr>
+
+	<tr>
+		<td>Jakub </td>
+		<td>Malíř</td>
+		<td>3.C</td>
+		<td>Jakub Šafařík</td>
+		<td>Gymnázium Botičská</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">9,5</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;"><b>ano</b></td></tr>
+
+	<tr>
+		<td>Van Minh</td>
+		<td>Nguyen</td>
+		<td>07.A</td>
+		<td>Jiří Benda</td>
+		<td>Gymnázium Praha 6,Nad Alejí 1952</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">.</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;"><b>ano</b></td></tr>
+
+	<tr>
+		<td>Lukáš</td>
+		<td>Rehberger</td>
+		<td>7.M</td>
+		<td>Štěpánka Jirošová</td>
+		<td>Gymnázium Christiana Dopplera</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;"><b>ano</b></td></tr>
+
+	<tr>
+		<td>Jan</td>
+		<td>Řezníček</td>
+		<td>septima B</td>
+		<td>Jan Šedivý</td>
+		<td>Gymnázium a Hudební škola hl.m. Prahy, ZUŠ</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;"><b>ano</b></td></tr>
+
+	<tr>
+		<td>Martin</td>
+		<td>Rod</td>
+		<td>7. M</td>
+		<td>Štěpánka Jirošová</td>
+		<td>Gymnázium Christiana Dopplera</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;">9,5</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;"><b>ano</b></td></tr>
+
+	<tr>
+		<td>Jakub</td>
+		<td>Rösler</td>
+		<td>VII.B</td>
+		<td>Marie A.Horáková-Trtková</td>
+		<td>Gymnázium J. Gutha-Jarkovského</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;"><b>ano</b></td></tr>
+
+	<tr>
+		<td>Ráchel</td>
+		<td>Sgallová</td>
+		<td>7. M</td>
+		<td>Štěpánka Jirošová</td>
+		<td>Gymnázium Christiana Dopplera</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">8,5</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;"><b>ano</b></td></tr>
+
+	<tr>
+		<td>Ondřej</td>
+		<td>Šmíd</td>
+		<td>7.M</td>
+		<td>Štěpánka Jirošová</td>
+		<td>Gymnázium Christiana Dopplera</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">-</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;"><b>ano</b></td></tr>
+</tbody></table>

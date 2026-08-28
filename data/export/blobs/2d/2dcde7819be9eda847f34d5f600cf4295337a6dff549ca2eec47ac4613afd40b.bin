@@ -1,0 +1,412 @@
+<p>
+Omlouváme se, ale výsledkové listiny se bohužel nezachovaly celé.
+</p>
+
+<table style="font-size:110%;">
+	<tr>
+		<th>Jméno</th>
+		<th>Třída</th>
+		<th>Škola</th>
+		<th>Učitel</th>
+		<th colspan="7">Body</th>
+	</tr>
+	<tr>
+		<td>Vrba Jan</td>
+		<td>4.D</td>
+		<td>P6, Arabská 14</td>
+		<td>Mgr. Jupa</td>
+		<td width="20px" align="center">7</td>
+		<td width="20px" align="center">8</td>
+		<td width="20px" align="center">9</td>
+		<td width="20px" align="center">9,5</td>
+		<td width="20px" align="center">8</td>
+		<td width="20px" align="center">6</td>
+		<td width="20px" align="center">9</td>
+	</tr>
+	<tr>
+		<td>Zíma Vlastimil</td>
+		<td>4.D</td>
+		<td>P6, Arabská 14</td>
+		<td>Mgr. Jupa</td>
+		<td align="center">8</td>
+		<td align="center">8</td>
+		<td align="center">8</td>
+		<td align="center">9</td>
+		<td align="center">9</td>
+		<td align="center">8</td>
+		<td align="center">10</td>
+	</tr>
+	<tr>
+		<td>Tichý Jakub</td>
+		<td>4.D</td>
+		<td>P6, Arabská 14</td>
+		<td>Mgr. Jupa</td>
+		<td align="center">9</td>
+		<td align="center">10</td>
+		<td align="center">9</td>
+		<td align="center">10</td>
+		<td align="center">9</td>
+		<td align="center">8</td>
+		<td align="center">7</td>
+	</tr>
+	<tr>
+		<td colspan="10" class="bezmrizky">&nbsp;</td>
+	</tr>
+	<tr>
+		<td colspan="10" class="bezmrizky">
+<b>Neúpěšní řešitelé</b>
+
+		</td>
+	</tr>
+<tr>
+		<td>Muzikář Petr</td>
+		<td>&nbsp;</td>
+		<td>P3, Sladkovského</td>
+		<td>Dr. Kličková</td>
+		<td width="20px" align="center">9</td>
+		<td width="20px" align="center">-</td>
+		<td width="20px" align="center">10</td>
+		<td width="20px" align="center">10</td>
+		<td width="20px" align="center">-</td>
+		<td width="20px" align="center">-</td>
+		<td width="20px" align="center">-</td>
+	</tr>
+	<tr>
+		<td>Balvínová Petra</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">4</td>
+		<td align="center">9</td>
+		<td align="center">4</td>
+		<td align="center">6</td>
+		<td align="center">3,5</td>
+		<td align="center">5</td>
+		<td align="center">3</td>
+	</tr>
+	<tr>
+		<td>Beneš David</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">-</td>
+		<td align="center">10</td>
+		<td align="center">4</td>
+		<td align="center">10</td>
+		<td align="center">9,5</td>
+		<td align="center">5</td>
+		<td align="center">-</td>
+	</tr>
+	<tr>
+		<td>Brunát Zdeněk</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">4</td>
+		<td align="center">8</td>
+		<td align="center">4</td>
+		<td align="center">4</td>
+		<td align="center">4,5</td>
+		<td align="center">2</td>
+		<td align="center">-</td>
+	</tr>
+	<tr>
+		<td>Čejka Petr</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">4</td>
+		<td align="center">3</td>
+		<td align="center">4,5</td>
+		<td align="center">2</td>
+		<td align="center">-</td>
+	</tr>
+	<tr>
+		<td>Dobeš Petr</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">-</td>
+		<td align="center">3</td>
+		<td align="center">-</td>
+		<td align="center">4,5</td>
+		<td align="center">-</td>
+		<td align="center">2</td>
+		<td align="center">-</td>
+	</tr>
+	<tr>
+		<td>Drnková Michaela</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">4</td>
+		<td align="center">-</td>
+		<td align="center">4</td>
+		<td align="center">5</td>
+		<td align="center">4,5</td>
+		<td align="center">2</td>
+		<td align="center">-</td>
+	</tr>
+	<tr>
+		<td>Hroch Tomáš</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">5</td>
+		<td align="center">8</td>
+		<td align="center">4</td>
+		<td align="center">5</td>
+		<td align="center">4,5</td>
+		<td align="center">2</td>
+		<td align="center">-</td>
+	</tr>
+	<tr>
+		<td>Charvát Karel</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">-</td>
+		<td align="center">7</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">.</td>
+		<td align="center">-</td>
+	</tr>
+	<tr>
+		<td>Klupka Ondřej</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">-</td>
+		<td align="center">8</td>
+		<td align="center">4</td>
+		<td align="center">5</td>
+		<td align="center">3,5</td>
+		<td align="center">2</td>
+		<td align="center">-</td>
+	</tr>
+	<tr>
+		<td>Knapp Petr</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td>4</td>
+		<td align="center">-</td>
+		<td align="center">.</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+	</tr>
+	<tr>
+		<td>Kočárek Michal</td>
+		<td>I.C</td>
+		<td>P5, Zborovská 45</td>
+		<td>Mgr. Prouza</td>
+		<td align="center">4</td>
+		<td align="center">10</td>
+		<td align="center">-</td>
+		<td align="center">3</td>
+		<td align="center">6</td>
+		<td align="center">5</td>
+		<td align="center">6</td>
+	</tr>
+	<tr>
+		<td>Kostkanová Olga</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">4</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">7</td>
+		<td align="center">2</td>
+		<td align="center">-</td>
+	</tr>
+	<tr>
+		<td>Král Martin</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">5</td>
+		<td align="center">7</td>
+		<td align="center">4</td>
+		<td align="center">4,5</td>
+		<td align="center">4</td>
+		<td align="center">2</td>
+		<td align="center">-</td>
+	</tr>
+	<tr>
+		<td>Kvítek Tomáš</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">7</td>
+		<td align="center">4</td>
+		<td align="center">4</td>
+		<td align="center">5</td>
+		<td align="center">4,5</td>
+		<td align="center">2</td>
+		<td align="center">-</td>
+	</tr>
+	<tr>
+		<td>Matoušek David</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">8</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+	</tr>
+	<tr>
+		<td>Mazáček David</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">8</td>
+		<td align="center">9</td>
+		<td align="center">4</td>
+		<td align="center">9</td>
+		<td align="center">5,5</td>
+		<td align="center">2</td>
+		<td align="center">-</td>
+	</tr>
+	<tr>
+		<td>Mikšová Lucie</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">3</td>
+		<td align="center">9</td>
+		<td align="center">-</td>
+		<td align="center">6</td>
+		<td align="center">3,5</td>
+		<td align="center">2</td>
+		<td align="center">-</td>
+	</tr>
+	<tr>
+		<td>Procházka Jan</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">4</td>
+		<td align="center">3</td>
+		<td align="center">4</td>
+		<td align="center">4,5</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">&nbsp;</td>
+	</tr>
+	<tr>
+		<td>Ptáček Petr</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">0</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+	</tr>
+	<tr>
+		<td>Rybka Ondřej</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">4</td>
+		<td align="center">5</td>
+		<td align="center">4</td>
+		<td align="center">3</td>
+		<td align="center">4,5</td>
+		<td align="center">2</td>
+		<td align="center">-</td>
+	</tr>
+	<tr>
+		<td>Siebr Marek</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">-</td>
+		<td align="center">6</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+	</tr>
+	<tr>
+		<td>Štěpánová Kateřina</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">2</td>
+		<td align="center">4</td>
+		<td align="center">4</td>
+		<td align="center">3</td>
+		<td align="center">3</td>
+		<td align="center">2</td>
+		<td align="center">-</td>
+	</tr>
+	<tr>
+		<td>Tomisová Martina</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">2</td>
+		<td align="center">-</td>
+	</tr>
+	<tr>
+		<td>Valešová Petra</td>
+		<td>4.C</td>
+		<td>P5, Zborovská 45</td>
+		<td>Pacáková</td>
+		<td align="center">4</td>
+		<td align="center">7</td>
+		<td align="center">-</td>
+		<td align="center">10</td>
+		<td align="center">3,5</td>
+		<td align="center">5</td>
+		<td align="center">6</td>
+	</tr>
+	<tr>
+		<td>Žák</td>
+		<td>&nbsp;</td>
+		<td>P5, Zborovská 45</td>
+		<td>Doc. Kluiber</td>
+		<td align="center">-</td>
+		<td align="center">6</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+		<td align="center">-</td>
+	</tr>
+	<tr>
+		<td>Žlebčík Radek</td>
+		<td>4.C</td>
+		<td>P5, Zborovská 45</td>
+		<td>Pacáková</td>
+		<td align="center">9</td>
+		<td align="center">10</td>
+		<td align="center">9</td>
+		<td align="center">10</td>
+		<td align="center">9,5</td>
+		<td align="center">-</td>
+		<td align="center">9</td>
+	</tr>
+</table>

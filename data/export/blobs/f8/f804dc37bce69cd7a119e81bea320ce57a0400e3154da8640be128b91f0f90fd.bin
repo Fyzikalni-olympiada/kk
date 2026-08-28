@@ -1,0 +1,83 @@
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<table> 
+ <tr>
+    <th>obvod</th>
+    <th>garant</th>
+    <th>email</th>
+    <th>adresa</th>
+    <th>www</th>
+    <th>telefon</th>
+  </tr>
+  <tr>
+    <td>Praha 1</td>
+    <td>Mgr. Lenka Suchopárová</td>
+    <td>suchoparova@svc1.cz</td>
+    <td>Středisko volného času Jednička, Truhlářská 1113/8</td>
+    <td><a href="https://www.svcjednicka.cz/">www.svcjednicka.cz</a></td>
+    <td>778 972 396</td>
+  </tr>
+  <tr>
+    <td>Praha 2</td>
+    <td>Kristýna Marková</td>
+    <td>kristyna.markova@ddm-ph2.cz</td>
+    <td>DDM SPV Praha 2, Lublaňská 398/18</td>
+    <td><a href=" http://www.ddm-ph2.cz/">www.ddm-ph2.cz</a></td>
+    <td>222&nbsp;510&nbsp;746, 602&nbsp;374&nbsp;784</td>
+  </tr>
+  <tr>
+    <td>Praha 3</td>
+    <td>Eva Němcová</td>
+    <td>eva.nemcova@ulita.cz</td>
+    <td>DDM-Ulita, Praha 3, Na Balkáně 2866</td>
+    <td><a href="http://www.ulita.cz/">www.ulita.cz</a></td>
+    <td>271&nbsp;771&nbsp;025-6, 602&nbsp;743&nbsp;339</td>
+  </tr>
+  <tr>
+    <td>Praha 4</td>
+    <td>Rostislav Jančar</td>
+    <td>jancar@planina.cz</td>
+    <td>ZŠ Na Planině 1393, Praha 4</td>
+    <td><a href="http://www.planina.cz/">www.planina.cz</a></td>
+    <td>241&nbsp;445&nbsp;041</td>
+  </tr>
+  <tr>
+    <td>Praha 5+13</td>
+    <td>Ing. Kornelie Holá</td>
+    <td>kornelie.hola@ddmpraha5.cz</td>
+    <td>Dům dětí a mládeže Praha 5, Štefánikova 235/11</td>
+    <td><a href="https://www.ddmpraha5.cz/">www.ddmpraha5.cz</a></td>
+    <td>724 554 114</td>
+  </tr>
+  <tr>
+    <td >Praha 6</td>
+    <td >Nataša Dřínková</td>
+    <td >natasa.drinkova@alej.cz</td>
+    <td>Gymnázium Nad alejí 1952, Praha 6</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Praha 8+7</td>
+    <td>Barbora Hrušková</td>
+    <td>hruskova@ddmpraha8.cz</td>
+    <td>DDM Praha 8 - Spirála, Přemyšlenská 1102/15, 182 00 Praha 8</td>
+    <td><a href="http://www.ddmpraha8.cz/">www.ddmpraha8.cz</a></td>
+    <td>284&nbsp;681&nbsp;050</td>
+  </tr>
+  <tr>
+    <td>Praha 9</td>
+    <td>Stanislav Gottwald</td>
+    <td>stanislav.gottwald@centrum.cz</td>
+    <td>Gymnázium, Špitálská 2, Praha 9</td>
+    <td><a href="http://www.gymspit.cz/">www.gymspit.cz</a></td>
+    <td>283&nbsp;891&nbsp;459, linka 32</td>
+  </tr>
+  <tr>
+    <td>Praha 10+15</td>
+    <td>Jana Jeřábková</td>
+    <td>jana.jerabkova@zsnadvodovodem.cz</td>
+    <td>ZŠ Nad Vodovodem 460, Praha 10</td>
+    <td><a href="http://www.zsnadvodovodem.cz/">www.zsnadvodovodem.cz</a></td>
+    <td>274&nbsp;773&nbsp;268</td>
+  </tr>
+</table>

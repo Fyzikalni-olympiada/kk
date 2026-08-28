@@ -1,0 +1,720 @@
+<p>
+Do třetího (krajského) kola postupuje prvních 28&nbsp;žáků (tj.&nbsp;úspěšných řešitelů s&nbsp;minimálně 27&nbsp;body).
+</p>
+
+
+<table style="font-size:110%;">
+<thead>
+	<tr>
+		<th rowspan=2>&nbsp;</th>
+		<th style="text-align:center;" rowspan=2>Příjmení a jméno</th>
+		<th style="text-align:center;" rowspan=2>Škola</th>
+		<th style="text-align:center;" rowspan=2>Praha</th>
+		<th style="text-align:center;" colspan=4>Příklad č.</th>
+		<th style="text-align:center;" rowspan=2>Celkem</th>
+		<th style="text-align:center;" rowspan=2>Postup do krajského kola</th></tr>
+
+	<tr>
+		<th style="text-align:center;">1</th>
+		<th style="text-align:center;">2</th>
+		<th style="text-align:center;">3</th>
+		<th style="text-align:center;">4</th></tr>
+
+</thead>
+<tbody>
+	<tr>
+		<td>1</td>
+		<td>Dvořák Ondřej</td>
+		<td>G. JGJ, Truhlářská </td>
+		<td style="text-align:center;">1</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;"><b>39</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>2</td>
+		<td>Suchánek Jakub</td>
+		<td>G. Opatov</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;"><b>38</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>3</td>
+		<td>Hobza Jáchym</td>
+		<td>G. Budějovická</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;"><b>37</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>4</td>
+		<td>Lipavská Kateřina</td>
+		<td>G  Ch. Dopplera</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;"><b>36</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>5</td>
+		<td>Novotný Patrik </td>
+		<td>G. Opatov</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;"><b>35</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>6</td>
+		<td>Kyzlíková Kamila</td>
+		<td>G  Ch. Dopplera</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;"><b>35</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>7</td>
+		<td>Dřínek Adam</td>
+		<td>G Nad Alejí</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;"><b>34</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>8</td>
+		<td>Kameník Vojtěch</td>
+		<td>ZŠ Červený Vrch</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;"><b>34</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>9</td>
+		<td>Svatošová Michaela</td>
+		<td>G. Jana Keplera</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;"><b>34</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>10</td>
+		<td>Jakubčík Petr </td>
+		<td>G  PORG</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;"><b>34</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>11</td>
+		<td>Löffenmann Václav</td>
+		<td>G. Litoměřická</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">3,5</td>
+		<td style="text-align:center;"><b>33,5</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>12</td>
+		<td>Löffenmann Jiří</td>
+		<td>G. Litoměřická</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;"><b>33</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>13</td>
+		<td>Švandelík Vojtěch</td>
+		<td>G  Ch. Dopplera</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">7,5</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;"><b>32,5</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>14</td>
+		<td>Chudoba Filip </td>
+		<td>G  PORG</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">4,5</td>
+		<td style="text-align:center;"><b>32,5</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>15</td>
+		<td>Janich Adam</td>
+		<td>G. Špitálská</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;"><b>32</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>16</td>
+		<td>Karlíček Lukáš</td>
+		<td>G  Ch. Dopplera</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;"><b>32</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>17</td>
+		<td>Olšavský Michael</td>
+		<td>G  Nad Kavalírkou</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;"><b>31</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>18</td>
+		<td>Novák Stanislav </td>
+		<td>G. Písnická</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">6,5</td>
+		<td style="text-align:center;"><b>30,5</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>19</td>
+		<td>Skalická Anna </td>
+		<td>G. Budějovická</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">3,5</td>
+		<td style="text-align:center;"><b>30,5</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>20</td>
+		<td>Hudec Pavel</td>
+		<td>G. JGJ, Truhlářská </td>
+		<td style="text-align:center;">1</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">3</td>
+		<td style="text-align:center;"><b>30</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>21</td>
+		<td>Němec Tadeáš</td>
+		<td>G. JGJ, Truhlářská </td>
+		<td style="text-align:center;">1</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;"><b>30</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>22</td>
+		<td>Peleška Jakub</td>
+		<td>G. JGJ, Truhlářská </td>
+		<td style="text-align:center;">1</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;"><b>30</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>23</td>
+		<td>Zenker Robin </td>
+		<td>G  PORG</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">2</td>
+		<td style="text-align:center;"><b>30</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>24</td>
+		<td>Kučera Josef</td>
+		<td>G. JGJ, Truhlářská </td>
+		<td style="text-align:center;">1</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;"><b>29</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>25</td>
+		<td>Nosková Petra </td>
+		<td>G  PORG</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;"><b>29</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>26</td>
+		<td>Zelený Marek</td>
+		<td>G. Voděradská</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">1</td>
+		<td style="text-align:center;"><b>28</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>27</td>
+		<td>Hospodková Lucie</td>
+		<td>ZŠ Červený Vrch</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;"><b>28</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>28</td>
+		<td>Novotný Vojtěch</td>
+		<td>G Nad Alejí</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">2</td>
+		<td style="text-align:center;"><b>27</b></td>
+		<td style="text-align:center;">Postupuje</td></tr>
+
+	<tr>
+		<td>29</td>
+		<td>Ho Xuan Hung</td>
+		<td>ZŠ V Rybníčkách</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">4,5</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;"><b>25,5</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>30</td>
+		<td>Matějka Filip</td>
+		<td>G  Ch. Dopplera</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">2,5</td>
+		<td style="text-align:center;"><b>25,5</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>31</td>
+		<td>Lanžhotský Václav</td>
+		<td>G  J. Heyrovského</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">9,5</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">3</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;"><b>25,5</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>32</td>
+		<td>Matoušek Daniel</td>
+		<td>G. Voděradská</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">1</td>
+		<td style="text-align:center;"><b>25</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>33</td>
+		<td>Kůrka Tomáš</td>
+		<td>G  Nad Kavalírkou</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">0</td>
+		<td style="text-align:center;">4,5</td>
+		<td style="text-align:center;"><b>24,5</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>34</td>
+		<td>Olšovský Martin</td>
+		<td>G. Litoměřická</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">0</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;"><b>24</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>35</td>
+		<td>Jirsa Vojtěch</td>
+		<td>G Nad Alejí</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">2</td>
+		<td style="text-align:center;"><b>24</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>36</td>
+		<td>Pýcha Tomáš</td>
+		<td>G Nad Alejí</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">0</td>
+		<td style="text-align:center;"><b>24</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>37</td>
+		<td>Hladíková Hana</td>
+		<td>G  Nad Kavalírkou</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;">0,5</td>
+		<td style="text-align:center;"><b>23,5</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>38</td>
+		<td>Gogatishvili Nodari</td>
+		<td>G  Ch. Dopplera</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">4,5</td>
+		<td style="text-align:center;"><b>23,5</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>39</td>
+		<td>Wohlgemuthová Eva</td>
+		<td>G. Litoměřická</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">1</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;"><b>23</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>40</td>
+		<td>Malík Čeněk</td>
+		<td>G. Litoměřická</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;"><b>23</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>41</td>
+		<td>Böhm Robin </td>
+		<td>ZŠ, Lupáčova </td>
+		<td style="text-align:center;">3</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">1</td>
+		<td style="text-align:center;"><b>23</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>42</td>
+		<td>Zápotocký Jakub </td>
+		<td>G. Opatov</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">0</td>
+		<td style="text-align:center;">3</td>
+		<td style="text-align:center;"><b>23</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>43</td>
+		<td>Poláková Kateřina</td>
+		<td>G  Ch. Dopplera</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">1</td>
+		<td style="text-align:center;">3</td>
+		<td style="text-align:center;"><b>23</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>44</td>
+		<td>Amiri Zarif</td>
+		<td>G J. Heyrovského</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;">2</td>
+		<td style="text-align:center;"><b>23</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr style="display:none;">
+		<td>45</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td style="text-align:center;">5</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td style="text-align:center;"><b>0</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>46</td>
+		<td>Bacík Josef</td>
+		<td>G  Nad Kavalírkou</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">2</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;"><b>23</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>47</td>
+		<td>Rainischová Anastázie</td>
+		<td>G. JGJ, Truhlářská </td>
+		<td style="text-align:center;">1</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">1</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;"><b>22</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>48</td>
+		<td>Kocech Hugo</td>
+		<td>ZŠ Litvínovská</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">3</td>
+		<td style="text-align:center;"><b>21</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>49</td>
+		<td>Lanz Vojtěch</td>
+		<td>G  Ch. Dopplera</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">0</td>
+		<td style="text-align:center;">2,5</td>
+		<td style="text-align:center;"><b>20,5</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>50</td>
+		<td>Deyl Adam</td>
+		<td>G. JGJ, Truhlářská </td>
+		<td style="text-align:center;">1</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">3</td>
+		<td style="text-align:center;">3</td>
+		<td style="text-align:center;">3</td>
+		<td style="text-align:center;"><b>19</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>51</td>
+		<td>Hauserová Klára </td>
+		<td>GKS, Sladkovského nám. </td>
+		<td style="text-align:center;">3</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">4</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">0</td>
+		<td style="text-align:center;"><b>19</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>52</td>
+		<td>Ilnerová Kateřina</td>
+		<td>ZŠ Červený Vrch</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">10</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">0</td>
+		<td style="text-align:center;">2</td>
+		<td style="text-align:center;"><b>18</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>53</td>
+		<td>Merunka Jan</td>
+		<td>ZŠ Červený Vrch</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">5</td>
+		<td style="text-align:center;">3</td>
+		<td style="text-align:center;">1</td>
+		<td style="text-align:center;"><b>18</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>54</td>
+		<td>Mráz Petr </td>
+		<td>GKS, Sladkovského nám. </td>
+		<td style="text-align:center;">3</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">2</td>
+		<td style="text-align:center;">0</td>
+		<td style="text-align:center;"><b>17</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>55</td>
+		<td>Hrůza Jiří </td>
+		<td>ZŠ Pražačka</td>
+		<td style="text-align:center;">3</td>
+		<td style="text-align:center;">9</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">1</td>
+		<td style="text-align:center;">0</td>
+		<td style="text-align:center;"><b>16</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>56</td>
+		<td>Křivánek Lukáš </td>
+		<td>GKS, Sladkovského nám. </td>
+		<td style="text-align:center;">3</td>
+		<td style="text-align:center;">8</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">1</td>
+		<td style="text-align:center;">0</td>
+		<td style="text-align:center;"><b>15</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>57</td>
+		<td>Puš Marek </td>
+		<td>ZŠ, nám. J. z Poděbrad</td>
+		<td style="text-align:center;">3</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">6</td>
+		<td style="text-align:center;">3</td>
+		<td style="text-align:center;">0</td>
+		<td style="text-align:center;"><b>15</b></td>
+		<td>&nbsp;</td></tr>
+
+	<tr>
+		<td>58</td>
+		<td>Menšíková Denida </td>
+		<td>ZŠ, nám. J. z Poděbrad </td>
+		<td style="text-align:center;">3</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">7</td>
+		<td style="text-align:center;">0</td>
+		<td style="text-align:center;">0</td>
+		<td style="text-align:center;"><b>14</b></td>
+		<td>&nbsp;</td></tr>
+</tbody></table>

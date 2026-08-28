@@ -1,2 +1,17 @@
-nbproject
-/web/assets
+# závislosti a výstupy buildu
+/vendor/
+/dist/
+/temp/
+
+# zdrojová data migrace (48 MB, mimo git; export je v data/export/)
+/data/couchdb/
+
+# soubory zachráněné ze starého serveru, vstup migrace
+/.recovered/
+
+# lokální cache nástrojů
+__pycache__/
+*.pyc
+/.wrangler/
+
+*~

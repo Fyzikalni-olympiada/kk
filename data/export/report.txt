@@ -1,0 +1,34 @@
+Export CouchDB kkfo -> data/export/
+
+shardů: 8
+  00000000-1fffffff  live= 52 deleted= 16 update_seq=148
+  20000000-3fffffff  live= 55 deleted= 13 update_seq=216
+  40000000-5fffffff  live= 56 deleted= 13 update_seq=171
+  60000000-7fffffff  live= 46 deleted= 18 update_seq=205
+  80000000-9fffffff  live= 57 deleted= 23 update_seq=175
+  a0000000-bfffffff  live= 58 deleted= 18 update_seq=326
+  c0000000-dfffffff  live= 52 deleted= 24 update_seq=189
+  e0000000-ffffffff  live= 45 deleted= 19 update_seq=143
+
+živých dokumentů celkem : 421
+náhrobků celkem         : 144
+exportovaných dokumentů : 407
+uživatelských účtů (zahozeno, hesla nesmí do gitu): 13
+  dana.topferova@, helena@, honza@, jirka@, jirosova@, krchova@, lukasl@, pospisil@, radek@, safarj3@, standa@, verka@, wokounova@
+přeskočeno (_design/_local): 1
+  _design/eywa
+unikátních blobů        : 233
+
+statistiky:
+  class:Eywa\CMS\Model\Directory                   7
+  class:Eywa\CMS\Model\Komise                      5
+  class:Eywa\CMS\Model\Link                        4
+  class:Eywa\CMS\Model\Page                        183
+  class:Eywa\CMS\Model\Redirect                    62
+  class:Eywa\CMS\Model\Results                     145
+  class:Eywa\CMS\Model\Site                        1
+  priloha:html                                     255
+  priloha:nulova_delka                             112
+  priloha:pdf                                      1
+  priloha:xls                                      96
+  uzivatele                                        13
