@@ -77,6 +77,12 @@ nemusí přepínat žádné číslo a web nezestárne jen tím, že plyne čas.
 
 Trvalý odkaz na novinku visí na datu pod ní.
 
+**Hlavička** ukazuje název kraje, mapu s vyznačeným krajem a ročník se školním
+rokem. Ročník se nikde nenastavuje: bere se z nejnovější novinky, a když web
+žádnou nemá (Karlovy Vary), z nejvyššího ročníku ve výsledkových listinách.
+Mapa `assets/pic/mapa-kraju.svg` je jeden zdroj pro oba weby — barvu kraje
+do ní doplní build podle `assets/css` a `src/sites.php`.
+
 **Nová výsledková listina.** Založ
 `content/<web>/vysledky/<ročník>/<kolo>/<kategorie>.html` s `type: results`
 a tabulkou v těle. Původní `.xls` patří do `files/<web>/vysledky/…` a odkážeš

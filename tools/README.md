@@ -29,6 +29,13 @@ Jednorázové skripty, kterými vznikl `content/` a `files/` z původního CMS
 - `.recovered/` — soubory stažené ze starého serveru (`web/doc`, `web/i`,
   `libs/eywa`). Mimo git.
 
+## Mapa krajů
+
+`assets/pic/mapa-kraju.svg` je převzatá z `../fo/html/kraje_mapa.html`, kde
+slouží jako klikací rozcestník krajských komisí. Všech 14 krajů má atribut
+`data-kraj`; barvu aktuálního kraje doplní `mapa_kraje_svg()` až při buildu,
+takže se do repozitáře nekopíruje jedna varianta na web.
+
 ## Vendorovaná čtečka Excelu
 
 `tools/vendor/excel_reader2.php` je kopie `libs/php-excel-reader/` se čtyřmi

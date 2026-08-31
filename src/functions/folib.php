@@ -121,6 +121,37 @@ function seznam_deti(string $pathname): string
 }
 
 /**
+ * Mapa krajů s vybarveným krajem aktuálního webu.
+ *
+ * Vkládat 22 kB SVG do každé z 497 stránek by dist zdvojnásobilo, a <img>
+ * zase nedědí barvy stránky. Proto se z jednoho zdroje vyrábí soubor na web:
+ * build ho zapíše do dist/, vývojový server ho servíruje z téže funkce, takže
+ * se nemají jak rozejít.
+ */
+function mapa_kraje_svg(): string
+{
+    static $memo = [];
+    $slug = site_slug();
+    if (!isset($memo[$slug])) {
+        $svg = file_get_contents(ROOT_DIR . 'assets/pic/mapa-kraju.svg');
+        /* inline styl, ne atribut fill — <style> uvnitř SVG by atribut přebil */
+        $memo[$slug] = str_replace(
+            '<path data-kraj="' . $slug . '"',
+            '<path style="fill:' . site()['akcent'] . '" data-kraj="' . $slug . '"',
+            $svg);
+    }
+    return $memo[$slug];
+}
+
+
+/** Adresa mapy s otiskem skutečně vydaného obsahu (barva je v něm zapečená). */
+function mapa_kraje_url(): string
+{
+    return '/pic/mapa-kraju.svg?v=' . substr(md5(mapa_kraje_svg()), 0, 8);
+}
+
+
+/**
  * Ročník FO, do kterého datum spadá.  Ročník běží od září do června,
  * takže 67. ročník = školní rok 2025/2026: prosinec 2025 i květen 2026
  * patří do téhož ročníku.
@@ -154,6 +185,48 @@ function novinky_aktualniho_rocniku(array $items): array
     $aktualni = max($rocniky);
     return array_values(array_filter(
         $items, fn($i) => rocnik_z_data($i['datum']) === $aktualni));
+}
+
+
+/**
+ * Ročník, kterým se web hlásí v hlavičce.
+ *
+ * Bere se z obsahu, ne z dnešního data: novinky jsou přesnější (mění se
+ * v průběhu roku), ale Karlovy Vary žádnou stránku novinek nemají, takže
+ * se sáhne po nejvyšším ročníku ve výsledkových listinách. Kdyby se ročník
+ * počítal ze dneška, ukazoval by web po prázdninách ročník, o kterém nic
+ * nemá — a musel by se přestavovat jen proto, že plyne čas.
+ */
+function aktualni_rocnik(): ?int
+{
+    static $memo = [];
+    $slug = site_slug();
+    if (isset($memo[$slug])) {
+        return $memo[$slug];
+    }
+    $rocniky = [];
+    foreach (obsah_vsechny() as $pathname => $uzel) {
+        if ($uzel['typ'] === 'news') {
+            $novinky = novinky_aktualniho_rocniku(
+                obsah_deti($uzel['novinky'] ?: $pathname, false));
+            if ($novinky) {
+                $rocniky[] = rocnik_z_data($novinky[0]['datum']);
+            }
+        }
+        /* /vysledky/67-rocnik i /vysledky/64 — obě konvence se používají */
+        if (preg_match('~^/vysledky/(\d{2})(-|$)~', $pathname, $m)) {
+            $rocniky[] = (int) $m[1];
+        }
+    }
+    $rocniky = array_filter($rocniky);
+    return $memo[$slug] = $rocniky ? max($rocniky) : null;
+}
+
+
+/** Školní rok ročníku: 67 => '2025/2026'. */
+function skolni_rok(int $rocnik): string
+{
+    return ($rocnik + 1958) . '/' . ($rocnik + 1959);
 }
 
 

@@ -32,6 +32,13 @@ $servuj = function (string $soubor): bool {
     return true;
 };
 
+/* Mapa se vyrábí, nesmí se vzít zdrojová kopie z assets/. */
+if ($cesta === '/pic/mapa-kraju.svg') {
+    header('Content-Type: image/svg+xml');
+    echo mapa_kraje_svg();
+    return true;
+}
+
 /* Stejné pořadí jako v buildu: files/<web> a assets se publikují bez prefixu. */
 if ($cesta !== '/' && !str_contains($cesta, '..')) {
     foreach (['files/' . site_slug(), 'assets/' . site_slug(), 'assets'] as $koren) {

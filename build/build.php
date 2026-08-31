@@ -109,7 +109,10 @@ foreach (array_keys(site_definice()) as $slug) {
         }
     }
 
-    /* 4. přesměrování a sitemapa */
+    /* 4. mapa s vybarveným krajem (přepisuje zdrojovou kopii z assets/) */
+    zapis($out . 'pic/mapa-kraju.svg', mapa_kraje_svg());
+
+    /* 5. přesměrování a sitemapa */
     zapis($out . '_redirects', presmerovani_soubor());
     sort($stranky);
     zapis($out . 'sitemap.xml', sitemap_xml($stranky));

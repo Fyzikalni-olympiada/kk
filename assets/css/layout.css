@@ -777,3 +777,19 @@ img.alignright, img.right {margin: 0 0 1em 1.5em;}
 .smap .label {margin: 0; padding: 0; border:none;}
 .smap table {border: none; background: none;}
 .smap td, .smap tr {border: none; padding: 0; background: none}
+
+/* Kraj s mapou v hlavičce (varianta s vyznačeným krajem) */
+#logo .kraj-blok {display: flex; align-items: center; gap: 13px; margin-top: 4px}
+/* #logo img má float:right kvůli znaku FO; mapa ho mít nesmí, jinak vypadne z flexu */
+#logo .mapka {width: 104px; height: auto; flex: none; float: none}
+#logo .kraj-blok .rocnik {white-space: nowrap}
+#logo .kraj {
+	display: block;
+	font-family: "Space Grotesk", "DejaVu Sans", sans-serif;
+	font-weight: 700; font-size: 30px; line-height: 1.1;
+	letter-spacing: -.01em; color: var(--akcent, #3E5199);
+}
+@media (max-width: 640px) {
+	#logo .mapka {width: 88px}
+	#logo .kraj {font-size: 24px}
+}

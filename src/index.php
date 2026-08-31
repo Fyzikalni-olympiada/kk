@@ -18,6 +18,9 @@ if ($uzel === null && PHP_SAPI !== 'cli') {
 }
 
 $siroka = $uzel && typ_ma($uzel, 'siroka');
+
+/* Ročník se nikde nenastavuje ručně, plyne z obsahu — viz aktualni_rocnik(). */
+$rocnik = aktualni_rocnik();
 $nadpis = $uzel['nadpis'] ?? 'Tato stránka neexistuje';
 /* Nadpisy nesou HTML entity (&nbsp; kvůli zalomení), stará šablona je
    vypisovala neescapované ({!$heading}).  Do <title> patří text, ne značky. */
@@ -69,7 +72,16 @@ if ($popis === '' && $uzel) {
         <div class="col-xs-12 col-lg-5" id="logo">
             <a href="/"><img src="/pic/logo-fo.svg" alt=""></a>
             <a href="/"><span>FYZIKÁLNÍ OLYMPIÁDA</span></a>
-            <span class="rocnik"><b><?= htmlspecialchars($web['nazev']) ?></b></span>
+            <div class="kraj-blok">
+                <img class="mapka" src="<?= mapa_kraje_url() ?>" width="470" height="269"
+                     alt="Poloha kraje na mapě České republiky">
+                <div>
+                    <span class="kraj"><?= htmlspecialchars($web['nazev']) ?></span>
+<?php if ($rocnik): ?>
+                    <span class="rocnik"><b><?= $rocnik ?>. ročník</b> &middot; <?= skolni_rok($rocnik) ?></span>
+<?php endif; ?>
+                </div>
+            </div>
             <!-- tlačítko i #main-nav musí být na každé stránce: fo.js na ně
                  věší posluchač bez kontroly na null -->
             <button type="button" id="menu-tlacitko" aria-expanded="false"><span class="linky" aria-hidden="true"><span></span><span></span><span></span></span>Menu</button>
