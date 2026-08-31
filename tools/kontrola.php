@@ -47,12 +47,22 @@ foreach (array_keys(site_definice()) as $slug) {
             $chyby[] = "$kde: soubor: {$uzel['file']} neexistuje";
         }
 
-        /* interní odkazy */
+        /* interní odkazy od kořene */
         if (preg_match_all('~\b(?:href|src)\s*=\s*["\']?(/[^"\'>\s#?]*)~i', $telo, $mm)) {
             foreach ($mm[1] as $cil) {
                 if (!isset($cile[$cil])) {
                     $varovani[] = "$kde: mrtvý odkaz $cil";
                 }
+            }
+        }
+
+        /* Relativní odkazy: v obsahu být nemají — migrace je rozvinula na
+           absolutní a editorům to říká README. Bez téhle kontroly proklouzly
+           rozbité galerie z předCMS archivu. */
+        if (preg_match_all('~\b(?:href|src)\s*=\s*["\']((?!https?:|mailto:|/|#|data:|tel:)[^"\']+)~i',
+                           $telo, $mm)) {
+            foreach (array_unique($mm[1]) as $cil) {
+                $chyby[] = "$kde: relativní odkaz \"$cil\" — odkazuj od kořene";
             }
         }
 

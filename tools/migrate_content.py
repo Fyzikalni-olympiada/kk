@@ -272,6 +272,8 @@ class Migration:
         # Chybějící úvodní uvozovka v href — překlep autora, prohlížeč z toho
         # udělá odkaz na `https:` a zbytek adresy zahodí.
         html = re.sub(r'href=(?!["\'])(\S+?)"', r'href="\1"', html)
+        # href=" http://…" — mezera navíc od editora
+        html = re.sub(r'(href|src)="\s+', r'\1="', html, flags=re.I)
         if html:
             base = self.link_base(d["_id"])
             html = self.fix_links(html, base, d["_id"])

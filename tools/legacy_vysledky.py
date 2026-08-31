@@ -88,6 +88,52 @@ def normalizuj_tabulky(text):
     return re.sub(r"<table[^>]*>", '<table class="vysledkovka">', text, flags=re.I)
 
 
+ODKAZ = re.compile(r'<a\s[^>]*href="(?!https?:|mailto:|#)([^"]+)"[^>]*>.*?</a>',
+                   re.I | re.S)
+
+
+def zahod_mrtve_odkazy(telo, zdroj, hlaseni):
+    """Odstraní odkazy mířící na soubory, které ve zdroji nejsou.
+
+    Ročník 47 kategorie A měl u výsledků fotogalerii; `praha/fotky/` bylo
+    v ../fo vždy v .gitignore, na serveru už neexistuje a není ani
+    v předfiltrové záloze — fotky jsou nenávratně pryč. Nechat 16 rozbitých
+    obrázků je horší než galerii zahodit.
+
+    Pokud po odstranění zůstane koncová sekce bez obsahu, zmizí i její
+    nadpis a úvodní odstavec — nadpis „Fotky“ s větou „Můžete si zde
+    prohlédnout několik fotek“ a bez fotek slibuje něco, co tam není.
+    Ruší se ale JEN sekce, ze které se odkazy braly; ostatní (třeba
+    „Úlohy opravovali“, což je jen seznam jmen) zůstávají."""
+    chybi = set()
+    prvni = [None]
+
+    def sub(m):
+        cil = m.group(1).split("#")[0].split("?")[0]
+        if (zdroj.parent / cil).exists():
+            return m.group(0)
+        chybi.add(cil.split("/")[0])
+        if prvni[0] is None:
+            prvni[0] = m.start()
+        return ""
+
+    novy = ODKAZ.sub(sub, telo)
+    if not chybi:
+        return novy
+    hlaseni.append(f"{zdroj.name}: zahozeny odkazy na chybějící {sorted(chybi)}")
+    novy = re.sub(r'<div[^>]*>(?:\s|<br\s*/?>|&nbsp;)*</div>', '', novy, flags=re.I)
+
+    # nadpis sekce, ve které odkazy byly (hledá se v PŮVODNÍM textu)
+    nadpisy = [m for m in re.finditer(r'<h[23][^>]*>', telo, re.I)
+               if m.start() < prvni[0]]
+    if nadpisy:
+        znacka = telo[nadpisy[-1].start():nadpisy[-1].end()]
+        i = novy.rfind(znacka)
+        if i != -1 and not re.search(r'<table|<img|<a\s[^>]*href', novy[i:], re.I):
+            novy = novy[:i]
+    return novy.rstrip()
+
+
 def hlavicka(pole):
     """YAML hlavička; safe_dump kvůli uvozování — ruční heuristika neuměla
     hodnoty začínající -, *, %, @ ani víceřádkové."""
@@ -140,10 +186,14 @@ def zpracuj(web, cfg, path, r, zapis):
         pole["soubor"] = f"/vysledky/{cfg['rocnik'](rocnik)}/{slug_kola}/{KATEGORIE[kat][1]}.pdf"
         pole["soubor_nazev"] = pdf.name
 
+    hlaseni = []
+    telo = zahod_mrtve_odkazy(telo, path, hlaseni)
     if zapis:
         adresar.mkdir(parents=True, exist_ok=True)
         cil.write_text(hlavicka(pole) + normalizuj_tabulky(telo).strip() + "\n",
                        encoding="utf-8")
+    for h in hlaseni:
+        print("    ", h)
     return poznamka or "ok"
 
 
