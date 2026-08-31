@@ -12,7 +12,7 @@ Jednorázové skripty, kterými vznikl `content/` a `files/` z původního CMS
 | `xls2html.php` | převod přílohy `.xls` na HTML tabulku |
 | `fosql.py`, `fo_sqlite.py` | čtení `../fo/fo.sql` do `temp/fo.sqlite` |
 | `results_db.py` | reprodukce presenteru `ResultsDatabase` nad tím snímkem |
-| `kvary_legacy.py` | 72 stránek Karlových Varů z doby před CMS (ročníky 45–55) |
+| `legacy_vysledky.py` | listiny z doby před CMS: Praha 45–53, Karlovy Vary 45–55 |
 | `kontrola.php` | kontrola obsahu (běží i v CI) |
 | `verify.py` | 31 kontrol konzistence migrace |
 
@@ -22,6 +22,10 @@ Jednorázové skripty, kterými vznikl `content/` a `files/` z původního CMS
   je `shards/`, ne `1.2.0/`; ta je zmrazený snímek z roku 2019 s méně dokumenty.
 - `../fo/fo.sql` — databáze soutěže, z níž se berou výsledkové listiny.
 - `../fo/kvary/vysledky/` — archiv Karlových Varů před CMS.
+- `.recovered/praha-vysledky/` — archiv Prahy před CMS, rozbalený z historie
+  `../fo` (`git archive 3af6326^ praha/vysledky`); commit `3af6326` ho smazal.
+  V CouchDB tyhle ročníky nejsou a v `fo.sql` k nim nejsou body — tabulka
+  `submit` začíná až 56. ročníkem.
 - `.recovered/` — soubory stažené ze starého serveru (`web/doc`, `web/i`,
   `libs/eywa`). Mimo git.
 
@@ -51,7 +55,7 @@ místo cesty k souboru — to je potřeba zachovat.
 python3 tools/couch_export.py          # 1. fáze (potřebuje data/couchdb/)
 python3 tools/migrate_content.py           # co by se změnilo (nic nezapíše)
 python3 tools/migrate_content.py --write   # zapsat (ruční úpravy nechá být)
-python3 tools/kvary_legacy.py --write
+python3 tools/legacy_vysledky.py --write
 python3 tools/verify.py
 ```
 
