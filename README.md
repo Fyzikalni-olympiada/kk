@@ -69,6 +69,14 @@ podle vzoru vedle: `type: page`, `title`, `date`, `author`, `position`.
 Novinky se řadí podle `position` vzestupně, nejnovější má nejmenší číslo
 (klidně záporné). Commit → do dvou minut je na webu.
 
+Na rozcestníku se **zobrazují jen novinky nejnovějšího ročníku**, který
+nějakou má; starší zůstávají dostupné na svých adresách, jen se nevypisují.
+Ročník se počítá z data (běží od září do června, 67. ročník = 2025/2026),
+takže první novinka nového ročníku sama schová ten předchozí — nikde se
+nemusí přepínat žádné číslo a web nezestárne jen tím, že plyne čas.
+
+Trvalý odkaz na novinku visí na datu pod ní.
+
 **Nová výsledková listina.** Založ
 `content/<web>/vysledky/<ročník>/<kolo>/<kategorie>.html` s `type: results`
 a tabulkou v těle. Původní `.xls` patří do `files/<web>/vysledky/…` a odkážeš

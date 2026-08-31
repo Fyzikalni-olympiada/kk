@@ -120,6 +120,43 @@ function seznam_deti(string $pathname): string
     return $out . '</ul>';
 }
 
+/**
+ * Ročník FO, do kterého datum spadá.  Ročník běží od září do června,
+ * takže 67. ročník = školní rok 2025/2026: prosinec 2025 i květen 2026
+ * patří do téhož ročníku.
+ */
+function rocnik_z_data(?string $datum): ?int
+{
+    if (!$datum) {
+        return null;
+    }
+    $ts = strtotime($datum);
+    if ($ts === false) {
+        return null;
+    }
+    $rok = (int) date('Y', $ts);
+    return (int) date('n', $ts) >= 9 ? $rok - 1958 : $rok - 1959;
+}
+
+
+/**
+ * Novinky nejnovějšího ročníku, který nějaké má.
+ *
+ * Ročník se bere z novinek, ne z dnešního data — jinak by weby po prázdninách
+ * zůstaly bez novinek a musely by se přestavovat jen proto, že plyne čas.
+ */
+function novinky_aktualniho_rocniku(array $items): array
+{
+    $rocniky = array_filter(array_map(fn($i) => rocnik_z_data($i['datum']), $items));
+    if (!$rocniky) {
+        return $items;
+    }
+    $aktualni = max($rocniky);
+    return array_values(array_filter(
+        $items, fn($i) => rocnik_z_data($i['datum']) === $aktualni));
+}
+
+
 /** '2019-06-13 15:33' => '13. června 2019' */
 function datum_cesky(?string $datum): string
 {
