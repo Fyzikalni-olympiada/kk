@@ -58,7 +58,8 @@ position: 1
 | `overview` | text a pod ním seznam podstránek |
 | `news` | rozcestník novinek (vypíše je celé pod sebe) |
 | `results` | výsledková listina — tabulka v těle, volitelně soubor ke stažení |
-| `results-overview` | rozcestník výsledků: kola a v nich kategorie |
+| `results-overview` | rozcestník ročníku: kola a v nich kategorie |
+| `results-index` | rozcestník všech listin na jedné stránce (`/vysledky`) |
 | `redirect` | žádná stránka; jen přesměruje na `location` |
 | `dir`, `link`, `site` | jen položka struktury, vlastní stránku nemá |
 
@@ -90,7 +91,12 @@ na něj přes `soubor:` a `soubor_nazev:`.
 
 **Nový ročník.** Přidej `content/<web>/vysledky/<ročník>.html`
 (`type: results-overview`) a pod ním adresář s koly. `position` u ročníků
-klesá směrem k novějším (56 → 100, 57 → 99 …).
+klesá směrem k novějším (56 → 100, 57 → 99 …). Do rozcestníku na `/vysledky`
+se ročník přidá sám.
+
+Okresní varianty se v rozcestníku značí SPZ okresu (CH, SO, KV) — stačí, aby
+se listina jmenovala „Kategorie E – Cheb“; převod je v `OKRESY`
+v `src/functions/folib.php`.
 
 **Změna menu.** Žádný seznam menu neexistuje — menu i rozcestníky vznikají
 ze stromu adresářů a z `position`.

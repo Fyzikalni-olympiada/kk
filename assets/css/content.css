@@ -763,3 +763,27 @@ hr.aktuality-predel {
 tr.aktualni td, span.aktualni {
 	font-weight: bold;
 }
+
+/* Rozcestník výsledkových listin (src/stranky/results-index.php) */
+.rozcestnik-vysledku {list-style: none; margin: 1.4em 0 0; padding: 0}
+.rozcestnik-vysledku > li {
+	display: flex; gap: 8px 18px; flex-wrap: wrap; align-items: baseline;
+	padding: 7px 0; border-bottom: 1px solid #EEE;
+}
+.rozcestnik-vysledku > li:last-child {border-bottom: 0}
+.rozcestnik-vysledku .rok {flex: 0 0 auto; min-width: 11.5em; white-space: nowrap}
+.rozcestnik-vysledku .rok a {font-weight: bold; color: #222}
+.rozcestnik-vysledku .rok a:hover {color: var(--akcent, #3E5199)}
+.rozcestnik-vysledku .kola {display: flex; gap: 6px 22px; flex-wrap: wrap}
+.rozcestnik-vysledku .kolo {display: flex; gap: 5px; align-items: baseline; flex-wrap: wrap}
+.rozcestnik-vysledku .kolo-nazev {font-size: .82em; color: #777; margin-right: 2px}
+.rozcestnik-vysledku .listina {
+	font-family: "Space Grotesk", "DejaVu Sans", sans-serif; font-weight: 700;
+	padding: 1px 4px; white-space: nowrap;
+}
+.rozcestnik-vysledku .okres {
+	font-family: "DejaVu Serif", Georgia, serif; font-weight: normal;
+	font-size: .78em; margin-left: 2px; opacity: .8;
+}
+/* šipka u čehokoli, co vede do Osma — v rozcestníku i ve výpisech ročníků */
+a.osmo::after {content: "\2197"; font-size: .7em; vertical-align: super; opacity: .75}

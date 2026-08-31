@@ -27,6 +27,7 @@ const TYPY = [
     'news'             => ['stranka' => true,  'v_menu' => true],
     'results'          => ['stranka' => true,  'v_menu' => true, 'siroka' => true],
     'results-overview' => ['stranka' => true,  'v_menu' => true],
+    'results-index'    => ['stranka' => true,  'v_menu' => true],
     'redirect'         => ['stranka' => false, 'v_menu' => true,
                            'odkaz' => 'cil', 'presmeruj' => true],
     'site'             => ['stranka' => false, 'v_menu' => false,

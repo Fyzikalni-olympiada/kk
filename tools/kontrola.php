@@ -31,6 +31,9 @@ foreach (array_keys(site_definice()) as $slug) {
         if (preg_match('~<script~i', $telo)) {
             $chyby[] = "$kde: <script> v obsahu";
         }
+        if (preg_match('~<iframe~i', $telo)) {
+            $chyby[] = "$kde: <iframe> v obsahu — odkazuj místo vkládání";
+        }
         if (preg_match('~file:///~i', $telo)) {
             $chyby[] = "$kde: odkaz file:///";
         }

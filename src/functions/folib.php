@@ -48,8 +48,9 @@ function odkaz_uzlu(array $uzel): string
         return $text;
     }
     $extern = str_starts_with($cil, 'http');
-    return sprintf('<a href="%s"%s>%s</a>',
+    return sprintf('<a href="%s"%s%s>%s</a>',
         htmlspecialchars($cil, ENT_QUOTES),
+        vede_do_osma($cil) ? ' class="osmo"' : '',
         $extern ? ' target="_blank" rel="noopener"' : '',
         $text);
 }
@@ -185,6 +186,50 @@ function novinky_aktualniho_rocniku(array $items): array
     $aktualni = max($rocniky);
     return array_values(array_filter(
         $items, fn($i) => rocnik_z_data($i['datum']) === $aktualni));
+}
+
+
+/** Vede odkaz do odevzdávacího systému Osmo? Novější ročníky tam mají výsledky. */
+function vede_do_osma(string $url): bool
+{
+    return parse_url($url, PHP_URL_HOST) === 'osmo.fyzikalniolympiada.cz';
+}
+
+
+/** Značka okresu podle SPZ; delší názvy se v rozcestníku nevejdou. */
+const OKRESY = ['Cheb' => 'CH', 'Sokolov' => 'SO', 'Karlovy Vary' => 'KV'];
+
+
+/**
+ * Rozebere název listiny na značku kategorie a případný okres.
+ *
+ *   'Kategorie E – Cheb'          => ['E', 'CH']
+ *   'Kategorie E a F'             => ['E a F', null]
+ *   'Archimediáda (kategorie G)'  => ['G', null]
+ *
+ * Neznámý tvar se vrátí celý — archiv má i jednorázové názvy
+ * („Kategorie B, C a D“, „Postupující do krajského kola“).
+ */
+function vysledky_kategorie(string $nazev): array
+{
+    if (preg_match('~^Kategorie ([A-G](?: a [A-G])?)(?:\s*[–-]\s*(.+))?$~u', $nazev, $m)) {
+        $okres = isset($m[2]) ? (OKRESY[trim($m[2])] ?? trim($m[2])) : null;
+        return [$m[1], $okres];
+    }
+    if (str_starts_with($nazev, 'Archimediáda')) {
+        return ['G', null];
+    }
+    /* Jednorázové názvy z archivu — v řádku by je plné znění roztrhlo,
+       celé zůstává v title odkazu. */
+    if (str_starts_with($nazev, 'Postupující')) {
+        return ['→', null];
+    }
+    /* „Kategorie B, C a D“ => „BCD“ */
+    if (preg_match('~^Kategorie [A-G](?:[,\s]|\sa\s)*~u', $nazev)
+        && preg_match_all('~\b([A-G])\b~u', substr($nazev, strlen('Kategorie ')), $m)) {
+        return [implode('', $m[1]), null];
+    }
+    return [$nazev, null];
 }
 
 

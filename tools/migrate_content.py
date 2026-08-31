@@ -274,6 +274,7 @@ class Migration:
         html = re.sub(r'href=(?!["\'])(\S+?)"', r'href="\1"', html)
         # href=" http://…" — mezera navíc od editora
         html = re.sub(r'(href|src)="\s+', r'\1="', html, flags=re.I)
+        html = self.iframe_na_odkaz(html, d["_id"])
         if html:
             base = self.link_base(d["_id"])
             html = self.fix_links(html, base, d["_id"])
@@ -401,6 +402,24 @@ class Migration:
             self.report["vysledky:z excelu"] += 1
 
         return "\n".join(x for x in (uvod, tabulka, html.strip()) if x) + "\n"
+
+    IFRAME = re.compile(r'\s*<iframe\b[^>]*\bsrc="([^"]+)"[^>]*>.*?</iframe>',
+                        re.S | re.I)
+
+    def iframe_na_odkaz(self, html, doc_id):
+        """Vložený rám nahradí odkazem.
+
+        Jediný výskyt v archivu vkládal výsledky z Osma do stránky; rám se
+        nepřizpůsobí šířce, na mobilu nefunguje a cizí obsah v cizím rámu
+        stejně nepatří do statického archivu. Když už na tutéž adresu vede
+        odkaz, rám se jen zahodí."""
+        def sub(m):
+            url = m.group(1)
+            self.notes.append(f"iframe -> odkaz: {doc_id} ({url})")
+            if f'href="{url}"' in html:
+                return ""
+            return (f'\n<p><a href="{url}">Výsledky v&nbsp;systému Osmo</a></p>')
+        return self.IFRAME.sub(sub, html)
 
     def internal_url(self, dest):
         """//praha/aktualni-rocnik -> /aktualni-rocnik ; externí nechá být."""
